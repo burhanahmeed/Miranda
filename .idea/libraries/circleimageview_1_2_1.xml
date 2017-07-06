@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="circleimageview-1.2.1">
+    <CLASSES>
+      <root url="file://$USER_HOME$/.android/build-cache/f11a3de1919b023a5b57d6786dffe000ec713e7f/output/res" />
+      <root url="jar://$USER_HOME$/.android/build-cache/f11a3de1919b023a5b57d6786dffe000ec713e7f/output/jars/classes.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/de.hdodenhof/circleimageview/1.2.1/507237329eb63442f3606c98888fd49a26e6a39d/circleimageview-1.2.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

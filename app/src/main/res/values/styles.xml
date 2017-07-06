@@ -6,13 +6,34 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <!--<item name="android:statusBarColor">@android:color/transparent</item>-->
         <item name="android:windowTranslucentStatus">true</item>
-        <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
+
     </style>
 
-    <style name="DrawerArrowStyle" parent="Widget.AppCompat.DrawerArrowToggle">
-        <item name="android:tint">@android:color/white</item>
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="sViewBackgroundBorderless">
+        <item name="android:background">@drawable/selector_view</item>
+    </style>
+
+    <style name="sViewBackground">
+        <item name="android:background">@drawable/selector_view</item>
+    </style>
+
+    <style name="ivCommon">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">5dp</item>
+        <item name="android:background">@drawable/selector_view</item>
+    </style>
+
+    <!-- ActionBar styles -->
+    <style name="MyActionBar" parent="@style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">
+        <item name="android:background">@drawable/gradients_blue_green</item>
+        <!-- Support library compatibility -->
+        <item name="background">@drawable/gradients_blue_green</item>
     </style>
 
 </resources>

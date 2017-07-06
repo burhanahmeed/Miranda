@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary"> #00e673</color>
-    <color name="colorPrimaryDark">#009999</color>
-    <color name="colorAccent">#fff</color>
+    <color name="colorPrimaryDark">#2cab3b</color>
+    <color name="colorPrimary">@color/colorPrimaryDark</color>
+    <color name="colorAccent">#0066ff</color>
+
+    <color name="ripple_color">#f2f2f2</color>
+
+    <color name="navigation_drawers_bg_color">#001119</color>
+
+    <color name="navigation_txt_color">#666666</color>
+
+    <color name="navigation_sep_color">#f2f2f2</color>
+    <!--<color name="gradient">@drawable/gradients_blue_green</color>-->
+
+
 </resources>
