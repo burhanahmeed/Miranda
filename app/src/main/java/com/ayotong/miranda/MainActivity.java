@@ -1,5 +1,6 @@
 package com.ayotong.miranda;
 
+import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.res.Resources;
@@ -24,7 +25,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.ayotong.miranda.app.About_fragment;
+import com.ayotong.miranda.app.Article_fragment;
 import com.ayotong.miranda.app.Home_fragment;
+import com.ayotong.miranda.app.Profile_fragment;
 import com.ayotong.miranda.app.Stat_fragment;
 
 public class MainActivity extends AppCompatActivity {
@@ -49,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
         // Initializing Toolbar and setting it as the actionbar
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle(null);
 
         //Initializing NavigationView
         navigationView = (NavigationView) findViewById(R.id.navigation_view);
@@ -67,7 +72,13 @@ public class MainActivity extends AppCompatActivity {
         profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(),"Profile",Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getApplicationContext(),"Profile",Toast.LENGTH_SHORT).show();
+                drawerLayout.closeDrawers();
+                navigationView.getMenu().getItem(0).setChecked(false);
+                navigationView.getMenu().getItem(1).setChecked(false);
+                navigationView.getMenu().getItem(2).setChecked(false);
+                navigationView.getMenu().getItem(3).setChecked(false);
+                openFragment(new Profile_fragment());
             }
         });
 
@@ -94,10 +105,11 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.nav_home:
                         navigationView.getMenu().getItem(0).setChecked(true);
 //                        Toast.makeText(getApplicationContext(),"Inbox Selected",Toast.LENGTH_SHORT).show();
-                        Home_fragment fragment = new Home_fragment();
-                        android.support.v4.app.FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                        fragmentTransaction.replace(R.id.frame,fragment);
-                        fragmentTransaction.commit();
+//                        Home_fragment fragment = new Home_fragment();
+//                        android.support.v4.app.FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+//                        fragmentTransaction.replace(R.id.frame,fragment);
+//                        fragmentTransaction.commit();
+                        openFragment(new Home_fragment());
                         return true;
 
                     // For rest of the options we just show a toast on click
@@ -105,23 +117,23 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.nav_article:
                         navigationView.getMenu().getItem(1).setChecked(true);
 //                        Toast.makeText(getApplicationContext(),"Stared Selected",Toast.LENGTH_SHORT).show();
+                        openFragment(new Article_fragment());
                         return true;
                     case R.id.nav_stat:
                         navigationView.getMenu().getItem(2).setChecked(true);
 //                        Toast.makeText(getApplicationContext(),"Stats Selected",Toast.LENGTH_SHORT).show();
-                        Stat_fragment fragment1 = new Stat_fragment();
-                        fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                        fragmentTransaction.replace(R.id.frame,fragment1);
-                        fragmentTransaction.commit();
+                        openFragment(new Stat_fragment());
                         return true;
                     case R.id.nav_about:
                         navigationView.getMenu().getItem(3).setChecked(true);
 //                        Toast.makeText(getApplicationContext(),"Drafts Selected",Toast.LENGTH_SHORT).show();
+                        openFragment(new About_fragment());
                         return true;
 
                 }
                 return true;}
         });
+
 
         // Initializing Drawer Layout and ActionBarToggle
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer);
@@ -146,12 +158,12 @@ public class MainActivity extends AppCompatActivity {
 
         //calling sync state is necessay or else your hamburger icon wont show up
         actionBarDrawerToggle.syncState();
+    }
 
-
-
-
-
-
+    public void openFragment(final android.support.v4.app.Fragment fragment){
+        android.support.v4.app.FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.frame,fragment);
+        fragmentTransaction.commit();
     }
 
 //    @Override

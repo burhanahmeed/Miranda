@@ -11,11 +11,11 @@
             android:title="Articles" />
         <item
             android:id="@+id/nav_stat"
-            android:icon="@drawable/ic_trending_up_black_24dp"
+            android:icon="@drawable/ic_stat_24"
             android:title="Stats" />
         <item
             android:id="@+id/nav_about"
-            android:icon="@drawable/icon_menu_about"
+            android:icon="@drawable/ic_about_24"
             android:title="About" />
 
     </group>
