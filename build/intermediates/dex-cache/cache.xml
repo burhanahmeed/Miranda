@@ -3,21 +3,12 @@
 
     <item
         is-multidex="false"
-        jar="/home/burhan/.android/build-cache/fb68a17177b177d01ba50a132981d9601de85c66/output/jars/classes.jar"
+        jar="/home/burhan/.android/build-cache/ef96f9a9bdc2170cfebffcbbea9205f2b34dcb6a/output/jars/classes.jar"
         jumboMode="false"
         optimize="true"
         revision="26.0.0"
-        sha1="19f281a785ca0eb5f6799fc7bf7ca199a9ca1e8b">
-        <dex dex="/media/burhan/6ce29c69-9e18-4c84-87fa-debfc9e679ef/burhan/AndroProjects/Miranda/app/build/intermediates/pre-dexed/debug/classes_91404b01a0fa9034a82f7eeb6c361af5b1bc761f.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/home/burhan/.gradle/caches/modules-2/files-2.1/com.jakewharton/butterknife-annotations/8.5.1/bb67dad90bab7cd77a8f7f1b8442b47e3a2326bc/butterknife-annotations-8.5.1.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="26.0.0"
-        sha1="bb67dad90bab7cd77a8f7f1b8442b47e3a2326bc">
-        <dex dex="/media/burhan/6ce29c69-9e18-4c84-87fa-debfc9e679ef/burhan/AndroProjects/Miranda/app/build/intermediates/pre-dexed/debug/butterknife-annotations-8.5.1_703b73cd4bd6ba34fc1fef9bccc077723376445a.jar" />
+        sha1="e176fd06c2ad5b50a2f5cb4de6000a83a7cb48f5">
+        <dex dex="/media/burhan/6ce29c69-9e18-4c84-87fa-debfc9e679ef/burhan/AndroProjects/Miranda/app/build/intermediates/pre-dexed/debug/classes_d371fe25e0ab92531948b554d0ce0c3589e8ff08.jar" />
     </item>
 
 </items>
