@@ -2,6 +2,7 @@ package com.ayotong.miranda.app;
 
 //import android.app.Fragment;
 import android.app.Activity;
+import android.content.Context;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.support.annotation.Nullable;
@@ -16,8 +17,8 @@ import android.view.View;
 import android.view.ViewGroup;
 ;
 import com.ayotong.miranda.R;
-import com.ayotong.miranda.adapter.CardAdapter;
-import com.ayotong.miranda.model.LocationInformation;
+import com.ayotong.miranda.adapter.CardAdapterQuest;
+import com.ayotong.miranda.model.Quest;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +30,7 @@ import java.util.List;
 public class Home_fragment extends Fragment {
 
     private RecyclerView cardRecyclerView;
-    private CardAdapter cardAdapter;
+    private CardAdapterQuest cardAdapterQuest;
 
     @Nullable
     @Override
@@ -39,8 +40,8 @@ public class Home_fragment extends Fragment {
         // 1
         this.cardRecyclerView = (RecyclerView)v.findViewById(R.id.recycler_view);
         this.cardRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
-        this.cardAdapter = new CardAdapter(getActivity());
-        this.cardRecyclerView.setAdapter(this.cardAdapter);
+        this.cardAdapterQuest = new CardAdapterQuest(getActivity());
+        this.cardRecyclerView.setAdapter(this.cardAdapterQuest);
 
         // 4
         LinearSnapHelper snapHelper = new LinearSnapHelper();
@@ -49,14 +50,14 @@ public class Home_fragment extends Fragment {
         this.cardRecyclerView.addItemDecoration(new VerticalOffsetDecoration(getActivity())); // 9
 
         // 2
-        List<LocationInformation> locations = new ArrayList<>();
-        locations.add(new LocationInformation("19.20", "10xp", "Waktunya Eok"));
-        locations.add(new LocationInformation("11.20", "10xp","Waktunya minum gelas yang banyak 1000ml"));
-        locations.add(new LocationInformation("09.20", "10xp","Enak enak dulu"));
-        locations.add(new LocationInformation("11.22", "11xp","Rehat jenak"));
+        List<Quest> quests = new ArrayList<>();
+        quests.add(new Quest("19.20", "10xp", "Waktunya Eok"));
+        quests.add(new Quest("11.20", "10xp","Waktunya minum gelas yang banyak 1000ml"));
+        quests.add(new Quest("09.20", "10xp","Enak enak dulu"));
+        quests.add(new Quest("11.22", "11xp","Rehat jenak"));
 
         // 3
-        this.cardAdapter.setItems(locations);
+        this.cardAdapterQuest.setItems(quests);
 
         return v; //return the fragmentview
     }
@@ -95,6 +96,17 @@ public class Home_fragment extends Fragment {
 
             if (position == total - 1)
                 outRect.right = offset- params.getMarginEnd();
+        }
+    }
+
+    public class UnscrollableLinearLayoutManager extends LinearLayoutManager {
+        public UnscrollableLinearLayoutManager(Context context) {
+            super(context);
+        }
+
+        @Override
+        public boolean canScrollVertically() {
+            return false;
         }
     }
 

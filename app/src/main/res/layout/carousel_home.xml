@@ -4,7 +4,10 @@
     android:layout_width="280dp"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_margin="16dp"
+    android:layout_marginTop="17dp"
+    android:layout_marginLeft="10dp"
+    android:layout_marginBottom="17dp"
+    android:layout_marginRight="10dp"
     app:cardCornerRadius="15dp">
 
     <RelativeLayout
@@ -92,13 +95,15 @@
                         android:layout_height="40dp"
                         android:src="@drawable/ic_accomplis"
                         android:layout_marginRight="60px"
-                        android:background="@null"/>
+                        android:background="@null"
+                        android:id="@+id/id_accomplish"/>
                     <ImageButton
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:layout_marginLeft="60px"
                         android:src="@drawable/ic_postpone"
-                        android:background="@null"/>
+                        android:background="@null"
+                        android:id="@+id/id_dissmiss"/>
                 </LinearLayout>
             </RelativeLayout>
 
