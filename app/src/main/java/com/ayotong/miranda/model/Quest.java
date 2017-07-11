@@ -9,11 +9,23 @@ import android.support.annotation.NonNull;
 
 public class Quest {
 
+    public static final String DATABASE_TABLE = "Quest";
+    public static final int DATABASE_VERSION = 1;
+    public static final String TABLE_CREATE =
+            "create table if not exists Quest (id integer primary key autoincrement , category text, time text, Exp int, questdesc text);";
+    public static final String COL_ID = "quest_id";
+    public static final String COL_CATEGORY = "category";
+    public static final String COL_TIME = "time";
+    public static final String COL_EXP = "exp";
+    public static final String COL_QUESTDESC = "quest_desc";
+
     private String jam;
     private String xp;
     private String quest;
     private int id;
     private String category;
+
+
 
     public Quest(int id, String category, String jam, String xp, String quest) {
         this.jam= jam;
