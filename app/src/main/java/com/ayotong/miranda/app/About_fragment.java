@@ -16,6 +16,6 @@ public class About_fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         //returning our layout file
         //change R.layout.yourlayoutfilename for each of your fragments
-        return inflater.inflate(R.layout.fragment_about, container, false);
+        return inflater.inflate(R.layout.form_signup, container, false);
     }
 }

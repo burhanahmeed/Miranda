@@ -5,7 +5,7 @@
     android:background="@drawable/action_bar_small"
     android:theme="@style/ThemeOverlay.AppCompat.Dark"
     android:elevation="4dp"
-
+    android:paddingBottom="40dp"
     >
 
     <TextView

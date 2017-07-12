@@ -14,4 +14,9 @@
 
         android:endColor="#1fa3aa"
         android:angle="270"/>
+    <!--<corners-->
+        <!--android:bottomLeftRadius="100dp"-->
+        <!--android:bottomRightRadius="100dp"-->
+        <!--android:topLeftRadius="0dp"-->
+        <!--android:topRightRadius="0dp" />-->
 </shape>
