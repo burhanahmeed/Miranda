@@ -18,6 +18,7 @@ public class Quest {
     public static final String COL_TIME = "time";
     public static final String COL_EXP = "exp";
     public static final String COL_QUESTDESC = "quest_desc";
+    public static final int QUEST_ID = -1;
 
     private String jam;
     private String xp;
