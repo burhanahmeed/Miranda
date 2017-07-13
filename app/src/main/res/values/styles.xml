@@ -13,19 +13,26 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
-    <style name="sViewBackgroundBorderless">
-        <item name="android:background">@drawable/selector_view</item>
-    </style>
+    <!--<style name="sViewBackgroundBorderless">-->
+        <!--<item name="android:background">@drawable/selector_view</item>-->
+    <!--</style>-->
 
-    <style name="sViewBackground">
-        <item name="android:background">@drawable/selector_view</item>
-    </style>
+    <!--<style name="sViewBackground">-->
+        <!--<item name="android:background">@drawable/selector_view</item>-->
+    <!--</style>-->
 
-    <style name="ivCommon">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:padding">5dp</item>
-        <item name="android:background">@drawable/selector_view</item>
+    <!--<style name="ivCommon">-->
+        <!--<item name="android:layout_width">wrap_content</item>-->
+        <!--<item name="android:layout_height">wrap_content</item>-->
+        <!--<item name="android:padding">5dp</item>-->
+        <!--<item name="android:background">@drawable/selector_view</item>-->
+    <!--</style>-->
+
+    <style name="TextAppearence.App.TextInputLayout" parent="@android:style/TextAppearance">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="colorControlNormal">#c5c5c5</item>
+        <item name="colorControlActivated">@android:color/white</item>
+        <item name="colorControlHighlight">@android:color/white</item>
     </style>
 
     <!-- ActionBar styles -->
@@ -33,6 +40,10 @@
         <item name="android:background">@drawable/gradients_blue_green</item>
         <!-- Support library compatibility -->
         <item name="background">@drawable/gradients_blue_green</item>
+    </style>
+
+    <style name="WhiteCheck">
+        <item name="colorAccent">#fff</item>
     </style>
 
 </resources>
