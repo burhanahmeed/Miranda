@@ -5,7 +5,6 @@ package com.ayotong.miranda.model;
  */
 
 public class UserInfo {
-//id integer primary key, username text, age integer, gender text, weight integer, height integer, is_pregnant integer, is_nap integer,start_nap text, start_sleep text
 
     public static final String DATABASE_TABLE = "UserInfo";
     public static final int DATABASE_VERSION = 1;
