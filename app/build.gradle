@@ -41,6 +41,7 @@ dependencies {
     compile 'com.pnikosis:materialish-progress:1.7'
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'com.squareup.okhttp3:okhttp:3.0.1'
-    implementation files('lib/jsoup-1.10.3.jar')
+//    implementation files('lib/jsoup-1.10.3.jar')
+    compile files('lib/jsoup-1.10.3.jar')
 }
 
