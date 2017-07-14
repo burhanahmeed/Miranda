@@ -34,4 +34,33 @@ public class UserInfoDB extends DatabaseDAO implements UserInfoDAO {
         return new UserInfo((int)super.insert(UserInfo.DATABASE_TABLE, cv), userinfo.getUsername(), userinfo.getAge(), userinfo.getGender(),
                 userinfo.getWeight(), userinfo.getHeight(), userinfo.ispregnant(), userinfo.isnap(), userinfo.getStartnap(), userinfo.getStartsleep());
     }
+
+    public int updateInfo(UserInfo userinfo){
+        ContentValues cv = new ContentValues();
+        cv.put(UserInfo.COL_ID, userinfo.getId());
+        cv.put(UserInfo.COL_UNAME, userinfo.getUsername());
+        cv.put(UserInfo.COL_AGE, userinfo.getAge());
+        cv.put(UserInfo.COL_GENDER, userinfo.getGender());
+        cv.put(UserInfo.COL_WEIGHT, userinfo.getWeight());
+        cv.put(UserInfo.COL_HEIGHT, userinfo.getHeight());
+        cv.put(UserInfo.COL_ISPREGNANT, boolsql(userinfo.ispregnant()));
+        cv.put(UserInfo.COL_ISNAP, boolsql(userinfo.isnap()));
+        cv.put(UserInfo.COL_STARTNAP, userinfo.getStartnap());
+        cv.put(UserInfo.COL_STARTSLEEP, userinfo.getStartsleep());
+        return super.update(UserInfo.DATABASE_TABLE, UserInfo.COL_ID + " = " + userinfo.getId(), cv);
+    }
+
+    public int boolsql (boolean value){
+        if(value)
+            return 1;
+        else
+            return 0;
+    }
+
+    public boolean boolsql (int value){
+        if(value==1)
+            return true;
+        else
+            return false;
+    }
 }
