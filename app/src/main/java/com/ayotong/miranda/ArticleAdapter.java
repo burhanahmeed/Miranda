@@ -1,4 +1,4 @@
-package com.ayotong.miranda.adapter;
+package com.ayotong.miranda;
 
 /**
  * Created by tehhutan on 14/07/17.
@@ -16,7 +16,7 @@ import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.prof.rssparser.Article;
+import com.ayotong.miranda.Article;
 import com.squareup.picasso.Picasso;
 
 import java.text.SimpleDateFormat;
@@ -76,10 +76,10 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ViewHold
         //load the image. If the parser did not find an image in the article, it set a placeholder.
         Picasso.with(mContext)
                 .load(currentArticle.getImage())
-                .placeholder(R.drawable.placeholder)
+                .placeholder(R.drawable.ic_logo)
                 .fit()
                 .centerCrop()
-                .into(viewHolder.image);
+                .into(viewHolder.image);    
 
         viewHolder.lastBuildDate.setText(pubDateString);
 

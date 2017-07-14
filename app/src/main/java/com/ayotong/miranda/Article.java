@@ -1,4 +1,4 @@
-package com.ayotong.miranda.app;
+package com.ayotong.miranda;
 
 /**
  * Created by tehhutan on 14/07/17.

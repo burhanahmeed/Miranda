@@ -3,12 +3,153 @@
 
     <item
         is-multidex="false"
-        jar="/home/burhan/.android/build-cache/ef96f9a9bdc2170cfebffcbbea9205f2b34dcb6a/output/jars/classes.jar"
+        jar="/home/tehhutan/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.0.0-alpha1.aar/beed10ba2a3cf88c71d18863b4cbbb0d/jars/classes.jar"
         jumboMode="false"
+        min-sdk-version="17"
+        optimize="true"
+        revision="26.0.0"
+        sha1="47471eb19df288158b00b8d9cfa41bce7373f5cc">
+        <dex dex="/home/tehhutan/AndroidStudioProjects/Miranda/app/build/intermediates/transforms/preDex/release/2.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/tehhutan/.gradle/caches/transforms-1/files-1.1/support-core-utils-26.0.0-alpha1.aar/afeba4daa7957f0c30b7dfc36057a271/jars/classes.jar"
+        jumboMode="false"
+        min-sdk-version="17"
+        optimize="true"
+        revision="26.0.0"
+        sha1="2e92aa0163544a804a0b34f169ca61801770839a">
+        <dex dex="/home/tehhutan/AndroidStudioProjects/Miranda/app/build/intermediates/transforms/preDex/release/13.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/tehhutan/.gradle/caches/transforms-1/files-1.1/support-compat-26.0.0-alpha1.aar/515f3a0b8972739668973d8d3c84c39a/jars/classes.jar"
+        jumboMode="false"
+        min-sdk-version="17"
+        optimize="true"
+        revision="26.0.0"
+        sha1="8df0e365e40beb151bc42dee20817721a6cab7b0">
+        <dex dex="/home/tehhutan/AndroidStudioProjects/Miranda/app/build/intermediates/transforms/preDex/release/14.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/tehhutan/.gradle/caches/transforms-1/files-1.1/design-26.0.0-alpha1.aar/29e4cf35e4af7fd9e9f2c856fe643215/jars/classes.jar"
+        jumboMode="false"
+        min-sdk-version="17"
+        optimize="true"
+        revision="26.0.0"
+        sha1="6a022bf00ccd0948a8180c505e8e458bbddd43a6">
+        <dex dex="/home/tehhutan/AndroidStudioProjects/Miranda/app/build/intermediates/transforms/preDex/release/1.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/tehhutan/.gradle/caches/transforms-1/files-1.1/support-v4-26.0.0-alpha1.aar/ffa0606e7eb0036a3b8f1befca28d652/jars/classes.jar"
+        jumboMode="false"
+        min-sdk-version="17"
+        optimize="true"
+        revision="26.0.0"
+        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
+        <dex dex="/home/tehhutan/AndroidStudioProjects/Miranda/app/build/intermediates/transforms/preDex/release/9.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/tehhutan/.gradle/caches/transforms-1/files-1.1/support-fragment-26.0.0-alpha1.aar/ff736fe28a82af4934d32d64fbc7e128/jars/classes.jar"
+        jumboMode="false"
+        min-sdk-version="17"
+        optimize="true"
+        revision="26.0.0"
+        sha1="18d31838aa4fcc768a8a0516e22cc13b94655d89">
+        <dex dex="/home/tehhutan/AndroidStudioProjects/Miranda/app/build/intermediates/transforms/preDex/release/10.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/tehhutan/Android/Sdk/extras/android/m2repository/com/android/support/support-annotations/26.0.0-alpha1/support-annotations-26.0.0-alpha1.jar"
+        jumboMode="false"
+        min-sdk-version="17"
+        optimize="true"
+        revision="26.0.0"
+        sha1="023ee503b631f69511e335a061ea008f8da60f40">
+        <dex dex="/home/tehhutan/AndroidStudioProjects/Miranda/app/build/intermediates/transforms/preDex/release/15.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/tehhutan/.gradle/caches/transforms-1/files-1.1/support-core-ui-26.0.0-alpha1.aar/cf06e867de31170e1225884fad5d17ae/jars/classes.jar"
+        jumboMode="false"
+        min-sdk-version="17"
+        optimize="true"
+        revision="26.0.0"
+        sha1="fcd01fd11233459f546c437ec927e9b61bf7caf1">
+        <dex dex="/home/tehhutan/AndroidStudioProjects/Miranda/app/build/intermediates/transforms/preDex/release/11.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/tehhutan/.gradle/caches/transforms-1/files-1.1/cardview-v7-26.0.0-alpha1.aar/0cb42441c0ae1d67198a42db7c9d825d/jars/classes.jar"
+        jumboMode="false"
+        min-sdk-version="17"
         optimize="true"
         revision="26.0.0"
         sha1="e176fd06c2ad5b50a2f5cb4de6000a83a7cb48f5">
-        <dex dex="/media/burhan/6ce29c69-9e18-4c84-87fa-debfc9e679ef/burhan/AndroProjects/Miranda/app/build/intermediates/pre-dexed/debug/classes_d371fe25e0ab92531948b554d0ce0c3589e8ff08.jar" />
+        <dex dex="/home/tehhutan/AndroidStudioProjects/Miranda/app/build/intermediates/transforms/preDex/release/5.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/tehhutan/.gradle/caches/transforms-1/files-1.1/recyclerview-v7-26.0.0-alpha1.aar/37ee783856743982481a6d0b19bbdd26/jars/classes.jar"
+        jumboMode="false"
+        min-sdk-version="17"
+        optimize="true"
+        revision="26.0.0"
+        sha1="c4f45092eee6cdf1a5dbd597b2b6819be652ce2e">
+        <dex dex="/home/tehhutan/AndroidStudioProjects/Miranda/app/build/intermediates/transforms/preDex/release/4.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/tehhutan/.gradle/caches/transforms-1/files-1.1/support-media-compat-26.0.0-alpha1.aar/4fd351713ad779c8d8accd152d9aacf6/jars/classes.jar"
+        jumboMode="false"
+        min-sdk-version="17"
+        optimize="true"
+        revision="26.0.0"
+        sha1="9935891f23923f39d002087085d9696568a9f657">
+        <dex dex="/home/tehhutan/AndroidStudioProjects/Miranda/app/build/intermediates/transforms/preDex/release/12.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/tehhutan/.gradle/caches/transforms-1/files-1.1/circleimageview-1.2.1.aar/a819cf0fb26cdb346a6ae2e33bac60df/jars/classes.jar"
+        jumboMode="false"
+        min-sdk-version="17"
+        optimize="true"
+        revision="26.0.0"
+        sha1="4b868b833b0887aa48c4e581558eef4f1196f6a2">
+        <dex dex="/home/tehhutan/AndroidStudioProjects/Miranda/app/build/intermediates/transforms/preDex/release/3.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/tehhutan/.gradle/caches/transforms-1/files-1.1/transition-26.0.0-alpha1.aar/b94bc2c75192ccdf44bc0e696af89d01/jars/classes.jar"
+        jumboMode="false"
+        min-sdk-version="17"
+        optimize="true"
+        revision="26.0.0"
+        sha1="cddcd0fb93bc70e27325f2f715b2710332004ebb">
+        <dex dex="/home/tehhutan/AndroidStudioProjects/Miranda/app/build/intermediates/transforms/preDex/release/8.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/tehhutan/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-26.0.0-alpha1.aar/30bbb78b60986bb986860750ff72f4e6/jars/classes.jar"
+        jumboMode="false"
+        min-sdk-version="17"
+        optimize="true"
+        revision="26.0.0"
+        sha1="952944218ecedea1554a513dec0c14d570642843">
+        <dex dex="/home/tehhutan/AndroidStudioProjects/Miranda/app/build/intermediates/transforms/preDex/release/7.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/tehhutan/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-26.0.0-alpha1.aar/a70a24d8b356c8af73d488bae688e5fb/jars/classes.jar"
+        jumboMode="false"
+        min-sdk-version="17"
+        optimize="true"
+        revision="26.0.0"
+        sha1="88246166d5afb106f532f6e6deae683c66b42c89">
+        <dex dex="/home/tehhutan/AndroidStudioProjects/Miranda/app/build/intermediates/transforms/preDex/release/6.jar" />
     </item>
 
 </items>
