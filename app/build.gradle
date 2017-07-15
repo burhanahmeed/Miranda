@@ -27,12 +27,6 @@ android {
     }
 }
 
-repositories {
-    maven {
-        url "https://jitpack.io"
-    }
-}
-
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
@@ -49,8 +43,6 @@ dependencies {
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'com.squareup.okhttp3:okhttp:3.0.1'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
-    compile 'com.github.lecho:hellocharts-library:1.5.8@aar'
-    compile 'com.github.lecho:hellocharts-android:v1.5.8'
     testCompile 'junit:junit:4.12'
 }
 
