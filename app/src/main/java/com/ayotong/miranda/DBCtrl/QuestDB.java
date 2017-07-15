@@ -70,4 +70,9 @@ public class QuestDB  extends DatabaseDAO implements QuestDAO{
         cursor.close();
         return arrquest;
     }
+
+    public int delete(int quest_id) {
+
+        return super.delete(Quest.DATABASE_TABLE, Quest.COL_ID+"="+ quest_id, null);
+    }
 }

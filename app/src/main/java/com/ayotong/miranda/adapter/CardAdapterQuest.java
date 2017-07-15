@@ -5,12 +5,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.ayotong.miranda.R;
-import com.ayotong.miranda.app.Home_fragment;
 import com.ayotong.miranda.model.Quest;
 
 import java.util.ArrayList;
@@ -53,8 +51,8 @@ public class CardAdapterQuest extends RecyclerView.Adapter<CardAdapterQuest.View
         }
 
         public void bind(Quest quest) {
-            this.txtJam.setText(quest.getJam());
-            this.txtXP.setText(quest.getXp());
+            this.txtJam.setText(quest.getTime());
+            this.txtXP.setText(quest.getExp());
             this.txtQuest.setText(quest.getQuest());
         }
 

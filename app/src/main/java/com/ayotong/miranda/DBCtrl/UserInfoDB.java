@@ -81,21 +81,6 @@ public class UserInfoDB extends DatabaseDAO implements UserInfoDAO {
             return "female";
     }
 
-//    String[] columns = new String[]{GenericDao.KEY_ID ,Item.COL_DESCRIPTION_ID , Item.COL_STOCK , Item.COL_DESCRIPTION_ID};
-//    Cursor cursor = super.get(Item.DATABASE_TABLE, columns , Item.COL_STOCK + " like " + "'%" + id + "%'" );
-//    Item item = null;
-//		if(cursor != null){
-//        int _id = cursor.getColumnIndex(GenericDao.KEY_ID);
-//        int itdID = cursor.getColumnIndex(Item.COL_DESCRIPTION_ID);
-//        int _cost = cursor.getColumnIndex(Item.COL_COST);
-//        int _Stock = cursor.getColumnIndex(Item.COL_STOCK);
-//        cursor.moveToFirst();
-//        ItemDescriptionBookDB itemDescriptionBookDB = new ItemDescriptionBookDB(getContext());
-//        ItemDescription itemDescription = itemDescriptionBookDB.findBy(cursor.getInt(itdID));
-//        itemDescriptionBookDB.close();
-//        item = new Item(cursor.getInt(_id) , itemDescription , cursor.getFloat(_cost) , cursor.getString(_Stock));
-//    }
-
     public UserInfo loadInfo(){
         String[] columns = new String[]{DatabaseDAO.KEY_ID ,UserInfo.COL_ID , UserInfo.COL_UNAME, UserInfo.COL_AGE, UserInfo.COL_GENDER,
                 UserInfo.COL_WEIGHT, UserInfo.COL_HEIGHT, UserInfo.COL_ISPREGNANT, UserInfo.COL_ISNAP, UserInfo.COL_STARTNAP,
