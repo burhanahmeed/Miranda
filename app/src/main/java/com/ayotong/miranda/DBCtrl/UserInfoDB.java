@@ -117,6 +117,7 @@ public class UserInfoDB extends DatabaseDAO implements UserInfoDAO {
         }else{
             Log.d("error", "Cursor are null");
         }
+        cursor.close();
         return user;
     }
 }

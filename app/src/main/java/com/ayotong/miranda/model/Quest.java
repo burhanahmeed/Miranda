@@ -4,8 +4,6 @@ package com.ayotong.miranda.model;
  * Created by burhan on 10/07/17.
  */
 
-import android.support.annotation.NonNull;
-
 
 public class Quest {
 
@@ -20,28 +18,29 @@ public class Quest {
     public static final String COL_QUESTDESC = "quest_desc";
     public static final int QUEST_ID = -1;
 
-    private String jam;
-    private String xp;
+    private String time;
+    private int exp;
     private String quest;
     private int id;
     private String category;
 
+    public Quest(){
 
-
-    public Quest(int id, String category, String jam, String xp, String quest) {
-        this.jam= jam;
-        this.xp = xp;
-        this.quest = quest;
-        this.category = category;
-        this.id = id;
     }
 
-    public String getJam(){
-        return jam;
+    public Quest(int id, String category, String jam, int exp, String quest) {
+        this.setTime(jam);
+        this.setExp(exp);
+        this.setQuest(quest);
+        this.setCategory(category);
+        this.setId(id);
     }
 
-    public String getXp(){
-        return xp;
+    public String getTime(){
+        return time;
+    }
+    public int getExp(){
+        return exp;
     }
     public String getQuest(){
         return quest;
@@ -51,5 +50,25 @@ public class Quest {
     }
     public int getId(){
         return id;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
+    public void setExp(int exp) {
+        this.exp = exp;
+    }
+
+    public void setQuest(String quest) {
+        this.quest = quest;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 }
