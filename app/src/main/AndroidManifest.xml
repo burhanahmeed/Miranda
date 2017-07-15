@@ -32,6 +32,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.ayotong.miranda.MainActivity" />
         </activity>
+        <activity
+            android:name=".SignUpActivity"
+            android:screenOrientation="portrait">
+        </activity>
     </application>
 
 </manifest>
