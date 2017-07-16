@@ -71,8 +71,7 @@ public class QuestDB  extends DatabaseDAO implements QuestDAO{
         return arrquest;
     }
 
-    public int delete(int quest_id) {
-
-        return super.delete(Quest.DATABASE_TABLE, Quest.COL_ID+"="+ quest_id, null);
+    public int delete(int quest_id, String category) {
+        return super.delete(Quest.DATABASE_TABLE, Quest.COL_ID+"="+ quest_id + " AND "+Quest.COL_CATEGORY+"="+category, null);
     }
 }

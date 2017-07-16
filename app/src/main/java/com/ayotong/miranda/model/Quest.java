@@ -10,7 +10,7 @@ public class Quest {
     public static final String DATABASE_TABLE = "Quest";
     public static final int DATABASE_VERSION = 1;
     public static final String TABLE_CREATE =
-            "create table if not exists Quest (id integer primary key autoincrement , category text, time text, Exp integer, questdesc text);";
+            "create table if not exists Quest (quest_id integer primary key autoincrement , category text, time text, exp integer, quest_desc text);";
     public static final String COL_ID = "quest_id";
     public static final String COL_CATEGORY = "category";
     public static final String COL_TIME = "time";
