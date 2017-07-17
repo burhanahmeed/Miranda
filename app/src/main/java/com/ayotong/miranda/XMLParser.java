@@ -4,6 +4,8 @@ package com.ayotong.miranda;
  * Created by tehhutan on 14/07/17.
  */
 
+import com.ayotong.miranda.model.Article;
+
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.xmlpull.v1.XmlPullParser;

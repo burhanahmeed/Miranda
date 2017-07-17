@@ -1,4 +1,4 @@
-package com.ayotong.miranda;
+package com.ayotong.miranda.model;
 
 /**
  * Created by tehhutan on 14/07/17.
@@ -6,9 +6,6 @@ package com.ayotong.miranda;
 
 import java.util.Date;
 
-/**
- * Created by Marco Gomiero on 12/02/2015.
- */
 public class Article {
 
     private String title;
