@@ -10,6 +10,8 @@ import java.util.ArrayList;
 
 public interface QuestDAO {
 
+    public Quest insert(Quest quest);
+
     public Quest insert(int questID, Quest quest);
 
     public int updateTime(int questID, Quest quest);

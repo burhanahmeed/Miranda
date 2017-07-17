@@ -25,11 +25,11 @@ public class UserInfoDB extends DatabaseDAO implements UserInfoDAO {
         cv.put(UserInfo.COL_ID, ID);
         cv.put(UserInfo.COL_UNAME, userinfo.getUsername());
         cv.put(UserInfo.COL_AGE, userinfo.getAge());
-        cv.put(UserInfo.COL_GENDER, userinfo.getGender());
+        cv.put(UserInfo.COL_GENDER, gendersql(userinfo.getGender()));
         cv.put(UserInfo.COL_WEIGHT, userinfo.getWeight());
         cv.put(UserInfo.COL_HEIGHT, userinfo.getHeight());
-        cv.put(UserInfo.COL_ISPREGNANT, userinfo.ispregnant());
-        cv.put(UserInfo.COL_ISNAP, userinfo.isnap());
+        cv.put(UserInfo.COL_ISPREGNANT, boolsql(userinfo.ispregnant()));
+        cv.put(UserInfo.COL_ISNAP, boolsql(userinfo.isnap()));
         cv.put(UserInfo.COL_STARTNAP, userinfo.getStartnap());
         cv.put(UserInfo.COL_STARTSLEEP, userinfo.getStartsleep());
 
@@ -42,7 +42,7 @@ public class UserInfoDB extends DatabaseDAO implements UserInfoDAO {
         cv.put(UserInfo.COL_ID, userinfo.getId());
         cv.put(UserInfo.COL_UNAME, userinfo.getUsername());
         cv.put(UserInfo.COL_AGE, userinfo.getAge());
-        cv.put(UserInfo.COL_GENDER, userinfo.getGender());
+        cv.put(UserInfo.COL_GENDER, gendersql(userinfo.getGender()));
         cv.put(UserInfo.COL_WEIGHT, userinfo.getWeight());
         cv.put(UserInfo.COL_HEIGHT, userinfo.getHeight());
         cv.put(UserInfo.COL_ISPREGNANT, boolsql(userinfo.ispregnant()));
@@ -50,6 +50,22 @@ public class UserInfoDB extends DatabaseDAO implements UserInfoDAO {
         cv.put(UserInfo.COL_STARTNAP, userinfo.getStartnap());
         cv.put(UserInfo.COL_STARTSLEEP, userinfo.getStartsleep());
         return super.update(UserInfo.DATABASE_TABLE, UserInfo.COL_ID + " = " + userinfo.getId(), cv);
+    }
+
+    public int updateInfo(int id, String username, int age, String gender, int weight, int height, boolean ispregnant,
+                          boolean isnap, String startnap, String startsleep){
+        ContentValues cv = new ContentValues();
+        cv.put(UserInfo.COL_ID, id);
+        cv.put(UserInfo.COL_UNAME, username);
+        cv.put(UserInfo.COL_AGE, age);
+        cv.put(UserInfo.COL_GENDER, gendersql(gender));
+        cv.put(UserInfo.COL_WEIGHT, weight);
+        cv.put(UserInfo.COL_HEIGHT, height);
+        cv.put(UserInfo.COL_ISPREGNANT, boolsql(ispregnant));
+        cv.put(UserInfo.COL_ISNAP, boolsql(isnap));
+        cv.put(UserInfo.COL_STARTNAP, startnap);
+        cv.put(UserInfo.COL_STARTSLEEP, startsleep);
+        return super.update(UserInfo.DATABASE_TABLE, UserInfo.COL_ID + " = " + id, cv);
     }
 
     public int boolsql (boolean value){

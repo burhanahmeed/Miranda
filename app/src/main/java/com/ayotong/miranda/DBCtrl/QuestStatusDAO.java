@@ -10,9 +10,13 @@ import java.util.ArrayList;
 
 public interface QuestStatusDAO {
 
-    public QuestStatus insert(String timestamp, int questID, QuestStatus quest_status);
+    public QuestStatus insert(QuestStatus quest_status);
 
-    public int updateQuestStatus(String timestamp, int questID, QuestStatus queststatus);
+    public QuestStatus insert(String timestamp, int questID, int quest_flag);
+
+    public int updateQuestStatus(QuestStatus queststatus);
+
+    public int updateQuestStatus(String timestamp, int questID, int quest_flag);
 
     public ArrayList<QuestStatus> readQuestStatus();
 

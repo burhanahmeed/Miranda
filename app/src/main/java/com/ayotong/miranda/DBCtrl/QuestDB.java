@@ -21,7 +21,17 @@ public class QuestDB  extends DatabaseDAO implements QuestDAO{
         super(context, DatabaseDAO.dName, Quest.TABLE_CREATE, Quest.DATABASE_TABLE, Quest.DATABASE_VERSION);
         this.context = context;
     }
-    @Override
+
+    public Quest insert(Quest quest) {
+        ContentValues cv = new ContentValues();
+        cv.put(Quest.COL_ID, quest.getId());
+        cv.put(Quest.COL_CATEGORY, quest.getCategory());
+        cv.put(Quest.COL_QUESTDESC, quest.getQuest());
+        cv.put(Quest.COL_TIME, quest.getTime());
+        cv.put(Quest.COL_EXP, quest.getExp());
+        return new Quest((int)super.insert(Quest.DATABASE_TABLE, cv) , quest.getCategory() ,quest.getTime() , quest.getExp(), quest.getQuest());
+    }
+
     public Quest insert(int questID, Quest quest) {
         ContentValues cv = new ContentValues();
         cv.put(Quest.COL_ID, questID);

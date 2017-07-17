@@ -21,21 +21,38 @@ public class QuestStatusDB extends DatabaseDAO implements QuestStatusDAO {
         this.context = context;
     }
 
-    public QuestStatus insert(String timestamp, int questID, QuestStatus quest_status){
+    public QuestStatus insert(QuestStatus quest_status){
         ContentValues cv = new ContentValues();
         cv.put(QuestStatus.COL_TIMESTAMP, quest_status.getTimestamp());
-        cv.put(QuestStatus.COL_QUESTID, questID);
+        cv.put(QuestStatus.COL_QUESTID, quest_status.getQuestid());
         cv.put(QuestStatus.COL_QUESTFLAG, quest_status.getQuestflag());
         super.insert(QuestStatus.DATABASE_TABLE, cv);
         return new QuestStatus(quest_status.getTimestamp(), quest_status.getQuestid(), quest_status.getQuestflag());
     }
 
-    public int updateQuestStatus(String timestamp, int questID, QuestStatus queststatus){
+    public QuestStatus insert(String timestamp, int questID, int quest_flag){
+        ContentValues cv = new ContentValues();
+        cv.put(QuestStatus.COL_TIMESTAMP, timestamp);
+        cv.put(QuestStatus.COL_QUESTID, questID);
+        cv.put(QuestStatus.COL_QUESTFLAG, quest_flag);
+        super.insert(QuestStatus.DATABASE_TABLE, cv);
+        return new QuestStatus(timestamp, questID, quest_flag);
+    }
+
+    public int updateQuestStatus(QuestStatus queststatus){
         ContentValues cv = new ContentValues();
         cv.put(QuestStatus.COL_TIMESTAMP, queststatus.getTimestamp());
         cv.put(QuestStatus.COL_QUESTID, queststatus.getQuestid());
         cv.put(QuestStatus.COL_QUESTFLAG, queststatus.getQuestflag());
         return super.update(QuestStatus.DATABASE_TABLE, QuestStatus.COL_QUESTID + " = " + queststatus.getQuestid(), cv);
+    }
+
+    public int updateQuestStatus(String timestamp, int questID, int quest_flag){
+        ContentValues cv = new ContentValues();
+        cv.put(QuestStatus.COL_TIMESTAMP, timestamp);
+        cv.put(QuestStatus.COL_QUESTID, questID);
+        cv.put(QuestStatus.COL_QUESTFLAG, quest_flag);
+        return super.update(QuestStatus.DATABASE_TABLE, QuestStatus.COL_QUESTID + " = " +questID, cv);
     }
 
     public ArrayList<QuestStatus> readQuestStatus(){

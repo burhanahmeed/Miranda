@@ -2,6 +2,10 @@ package com.ayotong.miranda.model;
 
 /**
  * Created by Alpha on 13/07/2017.
+ *
+ * Gender:
+ * 0. Male
+ * 1. Female
  */
 
 public class UserInfo {
