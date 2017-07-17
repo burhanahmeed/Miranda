@@ -2,6 +2,10 @@ package com.ayotong.miranda.model;
 
 /**
  * Created by Alpha on 13/07/2017.
+ *
+ * Gender:
+ * 0. Male
+ * 1. Female
  */
 
 public class UserInfo {
@@ -9,7 +13,7 @@ public class UserInfo {
     public static final String DATABASE_TABLE = "UserInfo";
     public static final int DATABASE_VERSION = 1;
     public static final String TABLE_CREATE =
-            "create table if not exists UserInfo (id integer primary key, username text, age integer, gender text, weight integer, height integer, is_pregnant integer, is_nap integer,start_nap text, start_sleep text);";
+            "create table if not exists UserInfo (userinfo_id integer primary key, username text, age integer, gender integer, weight integer, height integer, is_pregnant integer, is_nap integer,start_nap text, start_sleep text);";
     public static final String COL_ID = "userinfo_id";
     public static final String COL_UNAME = "username";
     public static final String COL_AGE = "age";
