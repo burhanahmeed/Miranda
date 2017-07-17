@@ -9,37 +9,25 @@ import android.content.DialogInterface;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
-import android.text.Html;
-import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.ayotong.miranda.ArticleAdapter;
-import com.ayotong.miranda.MainActivity;
+import com.ayotong.miranda.adapter.ArticleAdapter;
 import com.ayotong.miranda.R;
 import com.pnikosis.materialishprogress.ProgressWheel;
-import com.ayotong.miranda.Article;
+import com.ayotong.miranda.model.Article;
 import com.ayotong.miranda.Parser;
-import com.ayotong.miranda.XMLParser;
 
 import java.util.ArrayList;
 
-import okhttp3.OkHttpClient;
 public class Article_fragment extends Fragment {
 
     private RecyclerView mRecyclerView;

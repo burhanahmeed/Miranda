@@ -1,4 +1,4 @@
-package com.ayotong.miranda;
+package com.ayotong.miranda.adapter;
 
 /**
  * Created by tehhutan on 14/07/17.
@@ -16,7 +16,8 @@ import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.ayotong.miranda.Article;
+import com.ayotong.miranda.model.Article;
+import com.ayotong.miranda.R;
 import com.squareup.picasso.Picasso;
 
 import java.text.SimpleDateFormat;

@@ -7,6 +7,8 @@ package com.ayotong.miranda;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.ayotong.miranda.model.Article;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Observable;
