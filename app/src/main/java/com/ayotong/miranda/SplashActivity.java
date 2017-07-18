@@ -19,40 +19,30 @@ public class SplashActivity extends Activity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.splash_screen_intro);
 
-        if (x == false){
-            setContentView(R.layout.splash_screen_signup);
-            Button startBtn = (Button)findViewById(R.id.get_start_btn);
-
-            startBtn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent in = new Intent(SplashActivity.this, SignUpActivity.class);
-                    startActivity(in);
-                }
-            });
-
-        }else{
-            setContentView(R.layout.splash_screen_intro);
-
-            new Handler().postDelayed(new Runnable() {
+        new Handler().postDelayed(new Runnable() {
 
 			/*
              * Showing splash screen with a timer. This will be useful when you
 			 * want to show case your app logo / company
 			 */
 
-                @Override
-                public void run() {
-                    // This method will be executed once the timer is over
-                    // Start your app main activity
+            @Override
+            public void run() {
+                // This method will be executed once the timer is over
+                // Start your app main activity
+                if (x == false){
+                    Intent i = new Intent(SplashActivity.this, GetStartedActivity.class);
+                    startActivity(i);
+                }else{
                     Intent i = new Intent(SplashActivity.this, MainActivity.class);
                     startActivity(i);
-
-                    // close this activity
-                    finish();
                 }
-            }, SPLASH_TIME_OUT);
-        }
+
+                // close this activity
+                finish();
+            }
+        }, SPLASH_TIME_OUT);
     }
 }
