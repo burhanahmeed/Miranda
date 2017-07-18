@@ -15,13 +15,18 @@ import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 ;
 import com.ayotong.miranda.R;
 import com.ayotong.miranda.adapter.CardAdapterQuest;
 import com.ayotong.miranda.model.Quest;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Random;
 
 /**
  * Created by burhan on 06/07/17.
@@ -31,6 +36,8 @@ public class Home_fragment extends Fragment {
 
     private RecyclerView cardRecyclerView;
     private CardAdapterQuest cardAdapterQuest;
+    private TextView time, date, greet;
+    private ImageView cuaca;
 
     @Nullable
     @Override
@@ -58,6 +65,17 @@ public class Home_fragment extends Fragment {
 
         // 3
         this.cardAdapterQuest.setItems(quests);
+
+        time = (TextView)v.findViewById(R.id.txttime);
+        date = (TextView)v.findViewById(R.id.txtdate);
+        greet = (TextView)v.findViewById(R.id.txt_wheater);
+        cuaca = (ImageView)v.findViewById(R.id.img_cuaca);
+
+//        cuaca.setImageDrawable();
+
+        time();
+        date();
+        greet();
 
         return v; //return the fragmentview
     }
@@ -107,6 +125,76 @@ public class Home_fragment extends Fragment {
         @Override
         public boolean canScrollVertically() {
             return false;
+        }
+    }
+
+    public void time(){
+        Calendar c = Calendar.getInstance();
+        SimpleDateFormat tm = new SimpleDateFormat("HH:mm");
+        String times = tm.format(Calendar.getInstance().getTime());
+        time.setText(times);
+    }
+    public  void date(){
+        Calendar c = Calendar.getInstance();
+        SimpleDateFormat dt = new SimpleDateFormat("EEE, d MMM yyyy");
+        String dates = dt.format(Calendar.getInstance().getTime());
+        date.setText(dates);
+    }
+    public void greet(){
+        Calendar c = Calendar.getInstance();
+        int timeOfDay = c.get(Calendar.HOUR_OF_DAY);
+
+        Random r = new Random();
+        int value = r.nextInt(3);
+
+        if(timeOfDay >= 0 && timeOfDay < 12){
+            switch(value) {
+                case 0 :
+                    greet.setText("GOOD MORNING");
+                    break;
+                case 1 :
+                    greet.setText("HAVE A NICE DAY");
+                    break;
+                case 2 :
+                    greet.setText("DO YOUR BEST");
+                    break;
+            }
+        }else if(timeOfDay >= 12 && timeOfDay < 16){
+            switch(value) {
+                case 0 :
+                    greet.setText("GOOD AFTERNOON");
+                    break;
+                case 1 :
+                    greet.setText("KEEP SPIRIT");
+                    break;
+                case 2 :
+                    greet.setText("YOU'RE DOING SO GOOD");
+                    break;
+            }
+        }else if(timeOfDay >= 16 && timeOfDay < 21){
+            switch(value) {
+                case 0 :
+                    greet.setText("GOOD EVENING");
+                    break;
+                case 1 :
+                    greet.setText("TAKE A REST, OK");
+                    break;
+                case 2 :
+                    greet.setText("TODAY IS A GOOD DAY");
+                    break;
+            }
+        }else if(timeOfDay >= 21 && timeOfDay < 24){
+            switch(value) {
+                case 0 :
+                    greet.setText("GOOD NIGHT");
+                    break;
+                case 1 :
+                    greet.setText("SWEET DREAM");
+                    break;
+                case 2 :
+                    greet.setText("DONT FORGET TO DRINK WATER");
+                    break;
+            }
         }
     }
 
