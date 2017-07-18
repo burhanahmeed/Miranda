@@ -27,21 +27,34 @@
                 android:text="09.30"
                 android:textSize="12dp" />
 
-            <TextView
-                android:id="@+id/txtXP"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:text="10xp"
-                android:textSize="20dp"
+                android:orientation="horizontal"
                 android:layout_alignParentTop="true"
-                android:layout_toEndOf="@+id/txtJam" />
+                android:layout_toEndOf="@+id/txtJam"
+                android:id="@+id/xp_linear">
+                <TextView
+                    android:id="@+id/txtXP"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text="10"
+                    android:textSize="20dp"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="3dp"
+                    android:text="xp"
+                    android:textSize="20dp" />
+            </LinearLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
-                android:layout_below="@+id/txtXP"
+                android:layout_below="@+id/xp_linear"
                 android:layout_marginTop="12dp"
                 android:id="@+id/relative_card">
 
@@ -68,7 +81,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="1.2dp"
                 android:background="@android:color/darker_gray"
-                android:layout_below="@+id/txtXP"
+                android:layout_below="@+id/xp_linear"
                 android:id="@+id/line_bellow_time"
                 android:layout_marginTop="7dp"/>
 

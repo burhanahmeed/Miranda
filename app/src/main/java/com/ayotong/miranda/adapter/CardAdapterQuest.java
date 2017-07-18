@@ -52,7 +52,7 @@ public class CardAdapterQuest extends RecyclerView.Adapter<CardAdapterQuest.View
 
         public void bind(Quest quest) {
             this.txtJam.setText(quest.getTime());
-            this.txtXP.setText(quest.getExp());
+            this.txtXP.setText(String.valueOf(quest.getExp()));
             this.txtQuest.setText(quest.getQuest());
         }
 
