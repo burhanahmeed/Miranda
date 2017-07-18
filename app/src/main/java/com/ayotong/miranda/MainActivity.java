@@ -69,8 +69,8 @@ public class MainActivity extends AppCompatActivity {
         cond = (TextView)header.findViewById(R.id.condisi);
         level = (TextView)findViewById(R.id.level);
         name.setText("Teh");
-        cond.setText("Healthy");
-        level.setText("100 xp");
+        cond.setText("Male");
+        level.setText("100");
         ImageView img = (ImageView)header.findViewById(R.id.profile_image);
         Resources res = getResources(); // need this to fetch the drawable
         Drawable draw = res.getDrawable( R.drawable.teh );
