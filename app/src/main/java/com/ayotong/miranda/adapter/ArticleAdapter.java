@@ -125,8 +125,10 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ViewHold
 //
 //                ((TextView) alertDialog.findViewById(android.R.id.message)).setMovementMethod(LinkMovementMethod.getInstance());
                 String link = articles.get(position).getLink();
+                String title = articles.get(position).getTitle();
                 Intent i = new Intent(mContext, WebViewActivity.class);
                 i.putExtra("GET_LINK", link);
+                i.putExtra("GET_TITLE", title);
                 mContext.startActivity(i);
 
             }

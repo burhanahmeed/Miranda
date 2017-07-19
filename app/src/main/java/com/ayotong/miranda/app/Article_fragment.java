@@ -38,7 +38,7 @@ public class Article_fragment extends Fragment {
     private ArticleAdapter mAdapter;
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private ProgressWheel progressWheel;
-    private String urlString = "http://doktersehat.com/feed/";
+    private String urlString = "http://rss.detik.com/index.php/health/";
     private View ll;
     private FragmentActivity fa;
     private ArrayList<Article> articles = new ArrayList<Article>();
