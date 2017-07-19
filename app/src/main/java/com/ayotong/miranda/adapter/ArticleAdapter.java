@@ -6,6 +6,7 @@ package com.ayotong.miranda.adapter;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
@@ -16,6 +17,7 @@ import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.ayotong.miranda.WebViewActivity;
 import com.ayotong.miranda.model.Article;
 import com.ayotong.miranda.R;
 import com.squareup.picasso.Picasso;
@@ -35,7 +37,6 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ViewHold
 
     private int rowLayout;
     private Context mContext;
-    WebView articleView;
 
     public ArticleAdapter(ArrayList<Article> list, int rowLayout, Context context) {
 
@@ -90,33 +91,44 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ViewHold
             @Override
             public void onClick(View view) {
 
+                final String mimeType = "text/html";
+                final String encoding = "UTF-8";
+                String html = "<br /><br />Read the handouts please for tomorrow.<br /><br /><!--homework help homework" +
+                        "help help with homework homework assignments elementary school high school middle school" +
+                        "// --><font color='#60c000' size='4'><strong>Please!</strong></font>" +
+                        "<img src='http://www.homeworknow.com/hwnow/upload/images/tn_star300.gif'  />";
+
                 //show article content inside a dialog
-                articleView = new WebView(mContext);
+//                articleView = new WebView(mContext);
+//
+//                articleView.getSettings().setLoadWithOverviewMode(true);
+//
+//                String title = articles.get(position).getTitle();
+//                String content = articles.get(position).getLink();
+//
+//                articleView.getSettings().setJavaScriptEnabled(true);
+//                articleView.setHorizontalScrollBarEnabled(false);
+//                articleView.setWebChromeClient(new WebChromeClient());
+////                articleView.loadDataWithBaseURL("", html, mimeType, encoding, "");
+//                articleView.loadUrl(content);
+//
+//                android.support.v7.app.AlertDialog alertDialog = new android.support.v7.app.AlertDialog.Builder(mContext).create();
+//                alertDialog.setTitle(title);
+//                alertDialog.setView(articleView);
+//                alertDialog.setButton(android.support.v7.app.AlertDialog.BUTTON_NEUTRAL, "OK",
+//                        new DialogInterface.OnClickListener() {
+//                            public void onClick(DialogInterface dialog, int which) {
+//                                dialog.dismiss();
+//                            }
+//                        });
+//                alertDialog.show();
+//
+//                ((TextView) alertDialog.findViewById(android.R.id.message)).setMovementMethod(LinkMovementMethod.getInstance());
+                String link = articles.get(position).getLink();
+                Intent i = new Intent(mContext, WebViewActivity.class);
+                i.putExtra("GET_LINK", link);
+                mContext.startActivity(i);
 
-                articleView.getSettings().setLoadWithOverviewMode(true);
-
-                String title = articles.get(position).getTitle();
-                String content = articles.get(position).getContent();
-
-                articleView.getSettings().setJavaScriptEnabled(true);
-                articleView.setHorizontalScrollBarEnabled(false);
-                articleView.setWebChromeClient(new WebChromeClient());
-                articleView.loadDataWithBaseURL(null, "<style>img{display: inline; height: auto; max-width: 100%;} " +
-
-                        "</style>\n" + "<style>iframe{ height: auto; width: auto;}" + "</style>\n"  + content, null, "utf-8", null);
-
-                android.support.v7.app.AlertDialog alertDialog = new android.support.v7.app.AlertDialog.Builder(mContext).create();
-                alertDialog.setTitle(title);
-                alertDialog.setView(articleView);
-                alertDialog.setButton(android.support.v7.app.AlertDialog.BUTTON_NEUTRAL, "OK",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
-                            }
-                        });
-                alertDialog.show();
-
-                ((TextView) alertDialog.findViewById(android.R.id.message)).setMovementMethod(LinkMovementMethod.getInstance());
             }
         });
     }
