@@ -24,6 +24,7 @@ public class UpdateProfileActivity extends AppCompatActivity {
     EditText fullname, age, weight, height, tidur, tsiang;
     RadioGroup rg;
     RadioButton rb;
+    CheckBox cbP;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +66,7 @@ public class UpdateProfileActivity extends AppCompatActivity {
         int selectedId=rg.getCheckedRadioButtonId();
         rb=(RadioButton)findViewById(selectedId);
 
-        final CheckBox cbP = (CheckBox)findViewById(R.id.checkBox);
+        cbP = (CheckBox)findViewById(R.id.checkBox);
         cbP.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -73,6 +74,38 @@ public class UpdateProfileActivity extends AppCompatActivity {
                 //is chkIos checked?
                 boolean pregnant = cbP.isChecked();
 
+            }
+        });
+
+        //untuk setText pas buka halaman
+        fullname.setText("Tehhutan");
+        age.setText("24");
+        weight.setText("100");
+        height.setText("190");
+        tidur.setText("22.00");
+        tsiang.setText("13.00");
+
+        boolean isPreg = true;
+        if (isPreg){
+            cbP.setChecked(true);
+        }else{
+            cbP.setChecked(false);
+        }
+
+        String gndr = "Male";
+        if (gndr=="Male"){
+            RadioButton rmale = (RadioButton)findViewById(R.id.rbM);
+            rmale.setChecked(true);
+        }else{
+            RadioButton rfemale = (RadioButton)findViewById(R.id.rbF);
+            rfemale.setChecked(true);
+        }
+
+        Button save = (Button)findViewById(R.id.savingbtn);
+        save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
             }
         });
 

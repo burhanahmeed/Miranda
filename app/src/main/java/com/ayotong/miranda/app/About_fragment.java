@@ -11,7 +11,7 @@ import com.ayotong.miranda.R;
 
 public class About_fragment extends Fragment {
 
-    @Nullable
+    @org.jetbrains.annotations.Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         //returning our layout file

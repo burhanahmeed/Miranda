@@ -68,12 +68,12 @@ public class MainActivity extends AppCompatActivity {
         name = (TextView)header.findViewById(R.id.username);
         cond = (TextView)header.findViewById(R.id.condisi);
         level = (TextView)findViewById(R.id.level);
-        name.setText("Teh");
-        cond.setText("Male");
-        level.setText("100");
+        name.setText("Teh"); //nama
+        cond.setText("Male"); //iki ganti gender ae
+        level.setText("100"); //total xp
         ImageView img = (ImageView)header.findViewById(R.id.profile_image);
         Resources res = getResources(); // need this to fetch the drawable
-        Drawable draw = res.getDrawable( R.drawable.teh );
+        Drawable draw = res.getDrawable( R.drawable.ic_logo );
         img.setImageDrawable(draw);
         navigationView.getMenu().getItem(0).setChecked(true);
         ImageButton profile = (ImageButton) header.findViewById(R.id.btn_setting);
