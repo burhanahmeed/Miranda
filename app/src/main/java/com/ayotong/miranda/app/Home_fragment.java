@@ -136,7 +136,7 @@ public class Home_fragment extends Fragment {
     }
     public  void date(){
         Calendar c = Calendar.getInstance();
-        SimpleDateFormat dt = new SimpleDateFormat("EEE, d MMM yyyy");
+        SimpleDateFormat dt = new SimpleDateFormat("EEEE, d MMMM yyyy");
         String dates = dt.format(Calendar.getInstance().getTime());
         date.setText(dates);
     }
