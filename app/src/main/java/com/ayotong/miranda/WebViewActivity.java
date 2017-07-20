@@ -126,7 +126,8 @@ private class MyWebViewClient extends WebViewClient {
                 Elements isiD = doc.select("div.text_detail");
                 String isi = isiD.toString();
                 String date = tanggal.toString();
-                html = "<html>\n" +
+                html = "<style>img{width:300px}</style>" +
+                        "<html>\n" +
                         "  <h3>" + judul + "</h3>\n" +
                         "<h6>" + date + "</h6>" +
                         "  <div>" + isi + "</div>\n" +
