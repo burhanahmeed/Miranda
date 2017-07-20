@@ -51,6 +51,7 @@
                     android:layout_height="wrap_content"
                     android:ems="10"
                     android:hint="Full Name"
+                    android:text="Nama Orang"
                     android:inputType="textCapSentences|textAutoCorrect" />
             </android.support.design.widget.TextInputLayout>
 
@@ -87,22 +88,23 @@
                     android:layout_height="match_parent"
                     android:layout_below="@+id/textView"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginTop="5dp">
+                    android:layout_marginTop="5dp"
+                    android:id="@+id/radiogender">
 
                     <RadioButton
-                        android:id="@+id/radioButton1"
+                        android:id="@+id/rbM"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:onClick="radioButtonClicked"
+
                         android:text="Male"
                         android:textColor="@android:color/white"
                         android:theme="@style/WhiteCheck"/>
 
                     <RadioButton
-                        android:id="@+id/radioButton2"
+                        android:id="@+id/rbF"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:onClick="radioButtonClicked"
+
                         android:text="Female"
                         android:theme="@style/WhiteCheck"
                         android:textColor="@android:color/white"/>
@@ -141,6 +143,38 @@
                     android:inputType="phone" />
             </android.support.design.widget.TextInputLayout>
 
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/input_tidur"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                >
+
+                <EditText
+                    android:id="@+id/tidur"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="Sleep Time (used to do)"
+                    android:inputType="phone" />
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/input_tidursiang"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                >
+
+                <EditText
+                    android:id="@+id/tidursiang"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="Sleep Time During Day (Optional)"
+                    android:inputType="phone" />
+            </android.support.design.widget.TextInputLayout>
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -154,23 +188,13 @@
                     android:text="You are in pregnancy"
                     android:textColor="@android:color/white"
                     android:theme="@style/WhiteCheck"/>
-
-                <CheckBox
-                    android:id="@+id/checkBox1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="@+id/checkBox"
-                    android:layout_marginTop="5dp"
-                    android:onClick="androidCheckBoxClicked"
-                    android:text="You are used to nap during day"
-                    android:textColor="@android:color/white"
-                    android:theme="@style/WhiteCheck"/>
             </LinearLayout>
 
             <Button
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:id="@+id/savingbtn"
                 android:background="#fff"
                 android:text="Save"
                 android:textStyle="bold"
