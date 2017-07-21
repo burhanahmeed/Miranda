@@ -5,8 +5,10 @@ package com.ayotong.miranda;
  */
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -32,9 +34,19 @@ public class SplashActivity extends Activity{
             public void run() {
                 // This method will be executed once the timer is over
                 // Start your app main activity
-                if (x == false){
+                final String PREFS_NAME = "MyPrefsFile";
+
+                SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+
+                if (settings.getBoolean("my_first_time", true)) {
+                    //the app is being launched for first time, do something
+                    Log.d("Comments", "First time");
+                    // first time task
                     Intent i = new Intent(SplashActivity.this, GetStartedActivity.class);
                     startActivity(i);
+                    // record the fact that the app has been started at least once
+                    settings.edit().putBoolean("my_first_time", false).commit();
+
                 }else{
                     Intent i = new Intent(SplashActivity.this, MainActivity.class);
                     startActivity(i);
