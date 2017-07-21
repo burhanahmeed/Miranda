@@ -13,7 +13,7 @@ public interface UserInfoDAO {
 
     public int updateInfo(UserInfo userinfo);
 
-    public int updateInfo(int id, String username, int age, String gender, int weight, int height, boolean ispregnant, boolean isnap, String startnap, String startsleep);
+    public int updateInfo(int id, String username, int age, String gender, int weight, int height, boolean ispregnant, String startnap, String startsleep);
 
     public int boolsql (boolean value);
 
