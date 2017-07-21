@@ -3,6 +3,7 @@ package com.ayotong.miranda.app;
 
 import android.app.AlertDialog;
 //import android.app.Fragment;
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -15,11 +16,14 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.GestureDetector;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.ayotong.miranda.WebViewActivity;
 import com.ayotong.miranda.adapter.ArticleAdapter;
 import com.ayotong.miranda.R;
 import com.pnikosis.materialishprogress.ProgressWheel;
@@ -34,9 +38,10 @@ public class Article_fragment extends Fragment {
     private ArticleAdapter mAdapter;
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private ProgressWheel progressWheel;
-    private String urlString = "http://doktersehat.com/feed/";
+    private String urlString = "http://rss.detik.com/index.php/health/";
     private View ll;
     private FragmentActivity fa;
+    private ArrayList<Article> articles = new ArrayList<Article>();
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -68,6 +73,45 @@ public class Article_fragment extends Fragment {
 
             }
         });
+
+//        final GestureDetector mGestureDetector = new GestureDetector(getActivity(), new GestureDetector.SimpleOnGestureListener() {
+//
+//            @Override public boolean onSingleTapUp(MotionEvent e) {
+//                return true;
+//            }
+//
+//        });
+//
+//
+//        mRecyclerView.addOnItemTouchListener(new RecyclerView.OnItemTouchListener() {
+//            @Override
+//            public boolean onInterceptTouchEvent(RecyclerView recyclerView, MotionEvent motionEvent) {
+//                View child = recyclerView.findChildViewUnder(motionEvent.getX(),motionEvent.getY());
+//
+//
+//
+//                if(child!=null && mGestureDetector.onTouchEvent(motionEvent)){
+//                    String link = articles.get(recyclerView.getChildAdapterPosition(child)).getLink();
+//                    Toast.makeText(getActivity(),"The Item Clicked is: "+recyclerView.getChildPosition(child),Toast.LENGTH_SHORT).show();
+//                    Intent i = new Intent(getActivity(), WebViewActivity.class);
+//                    i.putExtra("GET_LINK", link);
+//                    startActivity(i);
+//                    return true;
+//
+//                }
+//
+//                return false;
+//            }
+//
+//            @Override
+//            public void onTouchEvent(RecyclerView recyclerView, MotionEvent motionEvent) {
+//
+//            }
+//
+//            @Override
+//            public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
+//            }
+//        });
 
         if (!isNetworkAvailable()) {
 
