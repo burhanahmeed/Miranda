@@ -29,12 +29,11 @@ public class UserInfoDB extends DatabaseDAO implements UserInfoDAO {
         cv.put(UserInfo.COL_WEIGHT, userinfo.getWeight());
         cv.put(UserInfo.COL_HEIGHT, userinfo.getHeight());
         cv.put(UserInfo.COL_ISPREGNANT, boolsql(userinfo.ispregnant()));
-        cv.put(UserInfo.COL_ISNAP, boolsql(userinfo.isnap()));
         cv.put(UserInfo.COL_STARTNAP, userinfo.getStartnap());
         cv.put(UserInfo.COL_STARTSLEEP, userinfo.getStartsleep());
 
         return new UserInfo((int)super.insert(UserInfo.DATABASE_TABLE, cv), userinfo.getUsername(), userinfo.getAge(), userinfo.getGender(),
-                userinfo.getWeight(), userinfo.getHeight(), userinfo.ispregnant(), userinfo.isnap(), userinfo.getStartnap(), userinfo.getStartsleep());
+                userinfo.getWeight(), userinfo.getHeight(), userinfo.ispregnant(), userinfo.getStartnap(), userinfo.getStartsleep());
     }
 
     public int updateInfo(UserInfo userinfo){
@@ -46,14 +45,13 @@ public class UserInfoDB extends DatabaseDAO implements UserInfoDAO {
         cv.put(UserInfo.COL_WEIGHT, userinfo.getWeight());
         cv.put(UserInfo.COL_HEIGHT, userinfo.getHeight());
         cv.put(UserInfo.COL_ISPREGNANT, boolsql(userinfo.ispregnant()));
-        cv.put(UserInfo.COL_ISNAP, boolsql(userinfo.isnap()));
         cv.put(UserInfo.COL_STARTNAP, userinfo.getStartnap());
         cv.put(UserInfo.COL_STARTSLEEP, userinfo.getStartsleep());
         return super.update(UserInfo.DATABASE_TABLE, UserInfo.COL_ID + " = " + userinfo.getId(), cv);
     }
 
     public int updateInfo(int id, String username, int age, String gender, int weight, int height, boolean ispregnant,
-                          boolean isnap, String startnap, String startsleep){
+                          String startnap, String startsleep){
         ContentValues cv = new ContentValues();
         cv.put(UserInfo.COL_ID, id);
         cv.put(UserInfo.COL_UNAME, username);
@@ -62,7 +60,6 @@ public class UserInfoDB extends DatabaseDAO implements UserInfoDAO {
         cv.put(UserInfo.COL_WEIGHT, weight);
         cv.put(UserInfo.COL_HEIGHT, height);
         cv.put(UserInfo.COL_ISPREGNANT, boolsql(ispregnant));
-        cv.put(UserInfo.COL_ISNAP, boolsql(isnap));
         cv.put(UserInfo.COL_STARTNAP, startnap);
         cv.put(UserInfo.COL_STARTSLEEP, startsleep);
         return super.update(UserInfo.DATABASE_TABLE, UserInfo.COL_ID + " = " + id, cv);
@@ -99,7 +96,7 @@ public class UserInfoDB extends DatabaseDAO implements UserInfoDAO {
 
     public UserInfo loadInfo(){
         String[] columns = new String[]{DatabaseDAO.KEY_ID ,UserInfo.COL_ID , UserInfo.COL_UNAME, UserInfo.COL_AGE, UserInfo.COL_GENDER,
-                UserInfo.COL_WEIGHT, UserInfo.COL_HEIGHT, UserInfo.COL_ISPREGNANT, UserInfo.COL_ISNAP, UserInfo.COL_STARTNAP,
+                UserInfo.COL_WEIGHT, UserInfo.COL_HEIGHT, UserInfo.COL_ISPREGNANT, UserInfo.COL_STARTNAP,
                 UserInfo.COL_STARTSLEEP };
         Cursor cursor = super.get(UserInfo.DATABASE_TABLE, columns , UserInfo.COL_ID + " = * ");
         UserInfo user = null;
@@ -112,7 +109,6 @@ public class UserInfoDB extends DatabaseDAO implements UserInfoDAO {
             user.setWeight(cursor.getInt(cursor.getColumnIndex(UserInfo.COL_WEIGHT)));
             user.setHeight(cursor.getInt(cursor.getColumnIndex(UserInfo.COL_HEIGHT)));
             user.setIspregnant(boolsql(cursor.getInt(cursor.getColumnIndex(UserInfo.COL_ISPREGNANT))));
-            user.setIsnap(boolsql(cursor.getInt(cursor.getColumnIndex(UserInfo.COL_ISNAP))));
             user.setStartnap(cursor.getString(cursor.getColumnIndex(UserInfo.COL_STARTNAP)));
             user.setStartsleep(cursor.getString(cursor.getColumnIndex(UserInfo.COL_STARTSLEEP)));
         }else{
