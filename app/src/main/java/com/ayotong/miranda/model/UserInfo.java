@@ -13,7 +13,7 @@ public class UserInfo {
     public static final String DATABASE_TABLE = "UserInfo";
     public static final int DATABASE_VERSION = 1;
     public static final String TABLE_CREATE =
-            "create table if not exists UserInfo (userinfo_id integer primary key, username text, age integer, gender integer, weight integer, height integer, is_pregnant integer, is_nap integer,start_nap text, start_sleep text);";
+            "create table if not exists UserInfo (userinfo_id integer primary key, username text, age integer, gender integer, weight integer, height integer, is_pregnant integer,start_nap text, start_sleep text);";
     public static final String COL_ID = "userinfo_id";
     public static final String COL_UNAME = "username";
     public static final String COL_AGE = "age";
@@ -21,7 +21,6 @@ public class UserInfo {
     public static final String COL_WEIGHT = "weight";
     public static final String COL_HEIGHT = "height";
     public static final String COL_ISPREGNANT = "is_pregnant";
-    public static final String COL_ISNAP = "is_nap";
     public static final String COL_STARTNAP = "start_nap";
     public static final String COL_STARTSLEEP = "start_sleep";
     public static final int USER_ID = -1;
@@ -29,11 +28,10 @@ public class UserInfo {
     private int id;
     private String username;
     private int age;
-    private String gender;
+    private int gender;
     private int weight;
     private int height;
     private boolean ispregnant;
-    private boolean isnap;
     private String startnap;
     private String startsleep;
 
@@ -41,16 +39,22 @@ public class UserInfo {
 
     }
 
-    public UserInfo(int id, String username, int age, String gender, int weight, int height, boolean ispregnant, boolean isnap, String startnap, String startsleep){
+    public UserInfo(int id, String username, int age, int gender, int weight, int height, boolean ispregnant, String startnap, String startsleep){
         this.id = id;
+        this.username = username;
         this.age = age;
         this.gender = gender;
         this.weight = weight;
         this.height = height;
         this.ispregnant = ispregnant;
-        this.isnap = isnap;
         this.startnap = startnap;
         this.startsleep = startsleep;
+    }
+
+    public String genderToText(int gender){
+        if(gender==0)
+            return "male";
+        return "female";
     }
 
     public int getId() {
@@ -77,11 +81,11 @@ public class UserInfo {
         this.age = age;
     }
 
-    public String getGender() {
+    public int getGender() {
         return gender;
     }
 
-    public void setGender(String gender) {
+    public void setGender(int gender) {
         this.gender = gender;
     }
 
@@ -107,14 +111,6 @@ public class UserInfo {
 
     public void setIspregnant(boolean ispregnant) {
         this.ispregnant = ispregnant;
-    }
-
-    public boolean isnap() {
-        return isnap;
-    }
-
-    public void setIsnap(boolean isnap) {
-        this.isnap = isnap;
     }
 
     public String getStartnap() {

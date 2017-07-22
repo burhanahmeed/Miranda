@@ -80,13 +80,13 @@
                     android:layout_height="match_parent"
                     android:layout_below="@+id/textView"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginTop="5dp">
+                    android:layout_marginTop="5dp"
+                    android:id="@+id/radiogender">
 
                     <RadioButton
                         android:id="@+id/radioButton1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:onClick="radioButtonClicked"
                         android:text="Male"
                         android:textColor="@android:color/white"
                         android:theme="@style/WhiteCheck"/>
@@ -95,7 +95,6 @@
                         android:id="@+id/radioButton2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:onClick="radioButtonClicked"
                         android:text="Female"
                         android:theme="@style/WhiteCheck"
                         android:textColor="@android:color/white"/>
