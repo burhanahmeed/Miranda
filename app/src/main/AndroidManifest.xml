@@ -4,6 +4,7 @@
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_SERVICE"/>
 
     <application
         android:allowBackup="true"
@@ -44,6 +45,14 @@
             android:name=".WebViewActivity"
             android:screenOrientation="portrait">
         </activity>
+
+        <!--android:theme="@style/Theme.Transparent"-->
+        <activity
+            android:name=".DialogActivity"
+
+            android:screenOrientation="portrait">
+        </activity>
+        <service android:name=".Service.BackgroundSvc"/>
     </application>
 
 </manifest>

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.Context;
 import android.os.Handler;
 import android.os.IBinder;
+import android.util.Log;
 import android.widget.Toast;
 
 //for calling ==> startService(new Intent(this, BackgroundService.class));
@@ -36,6 +37,7 @@ public class BackgroundSvc extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+        Log.d("myTag", "Service start 1");
         return Service.START_STICKY;
     }
 
@@ -48,6 +50,7 @@ public class BackgroundSvc extends Service {
 
     @Override
     public void onStart(Intent intent, int startid) {
-        Toast.makeText(this, "Service started by user.", Toast.LENGTH_LONG).show();
+//        Toast.makeText(this, "Service started by user.", Toast.LENGTH_LONG).show();
+        Log.d("myTag", "Service start");
     }
 }

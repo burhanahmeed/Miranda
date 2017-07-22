@@ -13,6 +13,8 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 
+import com.ayotong.miranda.Service.BackgroundSvc;
+
 public class SplashActivity extends Activity{
     // Splash screen timer
     private static int SPLASH_TIME_OUT = 2400;
@@ -38,7 +40,7 @@ public class SplashActivity extends Activity{
 
                 SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
 
-                if (settings.getBoolean("my_first_time", true)) {
+                if (settings.getBoolean("my_first_time", false)) {
                     //the app is being launched for first time, do something
                     Log.d("Comments", "First time");
                     // first time task
@@ -56,5 +58,6 @@ public class SplashActivity extends Activity{
                 finish();
             }
         }, SPLASH_TIME_OUT);
+        startService(new Intent(this, BackgroundSvc.class));
     }
 }
