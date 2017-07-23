@@ -20,5 +20,5 @@ public interface QuestDAO {
 
     public ArrayList<Quest> readQuest();
 
-    public int delete(int quest_id, String category);
+    public void ClearQuest();
 }

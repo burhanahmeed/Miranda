@@ -34,6 +34,7 @@ dependencies {
     })
     //    implementation files('lib/jsoup-1.10.3.jar')
     compile files('lib/jsoup-1.10.3.jar')
+    compile files('lib/joda-time-2.9.4.jar')
     compile 'com.android.support:appcompat-v7:26.+'
     compile 'de.hdodenhof:circleimageview:1.2.1'
     compile 'com.android.support:recyclerview-v7:26.0.+'
