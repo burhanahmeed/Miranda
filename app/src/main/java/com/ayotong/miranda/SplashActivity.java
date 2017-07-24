@@ -73,6 +73,6 @@ public class SplashActivity extends Activity{
         AlarmManager alarm = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         // Start service every 20 seconds
         alarm.setRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(),
-                20* 1000, pintent);
+                5* 1000, pintent);
     }
 }
