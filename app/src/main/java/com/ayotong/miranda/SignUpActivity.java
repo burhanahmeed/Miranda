@@ -3,6 +3,7 @@ package com.ayotong.miranda;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -46,6 +47,7 @@ public class SignUpActivity extends AppCompatActivity {
         chkispreg = (CheckBox) findViewById(R.id.checkBox);
         ettidur = (EditText) findViewById(R.id.tidur);
         ettidursiang = (EditText) findViewById(R.id.tidursiang);
+
 
         rg =(RadioGroup)findViewById(R.id.radiogender);
         rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
