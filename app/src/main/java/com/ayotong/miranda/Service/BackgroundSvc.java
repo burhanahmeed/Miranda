@@ -55,7 +55,8 @@ public class BackgroundSvc extends Service {
 
     @Override
     public void onStart(Intent intent, int startid) {
-        Toast.makeText(this, "Service started by user.", Toast.LENGTH_LONG).show();
+//        Toast.makeText(this, "Service started by user.", Toast.LENGTH_LONG).show();
+        Log.d("myTag", "Service start");
     }
 
     @Override

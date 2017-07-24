@@ -30,11 +30,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.ayotong.miranda.DBCtrl.UserInfoDB;
 import com.ayotong.miranda.app.About_fragment;
 import com.ayotong.miranda.app.Article_fragment;
 import com.ayotong.miranda.app.Home_fragment;
 import com.ayotong.miranda.app.Profile_fragment;
 import com.ayotong.miranda.app.Stat_fragment;
+import com.ayotong.miranda.model.UserInfo;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -42,8 +44,10 @@ public class MainActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private NavigationView navigationView;
     private DrawerLayout drawerLayout;
-
+    UserInfo user;
+    UserInfoDB userdb;
     TextView name, cond,level;
+    int fragID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,14 +67,24 @@ public class MainActivity extends AppCompatActivity {
 
         //Initializing NavigationView
         navigationView = (NavigationView) findViewById(R.id.navigation_view);
-                View header=navigationView.getHeaderView(0);
-/*View view=navigationView.inflateHeaderView(R.layout.nav_header_main);*/
+        View header=navigationView.getHeaderView(0);
+
+        /*View view=navigationView.inflateHeaderView(R.layout.nav_header_main);*/
         name = (TextView)header.findViewById(R.id.username);
         cond = (TextView)header.findViewById(R.id.condisi);
         level = (TextView)findViewById(R.id.level);
-        name.setText("Teh"); //nama
-        cond.setText("Male"); //iki ganti gender ae
+
+        userdb = new UserInfoDB(getApplicationContext());
+        user = new UserInfo();
+
+        Log.i("Action: ", "userdb created");
+        user = userdb.loadInfo();
+        Log.i("Action: ", "success loading info");
+        name.setText(user.getUsername()); //nama
+        Log.i("Action: ", "get username");
+        cond.setText(user.genderToText(user.getGender())); //iki ganti gender ae
         level.setText("100"); //total xp
+
         ImageView img = (ImageView)header.findViewById(R.id.profile_image);
         Resources res = getResources(); // need this to fetch the drawable
         Drawable draw = res.getDrawable( R.drawable.ic_logo );
@@ -89,6 +103,10 @@ public class MainActivity extends AppCompatActivity {
                 openFragment(new Profile_fragment());
             }
         });
+
+        if(getIntent().getIntExtra("fragnum", 0)==1){
+            openFragment(new Profile_fragment());
+        }
 
         Drawable drawable = ContextCompat.getDrawable(getApplicationContext(),R.drawable.icon_menu_feeds);
         toolbar.setOverflowIcon(drawable);
