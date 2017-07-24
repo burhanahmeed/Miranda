@@ -45,7 +45,7 @@ public class SplashActivity extends Activity{
 
                 SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
 
-                if (settings.getBoolean("my_first_time", false)) {
+                if (settings.getBoolean("my_first_time", true)) {
                     //the app is being launched for first time, do something
                     Log.d("Comments", "First time");
                     // first time task

@@ -28,7 +28,7 @@ public class UserInfo {
     private int id;
     private String username;
     private int age;
-    private String gender;
+    private int gender;
     private int weight;
     private int height;
     private boolean ispregnant;
@@ -39,8 +39,9 @@ public class UserInfo {
 
     }
 
-    public UserInfo(int id, String username, int age, String gender, int weight, int height, boolean ispregnant, String startnap, String startsleep){
+    public UserInfo(int id, String username, int age, int gender, int weight, int height, boolean ispregnant, String startnap, String startsleep){
         this.id = id;
+        this.username = username;
         this.age = age;
         this.gender = gender;
         this.weight = weight;
@@ -48,6 +49,12 @@ public class UserInfo {
         this.ispregnant = ispregnant;
         this.startnap = startnap;
         this.startsleep = startsleep;
+    }
+
+    public String genderToText(int gender){
+        if(gender==0)
+            return "male";
+        return "female";
     }
 
     public int getId() {
@@ -74,11 +81,11 @@ public class UserInfo {
         this.age = age;
     }
 
-    public String getGender() {
+    public int getGender() {
         return gender;
     }
 
-    public void setGender(String gender) {
+    public void setGender(int gender) {
         this.gender = gender;
     }
 
