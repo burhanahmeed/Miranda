@@ -5,10 +5,20 @@ import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
 import android.content.Context;
+import android.graphics.PixelFormat;
 import android.os.Handler;
 import android.os.IBinder;
 import android.util.Log;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Toast;
+
+import com.ayotong.miranda.DialogActivity;
+import com.ayotong.miranda.R;
+
+import java.util.Calendar;
+import java.util.zip.Inflater;
 
 //for calling ==> startService(new Intent(this, BackgroundService.class));
 
@@ -16,6 +26,7 @@ public class BackgroundSvc extends Service {
     public Context context = this;
     public Handler handler = null;
     public static Runnable runnable = null;
+    Inflater mInflater;
 
     @Override
     public IBinder onBind(Intent intent) {
@@ -36,11 +47,29 @@ public class BackgroundSvc extends Service {
         };
 
         handler.postDelayed(runnable, 15000);
+        String jam = "22:10";
+        String[] jams = jam.split(":");
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(System.currentTimeMillis());
+        calendar.set(Calendar.HOUR_OF_DAY, Integer.parseInt(jams[0]));
+        calendar.set(Calendar.MINUTE, Integer.parseInt(jams[1]));
+        calendar.set(Calendar.SECOND, 0);
+        Intent in = new Intent(this, DialogActivity.class);
+        in.putExtra("jam",jam);
+        in.putExtra("ques","Ayo bangun tong, masak kalah sama otong");
+        in.putExtra("xp","23");
+        PendingIntent peint = PendingIntent.getActivity(this, 0, in,0);
+        AlarmManager am = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+        am.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), peint);
+
+
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         Log.i("LocalService", "Received start id ");
+
         return START_STICKY;
     }
 
@@ -68,7 +97,7 @@ public class BackgroundSvc extends Service {
         PendingIntent service = PendingIntent.getService(
                 getApplicationContext(),
                 1001,
-                new Intent(getApplicationContext(), BackgroundSvc.class),
+                new Intent(getApplicationContext(), ServiceReceiver.class),
                 PendingIntent.FLAG_ONE_SHOT);
 
         AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
@@ -86,7 +115,7 @@ public class BackgroundSvc extends Service {
         PendingIntent service = PendingIntent.getService(
                 getApplicationContext(),
                 1001,
-                new Intent(getApplicationContext(), BackgroundSvc.class),
+                new Intent(getApplicationContext(), ServiceReceiver.class),
                 PendingIntent.FLAG_ONE_SHOT);
 
         AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
