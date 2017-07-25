@@ -9,7 +9,9 @@
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="com.android.alarm.permission.SET_ALARM"/>
 
     <application
         android:allowBackup="true"
@@ -37,7 +39,7 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.ayotong.miranda.MainActivity" />
-        </activity>https://stackoverflow.com/questions/9015536/java-how-to-add-10-mins-in-my-time
+        </activity>
         <activity
             android:name=".SignUpActivity"
             android:screenOrientation="portrait">
@@ -51,9 +53,11 @@
             android:screenOrientation="portrait">
         </activity>
 
+        <!--android:theme="@style/Theme.Transparent"-->
         <activity
             android:name=".DialogActivity"
-            android:theme="@style/Theme.Transparent"
+
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
             android:screenOrientation="portrait">
         </activity>
 
@@ -67,7 +71,11 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </receiver>
-        <receiver android:name=".Service.ReminderReceiver"/>
+        <receiver android:name=".Service.ReminderReceiver">
+            <intent-filter>
+                <action android:name="my.action.string" />
+            </intent-filter>
+        </receiver>
         <service
             android:name=".Service.BackgroundSvc"
             android:enabled="true"

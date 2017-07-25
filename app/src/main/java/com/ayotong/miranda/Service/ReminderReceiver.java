@@ -19,12 +19,14 @@ public class ReminderReceiver extends BroadcastReceiver{
 //                context.startService(new Intent(context, BackgroundSvc.class));
 //            }
 //        }
+        String jam = intent.getExtras().getString("jam");
+        String ques = intent.getExtras().getString("ques");
+        String xp = intent.getExtras().getString("xp");
         Intent myIntent = new Intent(context, DialogActivity.class);
         myIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        myIntent.putExtra("jam",jam);
+        myIntent.putExtra("ques",ques);
+        myIntent.putExtra("xp",xp);
         context.startActivity(myIntent);
-
-        Vibrator vibrator = (Vibrator) context
-                .getSystemService(Context.VIBRATOR_SERVICE);
-        vibrator.vibrate(2000);
     }
 }
