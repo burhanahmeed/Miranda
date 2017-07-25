@@ -145,15 +145,35 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
+                    android:cursorVisible="false"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
                     android:hint="Sleep Time (used to do)"
                     android:inputType="phone" />
             </android.support.design.widget.TextInputLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="10dp">
+
+                <CheckBox
+                    android:id="@+id/cbnap"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="androidCheckBoxClicked"
+                    android:text="You were nap during day"
+                    android:textColor="@android:color/white"
+                    android:theme="@style/WhiteCheck"/>
+            </LinearLayout>
 
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/input_tidursiang"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
+                android:visibility="gone"
                 >
 
                 <EditText
@@ -161,6 +181,9 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
+                    android:cursorVisible="false"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
                     android:hint="Sleep Time During Day (Optional)"
                     android:inputType="phone" />
             </android.support.design.widget.TextInputLayout>
