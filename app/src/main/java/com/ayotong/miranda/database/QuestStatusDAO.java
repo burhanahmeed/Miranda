@@ -1,4 +1,4 @@
-package com.ayotong.miranda.DBCtrl;
+package com.ayotong.miranda.database;
 
 import com.ayotong.miranda.model.QuestStatus;
 
@@ -12,15 +12,17 @@ public interface QuestStatusDAO {
 
     public QuestStatus insert(QuestStatus quest_status);
 
-    public QuestStatus insert(String timestamp, int questID, int quest_flag);
+    public QuestStatus insert(String timestamp, int questID, String quest_time, int quest_exp, int quest_flag);
 
     public int updateQuestStatus(QuestStatus queststatus);
 
-    public int updateQuestStatus(String timestamp, int questID, int quest_flag);
+    public int updateQuestStatus(String timestamp, int quest_id, String quest_time, int quest_exp, int quest_flag);
 
-    public ArrayList<QuestStatus> readQuestStatus();
+    public ArrayList<QuestStatus> readAllStatus();
 
-    public ArrayList<QuestStatus> readQuestStatus(int status);
+    public ArrayList<QuestStatus> readAllQuestByStatus(int status);
 
-    public int delete(int quest_id);
+    public int deleteQuest(int quest_id);
+
+    public void refreshTable();
 }

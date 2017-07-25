@@ -1,9 +1,8 @@
-package com.ayotong.miranda.DBCtrl;
+package com.ayotong.miranda.database;
 
 import com.ayotong.miranda.model.ExpLog;
 
 import java.util.ArrayList;
-import java.util.StringTokenizer;
 
 /**
  * Created by Alpha on 16/07/2017.

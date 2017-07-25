@@ -1,4 +1,4 @@
-package com.ayotong.miranda.controller;
+package com.ayotong.miranda.core;
 
 
 import org.joda.time.LocalTime;

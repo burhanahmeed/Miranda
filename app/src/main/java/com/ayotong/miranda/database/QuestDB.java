@@ -1,4 +1,4 @@
-package com.ayotong.miranda.DBCtrl;
+package com.ayotong.miranda.database;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -25,33 +25,29 @@ public class QuestDB  extends DatabaseDAO implements QuestDAO{
     public Quest insert(Quest quest) {
         ContentValues cv = new ContentValues();
         cv.put(Quest.COL_ID, quest.getId());
-        cv.put(Quest.COL_CATEGORY, quest.getCategory());
         cv.put(Quest.COL_QUESTDESC, quest.getQuestDescription());
         cv.put(Quest.COL_EXP, quest.getExp());
-        return new Quest((int)super.insert(Quest.DATABASE_TABLE, cv), quest.getCategory(), quest.getExp(), quest.getQuestDescription());
+        return new Quest((int)super.insert(Quest.DATABASE_TABLE, cv), quest.getExp(), quest.getQuestDescription());
     }
 
     public Quest insert(int questID, Quest quest) {
         ContentValues cv = new ContentValues();
         cv.put(Quest.COL_ID, questID);
-        cv.put(Quest.COL_CATEGORY, quest.getCategory());
         cv.put(Quest.COL_QUESTDESC, quest.getQuestDescription());
         cv.put(Quest.COL_EXP, quest.getExp());
-        return new Quest((int)super.insert(Quest.DATABASE_TABLE, cv) , quest.getCategory(), quest.getExp(), quest.getQuestDescription());
+        return new Quest((int)super.insert(Quest.DATABASE_TABLE, cv), quest.getExp(), quest.getQuestDescription());
     }
 
-    public ArrayList<Quest> readQuest(){
-        String[] columns = new String[]{DatabaseDAO.KEY_ID ,Quest.COL_ID, Quest.COL_CATEGORY, Quest.COL_EXP, Quest.COL_QUESTDESC};
+    public ArrayList<Quest> readAllQuest(){
+        String[] columns = new String[]{DatabaseDAO.KEY_ID ,Quest.COL_ID, Quest.COL_EXP, Quest.COL_QUESTDESC};
         Cursor cursor = super.get(Quest.DATABASE_TABLE, columns , Quest.COL_ID + " = * ");
 
-        ArrayList<Quest> arrquest = null;
+        ArrayList<Quest> arrquest = new ArrayList<Quest>();
         if(cursor != null && cursor.moveToFirst()) {
-            arrquest = new ArrayList<Quest>();
             while (cursor.isAfterLast()==false) {
                 //Calllog is a class with list of fileds
                 Quest quest = new Quest();
                 quest.setId(cursor.getInt(cursor.getColumnIndex(Quest.COL_ID)));
-                quest.setCategory(cursor.getString(cursor.getColumnIndex(Quest.COL_CATEGORY)));
                 quest.setExp(cursor.getInt(cursor.getColumnIndex(Quest.COL_EXP)));
                 quest.setQuestDescription(cursor.getString(cursor.getColumnIndex(Quest.COL_QUESTDESC)));
                 arrquest.add(quest);
@@ -64,7 +60,23 @@ public class QuestDB  extends DatabaseDAO implements QuestDAO{
         return arrquest;
     }
 
-    public void ClearQuest() {
-        super.delete(Quest.DATABASE_TABLE);
+    public Quest readQuestByID(int id){
+        String[] columns = new String[]{Quest.COL_ID, Quest.COL_EXP, Quest.COL_QUESTDESC};
+        Cursor cursor = super.get(Quest.DATABASE_TABLE, columns , Quest.COL_ID + " = " + id);
+
+        Quest quest = new Quest();
+        if(cursor != null && cursor.moveToFirst()) {
+
+            //Calllog is a class with list of fileds
+            quest.setId(cursor.getInt(cursor.getColumnIndex(Quest.COL_ID)));
+            quest.setExp(cursor.getInt(cursor.getColumnIndex(Quest.COL_EXP)));
+            quest.setQuestDescription(cursor.getString(cursor.getColumnIndex(Quest.COL_QUESTDESC)));
+        }else{
+            Log.d("Error", "cursor are null");
+        }
+        cursor.close();
+        return quest;
     }
+
+
 }

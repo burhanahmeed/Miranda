@@ -1,4 +1,4 @@
-package com.ayotong.miranda.DBCtrl;
+package com.ayotong.miranda.database;
 
 import com.ayotong.miranda.model.Quest;
 
@@ -14,7 +14,7 @@ public interface QuestDAO {
 
     public Quest insert(int questID, Quest quest);
 
-    public ArrayList<Quest> readQuest();
+    public ArrayList<Quest> readAllQuest();
 
-    public void ClearQuest();
+    public Quest readQuestByID(int id);
 }
