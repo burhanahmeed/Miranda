@@ -13,6 +13,8 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 
+import com.ayotong.miranda.Service.BackgroundSvc;
+
 public class SplashActivity extends Activity{
     // Splash screen timer
     private static int SPLASH_TIME_OUT = 2400;
@@ -56,5 +58,7 @@ public class SplashActivity extends Activity{
                 finish();
             }
         }, SPLASH_TIME_OUT);
+
+        startService(new Intent(SplashActivity.this, BackgroundSvc.class));
     }
 }

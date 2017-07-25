@@ -1,9 +1,11 @@
 package com.ayotong.miranda;
 
 import android.app.TimePickerDialog;
+import android.content.ComponentName;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
+import android.support.v4.content.IntentCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -26,10 +28,11 @@ import java.util.Calendar;
  */
 
 public class SignUpActivity extends AppCompatActivity {
+    private CheckBox chkispreg, chknap;
+    private TextInputLayout tilnap;
     private EditText etfullname, etage, etweight, etheight, ettidur, ettidursiang;
-    private CheckBox chkispreg;
     private RadioGroup rg;
-    private boolean ispreg;
+    private boolean ispreg, isnap;
     private int gender;
 
     public SignUpActivity() {
@@ -44,12 +47,14 @@ public class SignUpActivity extends AppCompatActivity {
         etage = (EditText) findViewById(R.id.input_age);
         etweight = (EditText) findViewById(R.id.weight);
         etheight = (EditText) findViewById(R.id.height_);
-        chkispreg = (CheckBox) findViewById(R.id.checkBox);
         ettidur = (EditText) findViewById(R.id.tidur);
-        ettidursiang = (EditText) findViewById(R.id.tidursiang);
-
-
+        ettidursiang= (EditText) findViewById(R.id.tidursiang);
+        chkispreg = (CheckBox) findViewById(R.id.checkBox);
+        chknap = (CheckBox) findViewById(R.id.cbnap);
+        tilnap = (TextInputLayout) findViewById(R.id.input_tidursiang);
         rg =(RadioGroup)findViewById(R.id.radiogender);
+
+        //Listener for radiogrup gender
         rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
         {
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -64,7 +69,7 @@ public class SignUpActivity extends AppCompatActivity {
             }
         });
 
-
+        //Listener for EditText tidur and process time input
         ettidur.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -90,6 +95,7 @@ public class SignUpActivity extends AppCompatActivity {
             }
         });
 
+        //listener for EditText  tidursiang and process time input
         ettidursiang.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -115,6 +121,7 @@ public class SignUpActivity extends AppCompatActivity {
             }
         });
 
+        //Listener for CheckBox ispreg
         chkispreg.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -124,25 +131,51 @@ public class SignUpActivity extends AppCompatActivity {
 
             }
         });
+
+        //Listener for CheckBox isnap, showing and hiding Input Nap  Time
+        chknap.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                //is chknap checked?
+                if(chknap.isChecked()){
+                    isnap = true;
+                    tilnap.setVisibility(View.VISIBLE);
+                }else{
+                    isnap = false;
+                    tilnap.setVisibility(View.GONE);
+                }
+            }
+        });
+
+        //Button for continue/save
         Button continuebtn = (Button)findViewById(R.id.signUp);
         continuebtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String fullname = etfullname.getText().toString();
-                int age = Integer.parseInt(etage.getText().toString());
-                int weight = Integer.parseInt(etweight.getText().toString());
-                int height = Integer.parseInt(etheight.getText().toString());
-                String tidur = ettidur.getText().toString();
-                String tidursiang = ettidursiang.getText().toString();
+            String fullname = etfullname.getText().toString();
+            int age = Integer.parseInt(etage.getText().toString());
+            int weight = Integer.parseInt(etweight.getText().toString());
+            int height = Integer.parseInt(etheight.getText().toString());
 
-                UserInfoDB userdb = new UserInfoDB(getApplicationContext());
-                UserInfo user = new UserInfo(0, fullname, age, gender , weight, height, ispreg, tidursiang, tidur);
-                userdb.insert(0, user);
-                userdb.close();
+            String tidur = ettidur.getText().toString();
+            String tidursiang;
+            if(isnap)
+                tidursiang= ettidursiang.getText().toString();
+            else
+                tidursiang = "none";
 
-                Intent in = new Intent(SignUpActivity.this, MainActivity.class);
-                startActivity(in);
-                finish();
+            UserInfoDB userdb = new UserInfoDB(getApplicationContext());
+            UserInfo user = new UserInfo(0, fullname, age, gender , weight, height, ispreg, tidursiang, tidur);
+            userdb.insert(0, user);
+            userdb.close();
+
+            Intent in = new Intent(SignUpActivity.this, MainActivity.class);
+            //startActivity(in);
+                ComponentName cn = in.getComponent();
+                Intent mainIntent = IntentCompat.makeRestartActivityTask(cn);
+                startActivity(mainIntent);
+            finish();
             }
         });
     }
