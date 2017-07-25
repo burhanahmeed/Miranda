@@ -7,6 +7,9 @@
     <uses-permission android:name="android.permission.ACCESS_BACKGROUND_SERVICE"/>
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
     <application
         android:allowBackup="true"
@@ -64,6 +67,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </receiver>
+        <receiver android:name=".Service.ReminderReceiver"/>
         <service
             android:name=".Service.BackgroundSvc"
             android:enabled="true"
