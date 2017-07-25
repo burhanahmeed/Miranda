@@ -25,15 +25,9 @@ public class UserInfo {
     public static final String COL_STARTSLEEP = "start_sleep";
     public static final int USER_ID = -1;
 
-    private int id;
-    private String username;
-    private int age;
-    private int gender;
-    private int weight;
-    private int height;
+    private int id, age, gender, weight, height;
+    private String username, startnap, startsleep;
     private boolean ispregnant;
-    private String startnap;
-    private String startsleep;
 
     public UserInfo(){
 

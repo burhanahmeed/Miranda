@@ -26,38 +26,22 @@ public class QuestDB  extends DatabaseDAO implements QuestDAO{
         ContentValues cv = new ContentValues();
         cv.put(Quest.COL_ID, quest.getId());
         cv.put(Quest.COL_CATEGORY, quest.getCategory());
-        cv.put(Quest.COL_QUESTDESC, quest.getQuest());
-        cv.put(Quest.COL_TIME, quest.getTime());
+        cv.put(Quest.COL_QUESTDESC, quest.getQuestDescription());
         cv.put(Quest.COL_EXP, quest.getExp());
-        return new Quest((int)super.insert(Quest.DATABASE_TABLE, cv) , quest.getCategory() ,quest.getTime() , quest.getExp(), quest.getQuest());
+        return new Quest((int)super.insert(Quest.DATABASE_TABLE, cv), quest.getCategory(), quest.getExp(), quest.getQuestDescription());
     }
 
     public Quest insert(int questID, Quest quest) {
         ContentValues cv = new ContentValues();
         cv.put(Quest.COL_ID, questID);
         cv.put(Quest.COL_CATEGORY, quest.getCategory());
-        cv.put(Quest.COL_QUESTDESC, quest.getQuest());
-        cv.put(Quest.COL_TIME, quest.getTime());
+        cv.put(Quest.COL_QUESTDESC, quest.getQuestDescription());
         cv.put(Quest.COL_EXP, quest.getExp());
-        return new Quest((int)super.insert(Quest.DATABASE_TABLE, cv) , quest.getCategory() ,quest.getTime() , quest.getExp(), quest.getQuest());
-    }
-
-    public int updateTime(int questID, Quest quest){
-        ContentValues cv = new ContentValues();
-        cv.put(Quest.COL_ID, quest.getId());
-        cv.put(Quest.COL_TIME, quest.getTime());
-        return super.update(Quest.DATABASE_TABLE, Quest.COL_ID + " = " + quest.getId(), cv);
-    }
-
-    public int updateQuestDesc(int questID, Quest quest){
-        ContentValues cv = new ContentValues();
-        cv.put(Quest.COL_ID, quest.getId());
-        cv.put(Quest.COL_QUESTDESC, quest.getQuest());
-        return super.update(Quest.DATABASE_TABLE, Quest.COL_ID + " = " + quest.getId(), cv);
+        return new Quest((int)super.insert(Quest.DATABASE_TABLE, cv) , quest.getCategory(), quest.getExp(), quest.getQuestDescription());
     }
 
     public ArrayList<Quest> readQuest(){
-        String[] columns = new String[]{DatabaseDAO.KEY_ID ,Quest.COL_ID, Quest.COL_CATEGORY, Quest.COL_TIME, Quest.COL_EXP, Quest.COL_QUESTDESC};
+        String[] columns = new String[]{DatabaseDAO.KEY_ID ,Quest.COL_ID, Quest.COL_CATEGORY, Quest.COL_EXP, Quest.COL_QUESTDESC};
         Cursor cursor = super.get(Quest.DATABASE_TABLE, columns , Quest.COL_ID + " = * ");
 
         ArrayList<Quest> arrquest = null;
@@ -68,9 +52,8 @@ public class QuestDB  extends DatabaseDAO implements QuestDAO{
                 Quest quest = new Quest();
                 quest.setId(cursor.getInt(cursor.getColumnIndex(Quest.COL_ID)));
                 quest.setCategory(cursor.getString(cursor.getColumnIndex(Quest.COL_CATEGORY)));
-                quest.setTime(cursor.getString(cursor.getColumnIndex(Quest.COL_TIME)));
                 quest.setExp(cursor.getInt(cursor.getColumnIndex(Quest.COL_EXP)));
-                quest.setQuest(cursor.getString(cursor.getColumnIndex(Quest.COL_QUESTDESC)));
+                quest.setQuestDescription(cursor.getString(cursor.getColumnIndex(Quest.COL_QUESTDESC)));
                 arrquest.add(quest);
                 cursor.moveToNext();
             }

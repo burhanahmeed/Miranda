@@ -14,10 +14,6 @@ public interface QuestDAO {
 
     public Quest insert(int questID, Quest quest);
 
-    public int updateTime(int questID, Quest quest);
-
-    public int updateQuestDesc(int questID, Quest quest);
-
     public ArrayList<Quest> readQuest();
 
     public void ClearQuest();

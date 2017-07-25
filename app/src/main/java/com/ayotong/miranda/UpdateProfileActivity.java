@@ -15,7 +15,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TimePicker;
 
-import com.ayotong.miranda.DBCtrl.UserInfoDB;
+import com.ayotong.miranda.database.UserInfoDB;
 import com.ayotong.miranda.model.UserInfo;
 
 import java.util.Calendar;
@@ -174,7 +174,7 @@ public class UpdateProfileActivity extends AppCompatActivity {
                 int weight = Integer.parseInt(etweight.getText().toString());
                 int height = Integer.parseInt(etheight.getText().toString());
                 String tidur = ettidur.getText().toString();
-                String tidursiang;
+                String tidursiang = ettidursiang.getText().toString();
 
                 if(isnap)
                     tidursiang = ettidursiang.getText().toString();
@@ -182,7 +182,7 @@ public class UpdateProfileActivity extends AppCompatActivity {
                     tidursiang = "none";
 
                 UserInfoDB userdb = new UserInfoDB(getApplicationContext());
-                UserInfo user = new UserInfo(0, fullname, age, gender , weight, height, ispreg, tidursiang, "2000");
+                UserInfo user = new UserInfo(0, fullname, age, gender , weight, height, ispreg, tidursiang, tidur);
                 userdb.updateInfo(user);
                 userdb.close();
 
@@ -194,6 +194,7 @@ public class UpdateProfileActivity extends AppCompatActivity {
         });
 
     }
+
     public void loadProfile(UserInfo user) {
         etfullname = (EditText) findViewById(R.id.your_full_name);
         etage = (EditText) findViewById(R.id.input_age);
