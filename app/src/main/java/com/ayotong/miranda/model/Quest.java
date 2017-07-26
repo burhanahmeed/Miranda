@@ -48,4 +48,8 @@ public class Quest {
     public void setId(int id) {
         this.id = id;
     }
+
+//    public String getTime() {
+//        return time;
+//    }
 }

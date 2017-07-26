@@ -58,10 +58,10 @@ public class Home_fragment extends Fragment {
 
         // 2
         List<Quest> quests = new ArrayList<>();
-        quests.add(new Quest(0,"minum","19.20", 10, "Waktunya Eok"));
-        quests.add(new Quest(1,"minum","11.20", 10,"Waktunya minum gelas yang banyak 1000ml"));
-        quests.add(new Quest(2,"minum","09.20", 10,"Enak enak dulu"));
-        quests.add(new Quest(3,"minum","11.22", 11,"Rehat jenak"));
+        quests.add(new Quest(0, 10, "Waktunya Eok"));
+        quests.add(new Quest(1,10,"Waktunya minum gelas yang banyak 1000ml"));
+        quests.add(new Quest(2,10,"Enak enak dulu"));
+        quests.add(new Quest(3,11,"Rehat jenak"));
 
         // 3
         this.cardAdapterQuest.setItems(quests);
