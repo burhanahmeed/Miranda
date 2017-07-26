@@ -13,25 +13,27 @@ public class QuestStatus {
     public static final String DATABASE_TABLE = "QuestStatus";
     public static final int DATABASE_VERSION = 1;
     public static final String TABLE_CREATE =
-            "create table if not exists QuestStatus (timestamp text primary key, quest_id int, quest_flag int);";
+            "create table if not exists QuestStatus (timestamp text primary key, quest_id integer, time text, exp integer, quest_flag integer);";
     public static final String COL_TIMESTAMP = "timestamp";
     public static final String COL_QUESTID= "quest_id";
-    public static final String COL_QUESTFLAG = "flag";
-    public static final String COL_EXP = "exp";
+    public static final String COL_QUEST_TIME = "time";
+    public static final String COL_QUEST_EXP = "exp";
+    public static final String COL_QUESTFLAG = "quest_flag";
     public static final int QUEST_ID = -1;
 
-    private String timestamp;
-    private int questid;
-    private int questflag;
+    private String timestamp, questtime;
+    private int questid, questexp, questflag;
 
     public QuestStatus(){
 
     }
 
-    public QuestStatus(String timestamp, int questid, int questflag){
+    public QuestStatus(String timestamp, int quest_id, String quest_time, int quest_exp, int quest_flag){
         this.timestamp = timestamp;
-        this.questid = questid;
-        this.questflag = questflag;
+        this.questid = quest_id;
+        this.questtime = quest_time;
+        this.questexp = quest_exp;
+        this.questflag = quest_flag;
     }
 
     public String getTimestamp() {
@@ -56,5 +58,21 @@ public class QuestStatus {
 
     public void setQuestflag(int questflag) {
         this.questflag = questflag;
+    }
+
+    public String getQuesttime() {
+        return questtime;
+    }
+
+    public void setQuesttime(String questtime) {
+        this.questtime = questtime;
+    }
+
+    public int getQuestexp() {
+        return questexp;
+    }
+
+    public void setQuestexp(int questexp) {
+        this.questexp = questexp;
     }
 }

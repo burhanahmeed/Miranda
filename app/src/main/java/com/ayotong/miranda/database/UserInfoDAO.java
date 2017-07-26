@@ -1,8 +1,7 @@
-package com.ayotong.miranda.DBCtrl;
+package com.ayotong.miranda.database;
 
 import com.ayotong.miranda.model.UserInfo;
 
-import java.util.List;
 /**
  * Created by Alpha on 11/07/2017.
  */

@@ -7,18 +7,14 @@ import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.content.IntentCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TimePicker;
 
-import com.ayotong.miranda.DBCtrl.UserInfoDB;
-import com.ayotong.miranda.app.Profile_fragment;
+import com.ayotong.miranda.database.UserInfoDB;
 import com.ayotong.miranda.model.UserInfo;
 
 import java.util.Calendar;
@@ -153,23 +149,8 @@ public class SignUpActivity extends AppCompatActivity {
         continuebtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-            String fullname = etfullname.getText().toString();
-            int age = Integer.parseInt(etage.getText().toString());
-            int weight = Integer.parseInt(etweight.getText().toString());
-            int height = Integer.parseInt(etheight.getText().toString());
 
-            String tidur = ettidur.getText().toString();
-            String tidursiang;
-            if(isnap)
-                tidursiang= ettidursiang.getText().toString();
-            else
-                tidursiang = "none";
-
-            UserInfoDB userdb = new UserInfoDB(getApplicationContext());
-            UserInfo user = new UserInfo(0, fullname, age, gender , weight, height, ispreg, tidursiang, tidur);
-            userdb.insert(0, user);
-            userdb.close();
-
+            saveToDB();
             Intent in = new Intent(SignUpActivity.this, MainActivity.class);
             //startActivity(in);
                 ComponentName cn = in.getComponent();
@@ -178,5 +159,25 @@ public class SignUpActivity extends AppCompatActivity {
             finish();
             }
         });
+    }
+
+
+    private void saveToDB(){
+        String fullname = etfullname.getText().toString();
+        int age = Integer.parseInt(etage.getText().toString());
+        int weight = Integer.parseInt(etweight.getText().toString());
+        int height = Integer.parseInt(etheight.getText().toString());
+
+        String tidur = ettidur.getText().toString();
+        String tidursiang;
+        if(isnap)
+            tidursiang= ettidursiang.getText().toString();
+        else
+            tidursiang = "none";
+
+        UserInfoDB userdb = new UserInfoDB(getApplicationContext());
+        UserInfo user = new UserInfo(0, fullname, age, gender , weight, height, ispreg, tidursiang, tidur);
+        userdb.insert(0, user);
+        userdb.close();
     }
 }

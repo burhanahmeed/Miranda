@@ -1,4 +1,4 @@
-package com.ayotong.miranda.DBCtrl;
+package com.ayotong.miranda.database;
 
 /**
  * Created by Alpha on 07/07/2017.
