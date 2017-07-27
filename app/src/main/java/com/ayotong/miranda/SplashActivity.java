@@ -4,6 +4,9 @@ package com.ayotong.miranda;
  * Created by burhan on 13/07/17.
  */
 import android.app.Activity;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -14,6 +17,8 @@ import android.view.Window;
 import android.widget.Button;
 
 import com.ayotong.miranda.Service.BackgroundSvc;
+
+import java.util.Calendar;
 
 public class SplashActivity extends Activity{
     // Splash screen timer
@@ -59,6 +64,15 @@ public class SplashActivity extends Activity{
             }
         }, SPLASH_TIME_OUT);
 
-        startService(new Intent(SplashActivity.this, BackgroundSvc.class));
+        startService(new Intent(this, BackgroundSvc.class));
+        Calendar cal = Calendar.getInstance();
+        Intent intent = new Intent(this, BackgroundSvc.class);
+        PendingIntent pintent = PendingIntent
+                .getService(this, 0, intent, 0);
+
+        AlarmManager alarm = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        // Start service every 20 seconds
+        alarm.setRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(),
+                5* 1000, pintent);
     }
 }

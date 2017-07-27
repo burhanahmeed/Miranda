@@ -1,6 +1,9 @@
 package com.ayotong.miranda;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.app.TimePickerDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -15,6 +18,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TimePicker;
 
+import com.ayotong.miranda.Service.ReminderReceiver;
 import com.ayotong.miranda.database.UserInfoDB;
 import com.ayotong.miranda.model.UserInfo;
 
@@ -186,6 +190,14 @@ public class UpdateProfileActivity extends AppCompatActivity {
                 userdb.updateInfo(user);
                 userdb.close();
 
+                alarmTidur();
+                alarmBangun();
+                if (isnap){
+                    alarmNap();
+                    alarmBangunNap();
+                }else{
+                    cancelNap();
+                }
                 Intent intent = new Intent(UpdateProfileActivity.this, MainActivity.class);
                 intent.putExtra("fragnum", 1);
                 startActivity(intent);
@@ -235,5 +247,127 @@ public class UpdateProfileActivity extends AppCompatActivity {
             RadioButton rfemale = (RadioButton)findViewById(R.id.rbF);
             rfemale.setChecked(true);
         }
+    }
+
+    private void alarmTidur(){
+        String jam = ettidur.getText().toString();
+        String[] jams = jam.split(":");
+        long _alarm = 0;
+
+        Calendar calendar = Calendar.getInstance();
+        Calendar now = Calendar.getInstance();
+        calendar.setTimeInMillis(System.currentTimeMillis());
+        calendar.set(Calendar.HOUR_OF_DAY, Integer.parseInt(jams[0]));
+        calendar.set(Calendar.MINUTE, Integer.parseInt(jams[1]));
+        calendar.set(Calendar.SECOND, 0);
+        if(calendar.getTimeInMillis() <= now.getTimeInMillis())
+            _alarm = calendar.getTimeInMillis() + (AlarmManager.INTERVAL_DAY+1);
+        else
+            _alarm = calendar.getTimeInMillis();
+
+        Intent in = new Intent(this, ReminderReceiver.class);
+        in.putExtra("jam",jam);
+        in.putExtra("ques","You're getting tired, it's time to sleep baby");
+        in.putExtra("xp","23");
+        in.putExtra("status","off");
+        PendingIntent peint = PendingIntent.getBroadcast(this, 1, in,PendingIntent.FLAG_CANCEL_CURRENT);
+        AlarmManager am = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+        am.setRepeating(AlarmManager.RTC_WAKEUP, _alarm, AlarmManager.INTERVAL_DAY, peint);
+
+        Log.i("difire","Berhasil");
+    }
+
+    private void alarmBangun(){
+//        String jam = ettidur.getText().toString();
+        String jam = "06:25";
+        String[] jams = jam.split(":");
+        long _alarm = 0;
+
+        Calendar now = Calendar.getInstance();
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(System.currentTimeMillis());
+        calendar.set(Calendar.HOUR_OF_DAY, Integer.parseInt(jams[0]));
+        calendar.set(Calendar.MINUTE, Integer.parseInt(jams[1])+6);
+        calendar.set(Calendar.SECOND, 0);
+        if(calendar.getTimeInMillis() <= now.getTimeInMillis())
+            _alarm = calendar.getTimeInMillis() + (AlarmManager.INTERVAL_DAY+1);
+        else
+            _alarm = calendar.getTimeInMillis();
+
+        Intent in = new Intent(this, ReminderReceiver.class);
+        in.putExtra("jam",jam);
+        in.putExtra("ques","It's time to wake up and have a nice day");
+        in.putExtra("xp","23");
+        in.putExtra("status","on");
+        PendingIntent peint = PendingIntent.getBroadcast(this, 2, in,PendingIntent.FLAG_CANCEL_CURRENT);
+        AlarmManager am = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+        am.setRepeating(AlarmManager.RTC_WAKEUP, _alarm, AlarmManager.INTERVAL_DAY, peint);
+    }
+
+    private void alarmNap(){
+        String jam = ettidursiang.getText().toString();
+        String[] jams = jam.split(":");
+
+        long _alarm = 0;
+
+        Calendar calendar = Calendar.getInstance();
+        Calendar now = Calendar.getInstance();
+        calendar.setTimeInMillis(System.currentTimeMillis());
+        calendar.set(Calendar.HOUR_OF_DAY, Integer.parseInt(jams[0]));
+        calendar.set(Calendar.MINUTE, Integer.parseInt(jams[1])+6);
+        calendar.set(Calendar.SECOND, 0);
+        if(calendar.getTimeInMillis() <= now.getTimeInMillis())
+            _alarm = calendar.getTimeInMillis() + (AlarmManager.INTERVAL_DAY+1);
+        else
+            _alarm = calendar.getTimeInMillis();
+
+        Intent in = new Intent(this, ReminderReceiver.class);
+        in.putExtra("jam",jam);
+        in.putExtra("ques","Take a short nap will be beneficial");
+        in.putExtra("xp","23");
+        in.putExtra("status","off");
+        PendingIntent peint = PendingIntent.getBroadcast(this, 3, in,PendingIntent.FLAG_CANCEL_CURRENT);
+        AlarmManager am = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+        am.setRepeating(AlarmManager.RTC_WAKEUP, _alarm, AlarmManager.INTERVAL_DAY, peint);
+    }
+    private void alarmBangunNap(){
+        String jam = ettidursiang.getText().toString();
+        String[] jams = jam.split(":");
+
+        long _alarm = 0;
+
+        Calendar calendar = Calendar.getInstance();
+        Calendar now = Calendar.getInstance();
+        calendar.setTimeInMillis(System.currentTimeMillis());
+        calendar.set(Calendar.HOUR_OF_DAY, Integer.parseInt(jams[0])+1);
+        calendar.set(Calendar.MINUTE, Integer.parseInt(jams[1]));
+        calendar.set(Calendar.SECOND, 0);
+        if(calendar.getTimeInMillis() <= now.getTimeInMillis())
+            _alarm = calendar.getTimeInMillis() + (AlarmManager.INTERVAL_DAY+1);
+        else
+            _alarm = calendar.getTimeInMillis();
+
+        Intent in = new Intent(this, ReminderReceiver.class);
+        in.putExtra("jam",jam);
+        in.putExtra("ques","OK, it's time to back to work");
+        in.putExtra("xp","23");
+        in.putExtra("status","on");
+        PendingIntent peint = PendingIntent.getBroadcast(this, 4, in,PendingIntent.FLAG_CANCEL_CURRENT);
+        AlarmManager am = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+        am.setRepeating(AlarmManager.RTC_WAKEUP, _alarm, AlarmManager.INTERVAL_DAY, peint);
+    }
+
+    private void cancelNap(){
+        Intent in = new Intent(this, ReminderReceiver.class);
+        in.putExtra("jam","00:00");
+        in.putExtra("ques","OK, it's time to back to work");
+        in.putExtra("xp","23");
+        in.putExtra("status","on");
+        PendingIntent peint = PendingIntent.getBroadcast(this, 4, in,PendingIntent.FLAG_CANCEL_CURRENT);
+        AlarmManager am = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+        am.cancel(peint);
+
+        PendingIntent bangunpeint = PendingIntent.getBroadcast(this, 3, in,PendingIntent.FLAG_CANCEL_CURRENT);
+        am.cancel(bangunpeint);
     }
 }
