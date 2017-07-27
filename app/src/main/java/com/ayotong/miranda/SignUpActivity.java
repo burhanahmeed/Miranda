@@ -18,13 +18,11 @@ import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.TimePicker;
 
-import com.ayotong.miranda.Service.InterpreterActivity;
 import com.ayotong.miranda.Service.ReminderReceiver;
 import com.ayotong.miranda.core.databasecontroller.QuestStatusGenerator;
 import com.ayotong.miranda.database.UserInfoDB;
 import com.ayotong.miranda.model.UserInfo;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 /**

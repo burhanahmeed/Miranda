@@ -64,7 +64,7 @@ public class DialogActivity extends Activity{
                 alarmMinum();
 
                 finish();
-                System.exit(0);
+//                System.exit(0);
             }
         });
 

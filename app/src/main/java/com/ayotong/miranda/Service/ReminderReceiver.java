@@ -29,7 +29,7 @@ public class ReminderReceiver extends BroadcastReceiver{
         String jam = intent.getExtras().getString("jam");
         String ques = intent.getExtras().getString("ques");
         String xp = intent.getExtras().getString("xp");
-        Log.d("local", "receiver: "+status);
+        Log.d("local", "receiver: "+status+", di FIRE");
         Intent myIntent = new Intent(context, DialogActivity.class);
         myIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         myIntent.putExtra("jam",jam);
@@ -37,6 +37,8 @@ public class ReminderReceiver extends BroadcastReceiver{
         myIntent.putExtra("xp",xp);
         myIntent.putExtra("status",status);
         context.startActivity(myIntent);
+
+        //insert database taruh sini bisa
 
 
     }

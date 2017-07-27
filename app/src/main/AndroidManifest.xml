@@ -76,6 +76,11 @@
                 <action android:name="my.action.string" />
             </intent-filter>
         </receiver>
+        <receiver android:name=".Service.ScreenStatusReceiver">
+            <intent-filter>
+                <action android:name="my.action.string" />
+            </intent-filter>
+        </receiver>
         <service
             android:name=".Service.BackgroundSvc"
             android:enabled="true"
