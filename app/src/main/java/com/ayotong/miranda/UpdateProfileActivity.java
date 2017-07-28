@@ -270,6 +270,7 @@ public class UpdateProfileActivity extends AppCompatActivity {
         in.putExtra("ques","You're getting tired, it's time to sleep baby");
         in.putExtra("xp","23");
         in.putExtra("status","off");
+        in.putExtra("id","002");
         PendingIntent peint = PendingIntent.getBroadcast(this, 1, in,PendingIntent.FLAG_CANCEL_CURRENT);
         AlarmManager am = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
         am.setRepeating(AlarmManager.RTC_WAKEUP, _alarm, AlarmManager.INTERVAL_DAY, peint);
@@ -299,6 +300,7 @@ public class UpdateProfileActivity extends AppCompatActivity {
         in.putExtra("ques","It's time to wake up and have a nice day");
         in.putExtra("xp","23");
         in.putExtra("status","on");
+        in.putExtra("id","003");
         PendingIntent peint = PendingIntent.getBroadcast(this, 2, in,PendingIntent.FLAG_CANCEL_CURRENT);
         AlarmManager am = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
         am.setRepeating(AlarmManager.RTC_WAKEUP, _alarm, AlarmManager.INTERVAL_DAY, peint);
@@ -326,6 +328,7 @@ public class UpdateProfileActivity extends AppCompatActivity {
         in.putExtra("ques","Take a short nap will be beneficial");
         in.putExtra("xp","23");
         in.putExtra("status","off");
+        in.putExtra("id","004");
         PendingIntent peint = PendingIntent.getBroadcast(this, 3, in,PendingIntent.FLAG_CANCEL_CURRENT);
         AlarmManager am = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
         am.setRepeating(AlarmManager.RTC_WAKEUP, _alarm, AlarmManager.INTERVAL_DAY, peint);
@@ -352,6 +355,7 @@ public class UpdateProfileActivity extends AppCompatActivity {
         in.putExtra("ques","OK, it's time to back to work");
         in.putExtra("xp","23");
         in.putExtra("status","on");
+        in.putExtra("id","005");
         PendingIntent peint = PendingIntent.getBroadcast(this, 4, in,PendingIntent.FLAG_CANCEL_CURRENT);
         AlarmManager am = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
         am.setRepeating(AlarmManager.RTC_WAKEUP, _alarm, AlarmManager.INTERVAL_DAY, peint);

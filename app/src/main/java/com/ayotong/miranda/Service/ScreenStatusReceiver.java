@@ -30,6 +30,7 @@ public class ScreenStatusReceiver extends BroadcastReceiver {
         i.putExtra("ques","Rest Your Eyes for 20 seconds");
         i.putExtra("xp","100");
         i.putExtra("status","tidak ada");
+        i.putExtra("id","001");
         PendingIntent pending = PendingIntent.getBroadcast(context, ALARM_ID, i,PendingIntent.FLAG_CANCEL_CURRENT);
         service.cancel(pending);
 

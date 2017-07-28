@@ -5,6 +5,8 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.support.v7.app.AppCompatActivity;
@@ -27,7 +29,8 @@ import java.util.Calendar;
 
 public class DialogActivity extends Activity{
     private Window window;
-    String jam, xp, quest, status;
+    String jam, xp, quest, status, id;
+    private MediaPlayer mMediaPlayer;
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -43,6 +46,7 @@ public class DialogActivity extends Activity{
         quest = getIntent().getStringExtra("ques");
         xp = getIntent().getStringExtra("xp");
         status = getIntent().getStringExtra("status");
+        id = getIntent().getStringExtra("id");
 
         Calendar c = Calendar.getInstance();
         SimpleDateFormat tm = new SimpleDateFormat("HH:mm");
@@ -69,6 +73,7 @@ public class DialogActivity extends Activity{
         });
 
         vibrate();
+        playSound();
     }
 
     private void vibrate(){
@@ -97,6 +102,7 @@ public class DialogActivity extends Activity{
         intent.putExtra("ques","Minum cucu dulu yaa");
         intent.putExtra("xp","100");
         intent.putExtra("status","tidak ada");
+        intent.putExtra("id","006");
         PendingIntent pIntent = PendingIntent.getBroadcast(this,
                 102, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         manager.setInexactRepeating(AlarmManager.RTC_WAKEUP,
@@ -114,5 +120,27 @@ public class DialogActivity extends Activity{
                 102, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         manager.cancel(pIntent);
+    }
+
+    public void playSound(){
+        mMediaPlayer = new MediaPlayer();
+
+        if (id.equals("001")){
+            mMediaPlayer = MediaPlayer.create(this, R.raw.rest);
+        }else if (id.equals("002")){
+            mMediaPlayer = MediaPlayer.create(this, R.raw.night);
+        }else if (id.equals("003")){
+            mMediaPlayer = MediaPlayer.create(this, R.raw.morning);
+        }else if (id.equals("004")){
+            mMediaPlayer = MediaPlayer.create(this, R.raw.nap);
+        }else if (id.equals("005")){
+            mMediaPlayer = MediaPlayer.create(this, R.raw.napbangun);
+        }else if (id.equals("006")){
+            mMediaPlayer = MediaPlayer.create(this, R.raw.drink);
+        }
+
+        mMediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+        mMediaPlayer.setLooping(false);
+        mMediaPlayer.start();
     }
 }
