@@ -16,6 +16,9 @@ public class Stat {
         this.xp = xp;
         this.xp_overall = xp_overall;
     }
+    public Stat(){
+
+    }
 
     public String getBulan() {
         return bulan;

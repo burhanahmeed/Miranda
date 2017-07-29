@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import com.ayotong.miranda.model.ExpLog;
+import com.ayotong.miranda.model.Stat;
 
 import java.util.ArrayList;
 
@@ -100,5 +101,25 @@ public class ExpLogDB extends DatabaseDAO implements ExpLogDAO {
         Cursor c = sqDB.rawQuery("SELECT SUM("+ExpLog.COL_EXPGAIN+") as Total FROM "+ExpLog.DATABASE_TABLE, null);
         Log.d("SUM", "SumOfXP: "+c.getColumnIndex("Total"));
         return c;
+    }
+
+    public ArrayList<Stat> sortByMonth(){
+        sqDB =this.getWritableDatabase();
+        Cursor c = sqDB.rawQuery("SELECT SUM("+ExpLog.COL_EXPGAIN+") as Total, strftime('%Y %m',"+ExpLog.COL_TIMESTAMP+") as time FROM "+ExpLog.DATABASE_TABLE+" GROUP BY time",null);
+        Cursor ct = sqDB.rawQuery("SELECT SUM("+ExpLog.COL_EXPGAIN+") as Total FROM "+ExpLog.DATABASE_TABLE,null);
+        ArrayList<Stat> arrLog = new ArrayList<>();
+        if (c.moveToNext()&&ct.moveToNext()){
+            Stat st = new Stat();
+            st.setXp(c.getInt(c.getColumnIndex("Total")));
+            st.setBulan(c.getString(c.getColumnIndex("time")));
+            st.setXp_overall(ct.getInt(ct.getColumnIndex("Total")));
+            arrLog.add(st);
+            c.moveToNext(); ct.moveToNext();
+            Log.d("Error", "cursor"+c.getString(c.getColumnIndex("time")));
+        }else{
+            Log.d("Error", "cursor are null");
+        }
+        c.close();
+        return arrLog;
     }
 }

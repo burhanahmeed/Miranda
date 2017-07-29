@@ -247,4 +247,11 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    public TextView getTextView()
+    {
+
+        TextView txtView = (TextView)findViewById(R.id.level);
+        return txtView;
+    }
 }

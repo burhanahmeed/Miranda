@@ -1,6 +1,7 @@
 package com.ayotong.miranda.adapter;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,13 +12,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ayotong.miranda.DialogActivity;
+import com.ayotong.miranda.MainActivity;
 import com.ayotong.miranda.R;
 import com.ayotong.miranda.database.ExpLogDB;
 import com.ayotong.miranda.database.QuestDB;
 import com.ayotong.miranda.model.ExpLog;
 import com.ayotong.miranda.model.Quest;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class CardAdapterQuest extends RecyclerView.Adapter<CardAdapterQuest.ViewHolder> {
@@ -109,6 +113,7 @@ public class CardAdapterQuest extends RecyclerView.Adapter<CardAdapterQuest.View
                 notifyItemRangeChanged(position,items.size());
                 qDB = new QuestDB(context);
                 qDB.deleteQuest(qDB.getQuest(Qid));
+
                 Long tsLong = System.currentTimeMillis()/1000;
                 String ts = tsLong.toString();
                 xpLog.setExp_gain(xp);
@@ -117,6 +122,16 @@ public class CardAdapterQuest extends RecyclerView.Adapter<CardAdapterQuest.View
                 xpDB.insert(xpLog);
                 Toast.makeText(context, "Task completed +"+xp+" XP", Toast.LENGTH_LONG).show();
                 Log.d("XP insert", ts);
+                //realtime set text
+//                MainActivity ma = new MainActivity();
+//                TextView level = ma.getTextView();
+//                ExpLogDB xpDB = new ExpLogDB(context);
+//                Cursor cXP = xpDB.SumOfXP();
+//                int total=0;
+//                if (cXP.moveToNext()) {
+//                    total = cXP.getInt(cXP.getColumnIndex("Total"));
+//                }
+//                level.setText(total);
             }
         });
     }

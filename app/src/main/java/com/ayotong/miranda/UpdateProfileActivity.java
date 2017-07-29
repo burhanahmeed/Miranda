@@ -316,7 +316,7 @@ public class UpdateProfileActivity extends AppCompatActivity {
         Calendar now = Calendar.getInstance();
         calendar.setTimeInMillis(System.currentTimeMillis());
         calendar.set(Calendar.HOUR_OF_DAY, Integer.parseInt(jams[0]));
-        calendar.set(Calendar.MINUTE, Integer.parseInt(jams[1])+6);
+        calendar.set(Calendar.MINUTE, Integer.parseInt(jams[1]));
         calendar.set(Calendar.SECOND, 0);
         if(calendar.getTimeInMillis() <= now.getTimeInMillis())
             _alarm = calendar.getTimeInMillis() + (AlarmManager.INTERVAL_DAY+1);
@@ -342,7 +342,7 @@ public class UpdateProfileActivity extends AppCompatActivity {
         Calendar calendar = Calendar.getInstance();
         Calendar now = Calendar.getInstance();
         calendar.setTimeInMillis(System.currentTimeMillis());
-        calendar.set(Calendar.HOUR_OF_DAY, Integer.parseInt(jams[0])+1);
+        calendar.set(Calendar.HOUR_OF_DAY, Integer.parseInt(jams[0]));
         calendar.set(Calendar.MINUTE, Integer.parseInt(jams[1]));
         calendar.set(Calendar.SECOND, 0);
         if(calendar.getTimeInMillis() <= now.getTimeInMillis())
