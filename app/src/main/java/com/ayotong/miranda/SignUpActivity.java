@@ -159,6 +159,7 @@ public class SignUpActivity extends AppCompatActivity {
             public void onClick(View view) {
 
             saveToDB();
+
 //                questGenerate = new QuestStatusGenerator(getApplicationContext());
 //                questGenerate.createSleepQuest(Integer.parseInt(etage.getText().toString()), ettidur.getText().toString());
             alarmTidur();
@@ -219,7 +220,7 @@ public class SignUpActivity extends AppCompatActivity {
         Intent in = new Intent(this, ReminderReceiver.class);
         in.putExtra("jam",jam);
         in.putExtra("ques","You're getting tired, it's time to sleep baby");
-        in.putExtra("xp","23");
+        in.putExtra("xp","50");
         in.putExtra("status","off");
         in.putExtra("id","002");
         PendingIntent peint = PendingIntent.getBroadcast(this, 1, in,PendingIntent.FLAG_CANCEL_CURRENT);
@@ -249,31 +250,13 @@ public class SignUpActivity extends AppCompatActivity {
         Intent in = new Intent(this, ReminderReceiver.class);
         in.putExtra("jam",jam);
         in.putExtra("ques","It's time to wake up and have a nice day");
-        in.putExtra("xp","23");
+        in.putExtra("xp","50");
         in.putExtra("status","on");
         in.putExtra("id","003");
         PendingIntent peint = PendingIntent.getBroadcast(this, 2, in,PendingIntent.FLAG_CANCEL_CURRENT);
         AlarmManager am = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
         am.setRepeating(AlarmManager.RTC_WAKEUP, _alarm, AlarmManager.INTERVAL_DAY, peint);
     }
-
-//    private void alarmMinum(){
-//        Calendar c = Calendar.getInstance();
-//        SimpleDateFormat tm = new SimpleDateFormat("HH:mm");
-//        String times = tm.format(Calendar.getInstance().getTime());
-//        String time = times;
-//
-//        AlarmManager manager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
-//        Intent intent = new Intent(this, ReminderReceiver.class);
-//        intent.putExtra("jam",time);
-//        intent.putExtra("ques","Minum cucu dulu yaa");
-//        intent.putExtra("xp","100");
-//        PendingIntent pIntent = PendingIntent.getBroadcast(this,
-//                102, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-//        manager.setInexactRepeating(AlarmManager.RTC_WAKEUP,
-//                System.currentTimeMillis(), 2*60*1000, pIntent);
-//
-//    }
 
     private void alarmNap(){
         String jam = ettidursiang.getText().toString();
@@ -295,7 +278,7 @@ public class SignUpActivity extends AppCompatActivity {
         Intent in = new Intent(this, ReminderReceiver.class);
         in.putExtra("jam",jam);
         in.putExtra("ques","Take a short nap will be beneficial");
-        in.putExtra("xp","23");
+        in.putExtra("xp","25");
         in.putExtra("status","off");
         in.putExtra("id","004");
         PendingIntent peint = PendingIntent.getBroadcast(this, 3, in,PendingIntent.FLAG_CANCEL_CURRENT);
@@ -322,7 +305,7 @@ public class SignUpActivity extends AppCompatActivity {
         Intent in = new Intent(this, ReminderReceiver.class);
         in.putExtra("jam",jam);
         in.putExtra("ques","OK, it's time to back to work");
-        in.putExtra("xp","23");
+        in.putExtra("xp","50");
         in.putExtra("status","on");
         in.putExtra("id","005");
         PendingIntent peint = PendingIntent.getBroadcast(this, 4, in,PendingIntent.FLAG_CANCEL_CURRENT);

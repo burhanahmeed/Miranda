@@ -17,8 +17,13 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.ayotong.miranda.Service.ReminderReceiver;
+import com.ayotong.miranda.database.ExpLogDB;
+import com.ayotong.miranda.database.QuestDB;
+import com.ayotong.miranda.model.ExpLog;
+
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -29,11 +34,16 @@ import java.util.Calendar;
 
 public class DialogActivity extends Activity{
     private Window window;
-    String jam, xp, quest, status, id;
+    String jam, xp, quest, status, id,Qid;
     private MediaPlayer mMediaPlayer;
+    QuestDB qDB;
+    ExpLog xpLog;
+    ExpLogDB xpDB;
+
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
+
         final Window window = getWindow();
         window.addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED
                 | WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD);
@@ -42,16 +52,20 @@ public class DialogActivity extends Activity{
 
         setContentView(R.layout.dialog_popup);
 
+        xpLog = new ExpLog();
+        xpDB = new ExpLogDB(DialogActivity.this);
+
         jam = getIntent().getStringExtra("jam");
         quest = getIntent().getStringExtra("ques");
         xp = getIntent().getStringExtra("xp");
         status = getIntent().getStringExtra("status");
         id = getIntent().getStringExtra("id");
+        Qid = getIntent().getStringExtra("Qid");
 
         Calendar c = Calendar.getInstance();
         SimpleDateFormat tm = new SimpleDateFormat("HH:mm");
         String times = tm.format(Calendar.getInstance().getTime());
-        String time = times;
+        final String time = times;
 
         TextView tjam = (TextView)findViewById(R.id.txtJam);
         TextView txp = (TextView)findViewById(R.id.txtXP);
@@ -62,18 +76,40 @@ public class DialogActivity extends Activity{
         Log.d("local", "onCreate: "+status);
 
         ImageButton ac =(ImageButton) findViewById(R.id.id_accomplish);
+        ImageButton dis = (ImageButton)findViewById(R.id.id_dissmiss);
         ac.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 alarmMinum();
-
+                insertXP();
+                qDB = new QuestDB(DialogActivity.this);
+                qDB.deleteQuest(qDB.getQuest(Integer.parseInt(Qid)));
+                Toast.makeText(DialogActivity.this, "Task completed +"+xp+" XP", Toast.LENGTH_LONG).show();
                 finish();
 //                System.exit(0);
             }
         });
 
+        dis.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(DialogActivity.this, "Task dismissed as a pending", Toast.LENGTH_LONG).show();
+                finish();
+            }
+        });
+
         vibrate();
         playSound();
+    }
+
+    private void insertXP(){
+        Long tsLong = System.currentTimeMillis()/1000;
+        String ts = tsLong.toString();
+        xpLog.setExp_gain(Integer.parseInt(xp));
+        xpLog.setQuest_id(Integer.parseInt(Qid));
+        xpLog.setTimestamp(ts);
+        xpDB.insert(xpLog);
+        Log.d("XP insert", ts);
     }
 
     private void vibrate(){
@@ -100,7 +136,7 @@ public class DialogActivity extends Activity{
         Intent intent = new Intent(this, ReminderReceiver.class);
         intent.putExtra("jam",time);
         intent.putExtra("ques","Minum cucu dulu yaa");
-        intent.putExtra("xp","100");
+        intent.putExtra("xp","20");
         intent.putExtra("status","tidak ada");
         intent.putExtra("id","006");
         PendingIntent pIntent = PendingIntent.getBroadcast(this,
