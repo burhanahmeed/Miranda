@@ -24,23 +24,21 @@ public class ExpLogDB extends DatabaseDAO implements ExpLogDAO {
     public ExpLog insert(ExpLog expLog){
         ContentValues cv = new ContentValues();
         cv.put(ExpLog.COL_TIMESTAMP, expLog.getTimestamp());
-        cv.put(ExpLog.COL_QUESTID, expLog.getQuest_id());
         cv.put(ExpLog.COL_EXPGAIN, expLog.getExp_gain());
         super.insert(ExpLog.DATABASE_TABLE, cv);
-        return new ExpLog(expLog.getTimestamp(), expLog.getQuest_id(), expLog.getExp_gain());
+        return new ExpLog(expLog.getTimestamp(), expLog.getExp_gain());
     }
 
-    public ExpLog insert(String timestamp, int quest_id, int exp_gain){
+    public ExpLog insert(String timestamp, int exp_gain){
         ContentValues cv = new ContentValues();
         cv.put(ExpLog.COL_TIMESTAMP, timestamp);
-        cv.put(ExpLog.COL_QUESTID, quest_id);
         cv.put(ExpLog.COL_EXPGAIN, exp_gain);
         super.insert(ExpLog.DATABASE_TABLE, cv);
-        return new ExpLog(timestamp, quest_id, exp_gain);
+        return new ExpLog(timestamp, exp_gain);
     }
 
     public ArrayList<ExpLog> readLog(){
-        String[] columns = new String[]{ExpLog.COL_TIMESTAMP, ExpLog.COL_QUESTID, ExpLog.COL_EXPGAIN};
+        String[] columns = new String[]{ExpLog.COL_TIMESTAMP, ExpLog.COL_EXPGAIN};
         Cursor cursor = super.get(ExpLog.DATABASE_TABLE, columns , ExpLog.COL_TIMESTAMP + " = * ");
 
         ArrayList<ExpLog> arrlog = null;
@@ -50,7 +48,6 @@ public class ExpLogDB extends DatabaseDAO implements ExpLogDAO {
                 //Calllog is a class with list of fileds
                 ExpLog log= new ExpLog();
                 log.setTimestamp(cursor.getString(cursor.getColumnIndex(ExpLog.COL_TIMESTAMP)));
-                log.setQuest_id(cursor.getInt(cursor.getColumnIndex(ExpLog.COL_QUESTID)));
                 log.setExp_gain(cursor.getInt(cursor.getColumnIndex(ExpLog.COL_EXPGAIN)));
                 arrlog.add(log);
                 cursor.moveToNext();
@@ -63,7 +60,7 @@ public class ExpLogDB extends DatabaseDAO implements ExpLogDAO {
     }
 
     public ArrayList<ExpLog> readLog(String timestamp){
-        String[] columns = new String[]{ExpLog.COL_TIMESTAMP, ExpLog.COL_QUESTID, ExpLog.COL_EXPGAIN};
+        String[] columns = new String[]{ExpLog.COL_TIMESTAMP, ExpLog.COL_EXPGAIN};
         Cursor cursor = super.get(ExpLog.DATABASE_TABLE, columns , ExpLog.COL_TIMESTAMP + " = "+ timestamp);
 
         ArrayList<ExpLog> arrlog = null;
@@ -73,7 +70,6 @@ public class ExpLogDB extends DatabaseDAO implements ExpLogDAO {
                 //Calllog is a class with list of fileds
                 ExpLog log= new ExpLog();
                 log.setTimestamp(cursor.getString(cursor.getColumnIndex(ExpLog.COL_TIMESTAMP)));
-                log.setQuest_id(cursor.getInt(cursor.getColumnIndex(ExpLog.COL_QUESTID)));
                 log.setExp_gain(cursor.getInt(cursor.getColumnIndex(ExpLog.COL_EXPGAIN)));
                 arrlog.add(log);
                 cursor.moveToNext();

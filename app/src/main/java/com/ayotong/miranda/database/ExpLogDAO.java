@@ -12,7 +12,7 @@ public interface ExpLogDAO {
 
     public ExpLog insert(ExpLog expLog);
 
-    public ExpLog insert(String timestamp, int quest_id, int exp_gain);
+    public ExpLog insert(String timestamp, int exp_gain);
 
     public ArrayList<ExpLog> readLog();
 
