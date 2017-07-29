@@ -159,6 +159,7 @@ public class SignUpActivity extends AppCompatActivity {
 
             //Save userdata to db
             saveToDB();
+
 //                questGenerate = new QuestStatusGenerator(getApplicationContext());
 //                questGenerate.createSleepQuest(Integer.parseInt(etage.getText().toString()), ettidur.getText().toString());
             //Set the alarm
@@ -209,7 +210,30 @@ public class SignUpActivity extends AppCompatActivity {
     private void alarmTidur(){
         String jam = ettidur.getText().toString();
         String[] jams = jam.split(":");
-        setAlarm(5, jam, "on", 2);
+        long _alarm = 0;
+
+        Calendar calendar = Calendar.getInstance();
+        Calendar now = Calendar.getInstance();
+        calendar.setTimeInMillis(System.currentTimeMillis());
+        calendar.set(Calendar.HOUR_OF_DAY, Integer.parseInt(jams[0]));
+        calendar.set(Calendar.MINUTE, Integer.parseInt(jams[1]));
+        calendar.set(Calendar.SECOND, 0);
+        if(calendar.getTimeInMillis() <= now.getTimeInMillis())
+            _alarm = calendar.getTimeInMillis() + (AlarmManager.INTERVAL_DAY+1);
+        else
+            _alarm = calendar.getTimeInMillis();
+
+        Intent in = new Intent(this, ReminderReceiver.class);
+        in.putExtra("jam",jam);
+        in.putExtra("ques","You're getting tired, it's time to sleep baby");
+        in.putExtra("xp","50");
+        in.putExtra("status","off");
+        in.putExtra("id","002");
+        PendingIntent peint = PendingIntent.getBroadcast(this, 1, in,PendingIntent.FLAG_CANCEL_CURRENT);
+        AlarmManager am = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+        am.setRepeating(AlarmManager.RTC_WAKEUP, _alarm, AlarmManager.INTERVAL_DAY, peint);
+
+        Log.i("difire","Berhasil");
     }
 
     /*
@@ -217,38 +241,59 @@ public class SignUpActivity extends AppCompatActivity {
     questID: 5
     */
     private void alarmBangun(){
-        TimeProcessing timeproc = new TimeProcessing();
-        String jam = timeproc.getWakeSleepTime(Integer.parseInt(etage.getText().toString()), ettidur.getText().toString());
-//        String jam = "06:25";
-        setAlarm(5, jam, "on", 2);
+//        String jam = ettidur.getText().toString();
+        String jam = "06:25";
+        String[] jams = jam.split(":");
+        long _alarm = 0;
+
+        Calendar now = Calendar.getInstance();
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(System.currentTimeMillis());
+        calendar.set(Calendar.HOUR_OF_DAY, Integer.parseInt(jams[0]));
+        calendar.set(Calendar.MINUTE, Integer.parseInt(jams[1])+6);
+        calendar.set(Calendar.SECOND, 0);
+        if(calendar.getTimeInMillis() <= now.getTimeInMillis())
+            _alarm = calendar.getTimeInMillis() + (AlarmManager.INTERVAL_DAY+1);
+        else
+            _alarm = calendar.getTimeInMillis();
+
+        Intent in = new Intent(this, ReminderReceiver.class);
+        in.putExtra("jam",jam);
+        in.putExtra("ques","It's time to wake up and have a nice day");
+        in.putExtra("xp","50");
+        in.putExtra("status","on");
+        in.putExtra("id","003");
+        PendingIntent peint = PendingIntent.getBroadcast(this, 2, in,PendingIntent.FLAG_CANCEL_CURRENT);
+        AlarmManager am = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+        am.setRepeating(AlarmManager.RTC_WAKEUP, _alarm, AlarmManager.INTERVAL_DAY, peint);
     }
 
-//    private void alarmMinum(){
-//        Calendar c = Calendar.getInstance();
-//        SimpleDateFormat tm = new SimpleDateFormat("HH:mm");
-//        String times = tm.format(Calendar.getInstance().getTime());
-//        String time = times;
-//
-//        AlarmManager manager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
-//        Intent intent = new Intent(this, ReminderReceiver.class);
-//        intent.putExtra("jam",time);
-//        intent.putExtra("ques","Minum cucu dulu yaa");
-//        intent.putExtra("xp","100");
-//        PendingIntent pIntent = PendingIntent.getBroadcast(this,
-//                102, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-//        manager.setInexactRepeating(AlarmManager.RTC_WAKEUP,
-//                System.currentTimeMillis(), 2*60*1000, pIntent);
-//
-//    }
-
-    /*
-    reqcode: 3
-    questID: 2
-    */
     private void alarmNap(){
         String jam = ettidursiang.getText().toString();
         String[] jams = jam.split(":");
-        setAlarm(2, jam, "off", 3);
+
+        long _alarm = 0;
+
+        Calendar calendar = Calendar.getInstance();
+        Calendar now = Calendar.getInstance();
+        calendar.setTimeInMillis(System.currentTimeMillis());
+        calendar.set(Calendar.HOUR_OF_DAY, Integer.parseInt(jams[0]));
+        calendar.set(Calendar.MINUTE, Integer.parseInt(jams[1])+6);
+        calendar.set(Calendar.SECOND, 0);
+        if(calendar.getTimeInMillis() <= now.getTimeInMillis())
+            _alarm = calendar.getTimeInMillis() + (AlarmManager.INTERVAL_DAY+1);
+        else
+            _alarm = calendar.getTimeInMillis();
+
+        Intent in = new Intent(this, ReminderReceiver.class);
+        in.putExtra("jam",jam);
+        in.putExtra("ques","Take a short nap will be beneficial");
+        in.putExtra("xp","25");
+        in.putExtra("status","off");
+        in.putExtra("id","004");
+        PendingIntent peint = PendingIntent.getBroadcast(this, 3, in,PendingIntent.FLAG_CANCEL_CURRENT);
+        AlarmManager am = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+        am.setRepeating(AlarmManager.RTC_WAKEUP, _alarm, AlarmManager.INTERVAL_DAY, peint);
     }
 
     /*
@@ -279,15 +324,12 @@ public class SignUpActivity extends AppCompatActivity {
             _alarm = calendar.getTimeInMillis();
 
         Intent in = new Intent(this, ReminderReceiver.class);
-        QuestCtrl questgen = new QuestCtrl(this);
-        Quest q = questgen.findQuestByID(quest_id);
-        in.putExtra("jam",time);
-        in.putExtra("ques", q.getQuestDescription());
-        in.putExtra("xp",String.valueOf(q.getExp()));
-        in.putExtra("status",status);
-        questgen.closeDB();
-
-        PendingIntent peint = PendingIntent.getBroadcast(this, reqcode, in,PendingIntent.FLAG_CANCEL_CURRENT);
+        in.putExtra("jam",jam);
+        in.putExtra("ques","OK, it's time to back to work");
+        in.putExtra("xp","50");
+        in.putExtra("status","on");
+        in.putExtra("id","005");
+        PendingIntent peint = PendingIntent.getBroadcast(this, 4, in,PendingIntent.FLAG_CANCEL_CURRENT);
         AlarmManager am = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
         am.setRepeating(AlarmManager.RTC_WAKEUP, _alarm, AlarmManager.INTERVAL_DAY, peint);
     }

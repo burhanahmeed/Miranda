@@ -20,9 +20,10 @@ public class ExpLog {
 
     }
 
-    public ExpLog(String timestamp, int exp_gain){
-        this.setTimestamp(timestamp);
-        this.setExp_gain(exp_gain);
+    public ExpLog(String timestamp, int quest_id, int exp_gain){
+        this.timestamp = timestamp;
+        this.quest_id=quest_id;
+        this.exp_gain=exp_gain;
     }
 
     public String getTimestamp() {

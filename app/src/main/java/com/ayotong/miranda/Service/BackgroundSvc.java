@@ -57,7 +57,7 @@ public class BackgroundSvc extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
         Log.i("LocalService", "start again ");
         // REGISTER RECEIVER THAT HANDLES SCREEN ON AND SCREEN OFF LOGIC
-        Toast.makeText(context, "Miranda", Toast.LENGTH_LONG).show();
+//        Toast.makeText(context, "Miranda", Toast.LENGTH_LONG).show();
         IntentFilter filter = new IntentFilter(Intent.ACTION_SCREEN_ON);
         filter.addAction(Intent.ACTION_SCREEN_OFF);
         BroadcastReceiver mReceiver = new ScreenStatusReceiver();

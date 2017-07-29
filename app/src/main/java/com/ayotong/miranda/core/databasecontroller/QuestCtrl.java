@@ -47,23 +47,23 @@ public class QuestGenerator {
 
     //method bikin quest minum (itungan e gaero)
     private void generateDrinkQuest(){
-        quest = new Quest(1, 50, "Minum 250 mL Air");
+        quest = new Quest(1, 50, "Minum 250 mL Air","15:15");
         arrquest.add(quest);
     }
 
     //method bikin quest boci + bangun e (durasi 1,5 jam)
     private void generateNapQuest(){
-        quest = new Quest(2, 150, "Boci dulu Tong!");
+        quest = new Quest(2, 150, "Boci dulu Tong!","15:15");
         arrquest.add(quest);
-        quest = new Quest(3, 150, "Udahan Tong boci nya!");
+        quest = new Quest(3, 150, "Udahan Tong boci nya!","15:15");
         arrquest.add(quest);
     }
 
     //method bikin quest bobo + bangun e
     private void generateSleepQuest(){
-        quest = new Quest(4, 200, "Ndang tidor tong!");
+        quest = new Quest(4, 200, "Ndang tidor tong!","15:15");
         arrquest.add(quest);
-        quest = new Quest(5, 200, "Bangun Tong!");
+        quest = new Quest(5, 200, "Bangun Tong!","15:15");
         arrquest.add(quest);
     }
 

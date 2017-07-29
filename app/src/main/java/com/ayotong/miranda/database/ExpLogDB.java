@@ -3,6 +3,7 @@ package com.ayotong.miranda.database;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import com.ayotong.miranda.model.ExpLog;
@@ -16,6 +17,7 @@ import java.util.ArrayList;
 public class ExpLogDB extends DatabaseDAO implements ExpLogDAO {
 
     private Context context;
+    private SQLiteDatabase sqDB;
 
     public ExpLogDB(Context context){
         super(context, DatabaseDAO.dName, ExpLog.TABLE_CREATE, ExpLog.DATABASE_TABLE, ExpLog.DATABASE_VERSION);
@@ -26,7 +28,7 @@ public class ExpLogDB extends DatabaseDAO implements ExpLogDAO {
         cv.put(ExpLog.COL_TIMESTAMP, expLog.getTimestamp());
         cv.put(ExpLog.COL_EXPGAIN, expLog.getExp_gain());
         super.insert(ExpLog.DATABASE_TABLE, cv);
-        return new ExpLog(expLog.getTimestamp(), expLog.getExp_gain());
+        return new ExpLog( expLog.getTimestamp(), expLog.getQuest_id(), expLog.getExp_gain());
     }
 
     public ExpLog insert(String timestamp, int exp_gain){
@@ -38,8 +40,8 @@ public class ExpLogDB extends DatabaseDAO implements ExpLogDAO {
     }
 
     public ArrayList<ExpLog> readLog(){
-        String[] columns = new String[]{ExpLog.COL_TIMESTAMP, ExpLog.COL_EXPGAIN};
-        Cursor cursor = super.get(ExpLog.DATABASE_TABLE, columns , ExpLog.COL_TIMESTAMP + " = * ");
+        String[] columns = new String[]{ExpLog.COL_TIMESTAMP, ExpLog.COL_QUESTID, ExpLog.COL_EXPGAIN};
+        Cursor cursor = super.get(ExpLog.DATABASE_TABLE, columns /*, ExpLog.COL_TIMESTAMP + " = * "*/);
 
         ArrayList<ExpLog> arrlog = null;
         if(cursor != null && cursor.moveToFirst()) {
@@ -87,5 +89,12 @@ public class ExpLogDB extends DatabaseDAO implements ExpLogDAO {
 
     public int clearLog(String timestamp){
         return super.delete(ExpLog.DATABASE_TABLE, ExpLog.COL_TIMESTAMP+"=" +timestamp, null);
+    }
+
+    public Cursor SumOfXP(){
+        sqDB = this.getWritableDatabase();
+        Cursor c = sqDB.rawQuery("SELECT SUM("+ExpLog.COL_EXPGAIN+") as Total FROM "+ExpLog.DATABASE_TABLE, null);
+        Log.d("SUM", "SumOfXP: "+c.getColumnIndex("Total"));
+        return c;
     }
 }

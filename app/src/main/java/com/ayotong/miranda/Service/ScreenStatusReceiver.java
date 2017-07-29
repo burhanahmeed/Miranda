@@ -28,8 +28,9 @@ public class ScreenStatusReceiver extends BroadcastReceiver {
         Intent i = new Intent(context, ReminderReceiver.class);
         i.putExtra("jam","00:00");
         i.putExtra("ques","Rest Your Eyes for 20 seconds");
-        i.putExtra("xp","100");
+        i.putExtra("xp","10");
         i.putExtra("status","tidak ada");
+        i.putExtra("id","001");
         PendingIntent pending = PendingIntent.getBroadcast(context, ALARM_ID, i,PendingIntent.FLAG_CANCEL_CURRENT);
         service.cancel(pending);
 
@@ -38,7 +39,7 @@ public class ScreenStatusReceiver extends BroadcastReceiver {
 
         // Start alarm. Set a long repeat time if the screen is off and a short repeat time if the screen is on
         if (intent.getAction().equals(Intent.ACTION_SCREEN_ON) || intent.getAction().equals(Intent.ACTION_BOOT_COMPLETED)){
-            service.setInexactRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), 20000, pending);
+            service.setInexactRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), 1200000, pending);
             Log.d("Local", "layar nyala");  //alarm bunyi setiap 20 menit pas layar nyala
         }
         else if (intent.getAction().equals(Intent.ACTION_SCREEN_OFF)){

@@ -2,13 +2,19 @@ package com.ayotong.miranda.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.ayotong.miranda.DialogActivity;
 import com.ayotong.miranda.R;
+import com.ayotong.miranda.database.ExpLogDB;
+import com.ayotong.miranda.database.QuestDB;
+import com.ayotong.miranda.model.ExpLog;
 import com.ayotong.miranda.model.Quest;
 
 import java.util.ArrayList;
@@ -18,11 +24,13 @@ public class CardAdapterQuest extends RecyclerView.Adapter<CardAdapterQuest.View
 
     private Context context;
     private List<Quest> items;
-
+    QuestDB qDB;
+    ExpLog xpLog;
+    ExpLogDB xpDB;
 
     public CardAdapterQuest(Context context) {
         this.context = context;
-        this.items = new ArrayList<>();
+        this.items = new ArrayList<Quest>();
     }
 
     public void setItems(List<Quest> items) {
@@ -48,10 +56,14 @@ public class CardAdapterQuest extends RecyclerView.Adapter<CardAdapterQuest.View
 
             dismiss.setOnClickListener(this);
             accomplish.setOnClickListener(this);
+
+            qDB = new QuestDB(context);
+            xpLog = new ExpLog();
+            xpDB = new ExpLogDB(context);
         }
 
         public void bind(Quest quest) {
-//            this.txtJam.setText(quest.getTime());
+            this.txtJam.setText(quest.getJam());
             this.txtXP.setText(String.valueOf(quest.getExp()));
             this.txtQuest.setText(quest.getQuestDescription());
         }
@@ -70,7 +82,10 @@ public class CardAdapterQuest extends RecyclerView.Adapter<CardAdapterQuest.View
 
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
+
         holder.bind(this.items.get(position));
+        final int Qid = items.get(position).getId();
+        final int xp = items.get(position).getExp();
 
         holder.dismiss.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -79,6 +94,10 @@ public class CardAdapterQuest extends RecyclerView.Adapter<CardAdapterQuest.View
                 items.remove(position);
                 notifyItemRemoved(position);
                 notifyItemRangeChanged(position,items.size());
+                qDB = new QuestDB(context);
+                qDB.deleteQuest(qDB.getQuest(Qid));
+                Toast.makeText(context, "Task dismissed", Toast.LENGTH_LONG).show();
+                Log.d("ID", "berapa idnya "+Qid);
             }
         });
 
@@ -88,6 +107,16 @@ public class CardAdapterQuest extends RecyclerView.Adapter<CardAdapterQuest.View
                 items.remove(position);
                 notifyItemRemoved(position);
                 notifyItemRangeChanged(position,items.size());
+                qDB = new QuestDB(context);
+                qDB.deleteQuest(qDB.getQuest(Qid));
+                Long tsLong = System.currentTimeMillis()/1000;
+                String ts = tsLong.toString();
+                xpLog.setExp_gain(xp);
+                xpLog.setQuest_id(Qid);
+                xpLog.setTimestamp(ts);
+                xpDB.insert(xpLog);
+                Toast.makeText(context, "Task completed +"+xp+" XP", Toast.LENGTH_LONG).show();
+                Log.d("XP insert", ts);
             }
         });
     }
@@ -96,5 +125,6 @@ public class CardAdapterQuest extends RecyclerView.Adapter<CardAdapterQuest.View
     public int getItemCount() {
         return items.size();
     }
+
 
 }

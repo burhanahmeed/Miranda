@@ -2,9 +2,12 @@ package com.ayotong.miranda;
 
 //import android.app.Fragment;
 import android.content.res.Resources;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
+import android.os.Handler;
 import android.support.design.widget.NavigationView;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
@@ -21,12 +24,14 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.ayotong.miranda.database.ExpLogDB;
 import com.ayotong.miranda.database.UserInfoDB;
 import com.ayotong.miranda.app.About_fragment;
 import com.ayotong.miranda.app.Article_fragment;
 import com.ayotong.miranda.app.Home_fragment;
 import com.ayotong.miranda.app.Profile_fragment;
 import com.ayotong.miranda.app.Stat_fragment;
+import com.ayotong.miranda.model.ExpLog;
 import com.ayotong.miranda.model.UserInfo;
 
 public class MainActivity extends AppCompatActivity {
@@ -38,7 +43,9 @@ public class MainActivity extends AppCompatActivity {
     UserInfo user;
     UserInfoDB userdb;
     TextView name, cond,level;
-    int fragID;
+    int fragID, total;
+    SQLiteDatabase sqDB;
+    Runnable updater;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,7 +81,27 @@ public class MainActivity extends AppCompatActivity {
         name.setText(user.getUsername()); //nama
         Log.i("Action: ", "get username");
         cond.setText(user.genderToText(user.getGender())); //iki ganti gender ae
-        level.setText("100"); //total xp
+//        int total=0;
+        ExpLogDB xpDB = new ExpLogDB(getApplicationContext());
+        Cursor cXP = xpDB.SumOfXP();
+        int total=0;
+        if (cXP.moveToNext()) {
+            total = cXP.getInt(cXP.getColumnIndex("Total"));
+            Log.d("XP", "XP total "+total);
+        }
+//        level.setText(String.valueOf(total)); //total xp
+        final int tot = total;
+        runOnUiThread(new Runnable() {
+
+            @Override
+            public void run() {
+                // TODO Auto-generated method stub
+                level.setText(String.valueOf(tot));
+            }
+        });
+
+        Log.d("XPLOG", "Isi XPLOG"+xpDB.readLog());
+
 
         ImageView img = (ImageView)header.findViewById(R.id.profile_image);
         Resources res = getResources(); // need this to fetch the drawable
