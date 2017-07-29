@@ -5,12 +5,14 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Point;
 import android.graphics.Rect;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.LinearSnapHelper;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,6 +22,7 @@ import android.widget.TextView;
 ;
 import com.ayotong.miranda.R;
 import com.ayotong.miranda.adapter.CardAdapterQuest;
+import com.ayotong.miranda.database.QuestDB;
 import com.ayotong.miranda.model.Quest;
 
 import java.text.SimpleDateFormat;
@@ -38,6 +41,8 @@ public class Home_fragment extends Fragment {
     private CardAdapterQuest cardAdapterQuest;
     private TextView time, date, greet;
     private ImageView cuaca;
+    private QuestDB qDB;
+    Runnable updater;
 
     @Nullable
     @Override
@@ -57,14 +62,16 @@ public class Home_fragment extends Fragment {
         this.cardRecyclerView.addItemDecoration(new VerticalOffsetDecoration(getActivity())); // 9
 
         // 2
-        List<Quest> quests = new ArrayList<>();
-        quests.add(new Quest(0, 10, "Waktunya Eok"));
-        quests.add(new Quest(1,10,"Waktunya minum gelas yang banyak 1000ml"));
-        quests.add(new Quest(2,10,"Enak enak dulu"));
-        quests.add(new Quest(3,11,"Rehat jenak"));
-
+//        List<Quest> quests = new ArrayList<>();
+//        quests.add(new Quest(0, 10, "Waktunya Eok", "15:15"));
+//        quests.add(new Quest(1,10,"Waktunya minum gelas yang banyak 1000ml","15:15"));
+//        quests.add(new Quest(2,10,"Enak enak dulu","15:15"));
+//        quests.add(new Quest(3,11,"Rehat jenak","15:15"));
+        qDB = new QuestDB(getContext().getApplicationContext());
+//        qDB.readAllQuest();
+        Log.d("DB", "terbaca ");
         // 3
-        this.cardAdapterQuest.setItems(quests);
+        this.cardAdapterQuest.setItems(qDB.readAllQuest());
 
         time = (TextView)v.findViewById(R.id.txttime);
         date = (TextView)v.findViewById(R.id.txtdate);
@@ -131,8 +138,17 @@ public class Home_fragment extends Fragment {
     public void time(){
         Calendar c = Calendar.getInstance();
         SimpleDateFormat tm = new SimpleDateFormat("HH:mm");
-        String times = tm.format(Calendar.getInstance().getTime());
-        time.setText(times);
+        final String times = tm.format(Calendar.getInstance().getTime());
+//        time.setText(times);
+        final Handler timerHandler = new Handler();
+        updater = new Runnable() {
+            @Override
+            public void run() {
+                time.setText(times);
+                timerHandler.postDelayed(updater,50000);
+            }
+        };
+        timerHandler.post(updater);
     }
     public  void date(){
         Calendar c = Calendar.getInstance();
