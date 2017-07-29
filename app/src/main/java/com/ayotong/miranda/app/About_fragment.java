@@ -29,9 +29,9 @@ public class About_fragment extends Fragment {
         //change R.layout.yourlayoutfilename for each of your fragments
       View v = inflater.inflate(R.layout.fragment_about, container, false);
 
-        Button bt = (Button)v.findViewById(R.id.button2);
-        Button repeat = (Button)v.findViewById(R.id.button1);
-
+//        Button bt = (Button)v.findViewById(R.id.button2);
+//        Button repeat = (Button)v.findViewById(R.id.button1);
+/*
         bt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -53,8 +53,8 @@ public class About_fragment extends Fragment {
                 AlarmManager am = (AlarmManager)getActivity().getSystemService(Context.ALARM_SERVICE);
                 am.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, peint);
             }
-        });
-        repeat.setOnClickListener(new View.OnClickListener() {
+        });*/
+/*        repeat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Calendar c = Calendar.getInstance();
@@ -64,7 +64,7 @@ public class About_fragment extends Fragment {
                 questMunim(time);
             }
         });
-
+*/
         return v;
     }
 

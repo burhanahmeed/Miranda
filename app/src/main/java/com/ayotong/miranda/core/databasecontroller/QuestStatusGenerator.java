@@ -48,8 +48,6 @@ public class QuestStatusGenerator {
     public ArrayList<QuestStatus> generateStatus(){
         arrqs = new ArrayList<QuestStatus>();
 
-        createNapQuest(start_nap);
-        createSleepQuest(age, start_sleep);
         createDrinkQuest(age, gender, ispregnant, wakesleep);
 
         return arrqs;
@@ -74,39 +72,6 @@ public class QuestStatusGenerator {
                 repeat = 5;
             }
         }
-    }
-
-    public void createNapQuest(String start_nap){
-        arrqs = new ArrayList<QuestStatus>();
-        if(!start_nap.equalsIgnoreCase("none")){
-            qs = new QuestStatus(timeproc.getTimestamp(), 2, start_nap, 150, 1);
-            arrqs.add(qs);
-
-            wakenap = timeproc.addTime(start_nap, 8,0);
-            qs = new QuestStatus(timeproc.getTimestamp(), 3, wakenap, 150, 1);
-            arrqs.add(qs);
-            insertToDB();
-        }
-    }
-
-    public void createSleepQuest(int age, String start_sleep){
-        arrqs = new ArrayList<QuestStatus>();
-        if(age>=65){
-            qs = new QuestStatus(timeproc.getTimestamp(), 4, start_sleep, 150, 1);
-            arrqs.add(qs);
-
-            wakesleep = timeproc.addTime(start_sleep, 8,0);
-            qs = new QuestStatus(timeproc.getTimestamp(), 5, wakesleep, 150, 1);
-            arrqs.add(qs);
-        }else{
-            qs = new QuestStatus(timeproc.getTimestamp(), 4, start_sleep, 150, 1);
-            arrqs.add(qs);
-
-            wakesleep = timeproc.addTime(start_sleep, 9,0);
-            qs = new QuestStatus(timeproc.getTimestamp(), 5, wakesleep, 150, 1);
-            arrqs.add(qs);
-        }
-        insertToDB();
     }
 
     private void insertToDB(){
