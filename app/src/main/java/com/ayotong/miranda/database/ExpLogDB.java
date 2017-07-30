@@ -2,6 +2,7 @@ package com.ayotong.miranda.database;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
@@ -105,14 +106,33 @@ public class ExpLogDB extends DatabaseDAO implements ExpLogDAO {
 
     public ArrayList<Stat> sortByMonth(){
         sqDB =this.getWritableDatabase();
-        Cursor c = sqDB.rawQuery("SELECT SUM("+ExpLog.COL_EXPGAIN+") as Total, strftime('%Y %m',"+ExpLog.COL_TIMESTAMP+") as time FROM "+ExpLog.DATABASE_TABLE+" GROUP BY time",null);
+        Cursor c = sqDB.rawQuery("SELECT SUM("+ExpLog.COL_EXPGAIN+") as Total, "+ExpLog.COL_MONTH+" as time FROM "+ExpLog.DATABASE_TABLE+" GROUP BY time",null);
         Cursor ct = sqDB.rawQuery("SELECT SUM("+ExpLog.COL_EXPGAIN+") as Total FROM "+ExpLog.DATABASE_TABLE,null);
+        String[] str = {"January",
+                "February",
+                "March",
+                "April",
+                "May",
+                "June",
+                "July",
+                "August",
+                "September",
+                "October",
+                "November",
+                "December"};
+        String monthString;
+
         ArrayList<Stat> arrLog = new ArrayList<>();
         if (c.moveToNext()&&ct.moveToNext()){
+            int monthInt = Integer.valueOf(c.getString(c.getColumnIndex("time")));
+            if(monthInt<str.length)
+                monthString = str[monthInt-1];
+            else
+               monthString = "Invalid month";
             Stat st = new Stat();
             Log.d("Error", "cursor"+c.getString(c.getColumnIndex("time")));
             st.setXp(c.getInt(c.getColumnIndex("Total")));
-            st.setBulan(c.getString(c.getColumnIndex("time")));
+            st.setBulan(monthString);
             st.setXp_overall(ct.getInt(ct.getColumnIndex("Total")));
             arrLog.add(st);
             c.moveToNext(); ct.moveToNext();
@@ -125,7 +145,7 @@ public class ExpLogDB extends DatabaseDAO implements ExpLogDAO {
 
     public ArrayList<Entry> getStats(){
         sqDB = this.getWritableDatabase();
-        Cursor c = sqDB.rawQuery("SELECT SUM("+ExpLog.COL_EXPGAIN+") as Total, strftime('%Y %m',"+ExpLog.COL_TIMESTAMP+") as time FROM "+ExpLog.DATABASE_TABLE+" GROUP BY time", null);
+        Cursor c = sqDB.rawQuery("SELECT SUM("+ExpLog.COL_EXPGAIN+") as Total, "+ExpLog.COL_TIMESTAMP+" as time FROM "+ExpLog.DATABASE_TABLE+" GROUP BY time", null);
         int count = c.getCount();
         ArrayList<Entry> numStat = new ArrayList<>();
         for (int i=0; i<count; i++){
@@ -143,11 +163,12 @@ public class ExpLogDB extends DatabaseDAO implements ExpLogDAO {
     }
     public ArrayList<String> getMonth(){
         sqDB = this.getWritableDatabase();
-        Cursor c = sqDB.rawQuery("SELECT SUM("+ExpLog.COL_EXPGAIN+") as Total, strftime('%Y %m',"+ExpLog.COL_TIMESTAMP+") as time FROM "+ExpLog.DATABASE_TABLE+" GROUP BY time", null);
+        Cursor c = sqDB.rawQuery("SELECT "+ExpLog.COL_MONTH+" as time FROM "+ExpLog.DATABASE_TABLE+" GROUP BY time", null);
         int count = c.getCount();
         ArrayList<String> label = new ArrayList<>();
         for (int i=0; i<count; i++){
             if (c.moveToNext()){
+                Log.d("Stat", "StatBulan"+c.getString(c.getColumnIndex("time")));
                 String lab = c.getString(c.getColumnIndex("time"));
                 label.add(lab);
                 c.moveToNext();
@@ -161,6 +182,6 @@ public class ExpLogDB extends DatabaseDAO implements ExpLogDAO {
 
 
     public void closeDB(){
-        sqDB.close();
+        super.close();
     }
 }

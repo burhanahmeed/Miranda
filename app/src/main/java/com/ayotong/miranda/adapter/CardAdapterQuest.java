@@ -121,7 +121,7 @@ public class CardAdapterQuest extends RecyclerView.Adapter<CardAdapterQuest.View
                 QuestCtrl qctrl = new QuestCtrl(context);
                 qctrl.deleteQuest(Integer.valueOf(Qid));
                 qctrl.closeDB();
-
+                DialogActivity da = new DialogActivity();
                 Toast.makeText(context, "Quest completed! +"+xp+" XP", Toast.LENGTH_LONG).show();
             }
         });

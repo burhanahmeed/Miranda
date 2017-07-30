@@ -1,6 +1,8 @@
 package com.ayotong.miranda.core;
 
 
+import android.util.Log;
+
 import com.ayotong.miranda.model.UserInfo;
 
 import org.joda.time.LocalTime;
@@ -16,6 +18,7 @@ import java.util.TimeZone;
  */
 
 public class TimeProcessing {
+    int interval;
 
     public TimeProcessing(){
 
@@ -67,6 +70,23 @@ public class TimeProcessing {
             return addTime(start_sleep, 8,0);
         }
         return addTime(start_sleep, 9,0);
+    }
+    public int minum(int gender, int age, boolean pregnant){
+
+        if (age>=19 && gender==0){
+            interval = 5400000; //kurang lbh 90mnt
+        }else if (age>=19 && gender==1){
+            interval = 6300000; //kurang lbh 105mnt
+        }else if(age>=0 && age<=8){
+            interval = 12000000; //kurang lbh 200mnt
+        }else if (age>=9 && age <=18){
+            interval = 6360000; //kurang lbh 106mnt
+        }else if (pregnant==true && gender==1 && age>=19){
+            interval = 4800000; //kurang lbh 80mnt
+        }else{
+            interval = 7200000; //kurang lbh 120mnt
+        }
+        return interval;
     }
 
     public String timestampToDate(String timestamp){

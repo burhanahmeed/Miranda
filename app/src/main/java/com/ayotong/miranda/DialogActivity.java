@@ -25,7 +25,9 @@ import com.ayotong.miranda.core.databasecontroller.ExpLogCtrl;
 import com.ayotong.miranda.core.databasecontroller.QuestCtrl;
 import com.ayotong.miranda.database.ExpLogDB;
 import com.ayotong.miranda.database.QuestDB;
+import com.ayotong.miranda.database.UserInfoDB;
 import com.ayotong.miranda.model.ExpLog;
+import com.ayotong.miranda.model.UserInfo;
 
 
 import java.text.SimpleDateFormat;
@@ -40,7 +42,8 @@ public class DialogActivity extends Activity{
     private Window window;
     String jam, xp, quest, status, id,Qid;
     private MediaPlayer mMediaPlayer;
-    ExpLog xpLog;
+    ExpLog xpLog;     UserInfo user;
+    UserInfoDB userdb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -94,6 +97,7 @@ public class DialogActivity extends Activity{
             @Override
             public void onClick(View view) {
                 Toast.makeText(DialogActivity.this, "Quest dismissed as a pending", Toast.LENGTH_LONG).show();
+                alarmMinum();
                 finish();
             }
         });
@@ -122,7 +126,7 @@ public class DialogActivity extends Activity{
         vibrator.vibrate(2000);
     }
 
-    private void alarmMinum(){
+    public void alarmMinum(){
         if (status.equals("on")){
             Log.d("alarmMinum: ","ON");
             alarmMinumDo();
@@ -132,28 +136,34 @@ public class DialogActivity extends Activity{
         }
     }
 
-    private void alarmMinumDo(){
+    public void alarmMinumDo(){
         TimeProcessing timeproc = new TimeProcessing();
         String time = timeproc.getTime();
-
+        Calendar cal = Calendar.getInstance();
+        userdb = new UserInfoDB(getApplicationContext());
+        user = new UserInfo();
+        user = userdb.loadInfo();
+        int interval = timeproc.minum(user.getGender(), user.getAge(), user.ispregnant());
+        Log.d("ngombe", "alarmMinumDo: "+interval);
+        cal.add(Calendar.MINUTE, 10);
         AlarmManager manager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(this, ReminderReceiver.class);
         intent.putExtra("jam",time);
-        intent.putExtra("ques","Minum cucu dulu yaa");
+        intent.putExtra("ques","You need to drink water 250ml");
         intent.putExtra("xp","20");
         intent.putExtra("status","tidak ada");
         intent.putExtra("id","006");
         PendingIntent pIntent = PendingIntent.getBroadcast(this,
                 102, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         manager.setInexactRepeating(AlarmManager.RTC_WAKEUP,
-                System.currentTimeMillis(), 60*60*1000, pIntent);
+                cal.getTimeInMillis(), interval, pIntent);
     }
 
     public void cancelMinum(){
         AlarmManager manager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(this, ReminderReceiver.class);
         intent.putExtra("jam","00:00");
-        intent.putExtra("ques","Minum cucu dulu yaa");
+        intent.putExtra("ques","You need to drink water 250ml");
         intent.putExtra("xp","100");
         intent.putExtra("status","tidak ada");
         PendingIntent pIntent = PendingIntent.getBroadcast(this,

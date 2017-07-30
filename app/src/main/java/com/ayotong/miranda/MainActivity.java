@@ -2,6 +2,7 @@ package com.ayotong.miranda;
 
 //import android.app.Fragment;
 import android.content.res.Resources;
+import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
