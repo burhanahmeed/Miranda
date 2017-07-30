@@ -24,6 +24,11 @@ public class Quest {
 
     }
 
+    public Quest(int exp, String quest_description){
+        this.exp = exp;
+        this.quest = quest_description;
+    }
+
     public Quest(int id, int exp, String quest_description, String jam) {
         this.exp = exp;
         this.quest = quest_description;
