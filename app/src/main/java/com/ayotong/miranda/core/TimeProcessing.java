@@ -28,12 +28,12 @@ public class TimeProcessing {
         return currentDateandTime;
     }
 
-//    public String getTime(){
-//        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
-//        sdf.setTimeZone(TimeZone.getDefault());
-//        String currentDateandTime = sdf.format(new Date());
-//        return currentDateandTime;
-//    }
+    public String getTime(){
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+        sdf.setTimeZone(TimeZone.getDefault());
+        String currentDateandTime = sdf.format(new Date());
+        return currentDateandTime;
+    }
 
     public String getDate(){
         SimpleDateFormat sdf = new SimpleDateFormat("dd:MM:yyyy");

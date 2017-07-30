@@ -206,7 +206,7 @@ public class SignUpActivity extends AppCompatActivity {
 
     /*
     reqcode: 1
-    questID: 002
+    ID: 002
     */
     private void alarmTidur(){
         String jam = ettidur.getText().toString();
@@ -216,7 +216,7 @@ public class SignUpActivity extends AppCompatActivity {
 
     /*
     reqcode: 2
-    questID: 003
+    ID: 003
     */
     private void alarmBangun(){
         TimeProcessing timeproc = new TimeProcessing();
@@ -227,7 +227,7 @@ public class SignUpActivity extends AppCompatActivity {
 
     /*
     reqcode: 3
-    questID: 004
+    ID: 004
     */
     private void alarmNap(){
         String jam = ettidursiang.getText().toString();
@@ -237,7 +237,7 @@ public class SignUpActivity extends AppCompatActivity {
 
     /*
     reqcode: 4
-    questID: 005
+    ID: 005
     */
     private void alarmBangunNap(){
         TimeProcessing timeproc = new TimeProcessing();

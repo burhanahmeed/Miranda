@@ -20,6 +20,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ayotong.miranda.Service.ReminderReceiver;
+import com.ayotong.miranda.core.TimeProcessing;
+import com.ayotong.miranda.core.databasecontroller.QuestCtrl;
 import com.ayotong.miranda.database.ExpLogDB;
 import com.ayotong.miranda.database.QuestDB;
 import com.ayotong.miranda.model.ExpLog;
@@ -51,6 +53,9 @@ public class DialogActivity extends Activity{
                 | WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON);
 
         setContentView(R.layout.dialog_popup);
+        TextView tjam = (TextView)findViewById(R.id.txtJam);
+        TextView txp = (TextView)findViewById(R.id.txtXP);
+        TextView tquest = (TextView)findViewById(R.id.txtQuest);
 
         xpLog = new ExpLog();
         xpDB = new ExpLogDB(DialogActivity.this);
@@ -62,18 +67,13 @@ public class DialogActivity extends Activity{
         id = getIntent().getStringExtra("id");
         Qid = getIntent().getStringExtra("Qid");
 
-        Calendar c = Calendar.getInstance();
-        SimpleDateFormat tm = new SimpleDateFormat("HH:mm");
-        String times = tm.format(Calendar.getInstance().getTime());
+        TimeProcessing timeproc = new TimeProcessing();
+        String times = timeproc.getTime();
         final String time = times;
-
-        TextView tjam = (TextView)findViewById(R.id.txtJam);
-        TextView txp = (TextView)findViewById(R.id.txtXP);
-        TextView tquest = (TextView)findViewById(R.id.txtQuest);
         tjam.setText(time);
         txp.setText(xp);
         tquest.setText(quest);
-        Log.d("local", "onCreate: "+status);
+        Log.d("DialogActivity", "onCreate: Quest: " +quest +"\nStatus minum: " +status);
 
         ImageButton ac =(ImageButton) findViewById(R.id.id_accomplish);
         ImageButton dis = (ImageButton)findViewById(R.id.id_dissmiss);
@@ -82,9 +82,11 @@ public class DialogActivity extends Activity{
             public void onClick(View view) {
                 alarmMinum();
                 insertXP();
-                qDB = new QuestDB(DialogActivity.this);
-                qDB.deleteQuest(qDB.getQuest(Integer.parseInt(Qid)));
-                Toast.makeText(DialogActivity.this, "Task completed +"+xp+" XP", Toast.LENGTH_LONG).show();
+                QuestCtrl qctrl = new QuestCtrl(getApplicationContext());
+                qctrl.deleteQuest(Integer.valueOf(Qid));
+                qctrl.closeDB();
+
+                Toast.makeText(DialogActivity.this, "Quest completed! +"+xp+" XP", Toast.LENGTH_LONG).show();
                 finish();
 //                System.exit(0);
             }
@@ -93,7 +95,7 @@ public class DialogActivity extends Activity{
         dis.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(DialogActivity.this, "Task dismissed as a pending", Toast.LENGTH_LONG).show();
+                Toast.makeText(DialogActivity.this, "Quest dismissed as a pending", Toast.LENGTH_LONG).show();
                 finish();
             }
         });
@@ -106,7 +108,6 @@ public class DialogActivity extends Activity{
         Long tsLong = System.currentTimeMillis()/1000;
         String ts = tsLong.toString();
         xpLog.setExp_gain(Integer.parseInt(xp));
-        xpLog.setQuest_id(Integer.parseInt(Qid));
         xpLog.setTimestamp(ts);
         xpDB.insert(xpLog);
         Log.d("XP insert", ts);
@@ -126,11 +127,10 @@ public class DialogActivity extends Activity{
             cancelMinum();
         }
     }
+
     private void alarmMinumDo(){
-        Calendar c = Calendar.getInstance();
-        SimpleDateFormat tm = new SimpleDateFormat("HH:mm");
-        String times = tm.format(Calendar.getInstance().getTime());
-        String time = times;
+        TimeProcessing timeproc = new TimeProcessing();
+        String time = timeproc.getTime();
 
         AlarmManager manager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(this, ReminderReceiver.class);
@@ -143,8 +143,8 @@ public class DialogActivity extends Activity{
                 102, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         manager.setInexactRepeating(AlarmManager.RTC_WAKEUP,
                 System.currentTimeMillis(), 60*60*1000, pIntent);
-
     }
+
     public void cancelMinum(){
         AlarmManager manager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(this, ReminderReceiver.class);
@@ -154,7 +154,6 @@ public class DialogActivity extends Activity{
         intent.putExtra("status","tidak ada");
         PendingIntent pIntent = PendingIntent.getBroadcast(this,
                 102, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-
         manager.cancel(pIntent);
     }
 

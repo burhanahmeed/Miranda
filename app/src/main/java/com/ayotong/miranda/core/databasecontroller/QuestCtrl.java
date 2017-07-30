@@ -12,29 +12,20 @@ import java.util.ArrayList;
  * Created by Alpha on 21/07/2017.
  */
 
-public class QuestGenerator {
+public class QuestCtrl {
 
     private QuestDB questdb;
     private Quest quest;
     private ArrayList<Quest> arrquest;
     private Context context;
 
-    public QuestGenerator(Context context){
+    public QuestCtrl(Context context){
         this.context = context;
         questdb = new QuestDB(context);
     }
 
-    public void generateQuest(UserInfo user){
-        arrquest = new ArrayList<Quest>();
-
-        //generate quest
-        generateDrinkQuest();
-        generateNapQuest();
-        generateSleepQuest();
-
-        //masukin ke db
-        insertToDB();
-        closeDB();
+    public void addQuest(Quest quest){
+        questdb.insert(quest);
     }
 
     public ArrayList<Quest> getAllQuest(){
@@ -45,32 +36,8 @@ public class QuestGenerator {
         return questdb.readQuestByID(id);
     }
 
-    //method bikin quest minum (itungan e gaero)
-    private void generateDrinkQuest(){
-        quest = new Quest(1, 50, "Minum 250 mL Air","15:15");
-        arrquest.add(quest);
-    }
-
-    //method bikin quest boci + bangun e (durasi 1,5 jam)
-    private void generateNapQuest(){
-        quest = new Quest(2, 150, "Boci dulu Tong!","15:15");
-        arrquest.add(quest);
-        quest = new Quest(3, 150, "Udahan Tong boci nya!","15:15");
-        arrquest.add(quest);
-    }
-
-    //method bikin quest bobo + bangun e
-    private void generateSleepQuest(){
-        quest = new Quest(4, 200, "Ndang tidor tong!","15:15");
-        arrquest.add(quest);
-        quest = new Quest(5, 200, "Bangun Tong!","15:15");
-        arrquest.add(quest);
-    }
-
-    private void insertToDB(){
-        for(int i=0; i<arrquest.size(); i++){
-            questdb.insert(arrquest.get(i));
-        }
+    public void deleteQuest(int id){
+        questdb.deleteQuest(questdb.getQuest(id));
     }
 
     public void closeDB(){
