@@ -35,6 +35,13 @@ public class TimeProcessing {
         return currentDateandTime;
     }
 
+    public String getMonth(){
+        SimpleDateFormat sdf = new SimpleDateFormat("MM");
+        sdf.setTimeZone(TimeZone.getDefault());
+        String currentDateandTime = sdf.format(new Date());
+        return currentDateandTime;
+    }
+
     public String getDate(){
         SimpleDateFormat sdf = new SimpleDateFormat("dd:MM:yyyy");
         sdf.setTimeZone(TimeZone.getDefault());

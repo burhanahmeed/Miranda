@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 import com.ayotong.miranda.Service.ReminderReceiver;
 import com.ayotong.miranda.core.TimeProcessing;
+import com.ayotong.miranda.core.databasecontroller.ExpLogCtrl;
 import com.ayotong.miranda.core.databasecontroller.QuestCtrl;
 import com.ayotong.miranda.database.ExpLogDB;
 import com.ayotong.miranda.database.QuestDB;
@@ -38,9 +39,7 @@ public class DialogActivity extends Activity{
     private Window window;
     String jam, xp, quest, status, id,Qid;
     private MediaPlayer mMediaPlayer;
-    QuestDB qDB;
     ExpLog xpLog;
-    ExpLogDB xpDB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -58,8 +57,6 @@ public class DialogActivity extends Activity{
         TextView tquest = (TextView)findViewById(R.id.txtQuest);
 
         xpLog = new ExpLog();
-        xpDB = new ExpLogDB(DialogActivity.this);
-
         jam = getIntent().getStringExtra("jam");
         quest = getIntent().getStringExtra("ques");
         xp = getIntent().getStringExtra("xp");
@@ -105,12 +102,18 @@ public class DialogActivity extends Activity{
     }
 
     private void insertXP(){
-        Long tsLong = System.currentTimeMillis()/1000;
-        String ts = tsLong.toString();
-        xpLog.setExp_gain(Integer.parseInt(xp));
+        TimeProcessing timeproc = new TimeProcessing();
+        ExpLogCtrl logCtrl = new ExpLogCtrl(this);
+        String ts = timeproc.getTimestamp();
+        int month = Integer.parseInt(timeproc.getMonth());
+        int expgain = Integer.parseInt(xp);
+
+        xpLog.setExp_gain(expgain);
+        xpLog.setMonth(month);
         xpLog.setTimestamp(ts);
-        xpDB.insert(xpLog);
-        Log.d("XP insert", ts);
+        logCtrl.addLog(xpLog);
+        logCtrl.closeDB();
+        Log.d("DialogActivity: ", "Log: \ntimestamp: " +ts +"\nmonth: " +month +"\nexp: " +expgain);
     }
 
     private void vibrate(){

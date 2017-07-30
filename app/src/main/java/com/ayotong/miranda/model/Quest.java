@@ -57,8 +57,4 @@ public class Quest {
         this.id = id;
     }
     public void setJam(String jam){this.jam = jam;}
-
-//    public String getTime() {
-//        return time;
-//    }
 }

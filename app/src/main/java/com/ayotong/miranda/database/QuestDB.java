@@ -98,9 +98,9 @@ public class QuestDB  extends DatabaseDAO implements QuestDAO{
         if (cursor != null)
             cursor.moveToFirst();
 
-        Quest e = new Quest(Integer.parseInt(cursor.getString(0)),Integer.parseInt(cursor.getString(1)),cursor.getString(2),cursor.getString(3));
-        // return Employee
-        return e;
+        Quest q = new Quest(Integer.parseInt(cursor.getString(0)),Integer.parseInt(cursor.getString(1)),
+                cursor.getString(2),cursor.getString(3));
+        return q;
     }
 
 

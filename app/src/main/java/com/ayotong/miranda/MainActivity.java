@@ -2,8 +2,6 @@ package com.ayotong.miranda;
 
 //import android.app.Fragment;
 import android.content.res.Resources;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
@@ -24,6 +22,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.ayotong.miranda.core.databasecontroller.ExpLogCtrl;
 import com.ayotong.miranda.database.ExpLogDB;
 import com.ayotong.miranda.database.UserInfoDB;
 import com.ayotong.miranda.app.About_fragment;
@@ -43,8 +42,6 @@ public class MainActivity extends AppCompatActivity {
     UserInfo user;
     UserInfoDB userdb;
     TextView name, cond,level;
-    int fragID, total;
-    SQLiteDatabase sqDB;
     Runnable updater;
 
     @Override
@@ -81,27 +78,16 @@ public class MainActivity extends AppCompatActivity {
         name.setText(user.getUsername()); //nama
         Log.i("Action: ", "get username");
         cond.setText(user.genderToText(user.getGender())); //iki ganti gender ae
-//        int total=0;
-        ExpLogDB xpDB = new ExpLogDB(getApplicationContext());
-        Cursor cXP = xpDB.SumOfXP();
-        int total=0;
-        if (cXP.moveToNext()) {
-            total = cXP.getInt(cXP.getColumnIndex("Total"));
-            Log.d("XP", "XP total "+total);
-        }
+        ExpLogCtrl logctrl = new ExpLogCtrl(getApplicationContext());
 //        level.setText(String.valueOf(total)); //total xp
-        final int tot = total;
+        final int tot = logctrl.getTotalXP();
         runOnUiThread(new Runnable() {
 
             @Override
             public void run() {
-                // TODO Auto-generated method stub
                 level.setText(String.valueOf(tot));
             }
         });
-
-        Log.d("XPLOG", "Isi XPLOG"+xpDB.readLog());
-
 
         ImageView img = (ImageView)header.findViewById(R.id.profile_image);
         Resources res = getResources(); // need this to fetch the drawable

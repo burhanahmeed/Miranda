@@ -12,6 +12,9 @@ import android.widget.Toast;
 
 import com.ayotong.miranda.DialogActivity;
 import com.ayotong.miranda.R;
+import com.ayotong.miranda.core.TimeProcessing;
+import com.ayotong.miranda.core.databasecontroller.ExpLogCtrl;
+import com.ayotong.miranda.core.databasecontroller.QuestCtrl;
 import com.ayotong.miranda.database.ExpLogDB;
 import com.ayotong.miranda.database.QuestDB;
 import com.ayotong.miranda.model.ExpLog;
@@ -24,9 +27,9 @@ public class CardAdapterQuest extends RecyclerView.Adapter<CardAdapterQuest.View
 
     private Context context;
     private List<Quest> items;
-    QuestDB qDB;
+    QuestCtrl qctrl;
+    int exp;
     ExpLog xpLog;
-    ExpLogDB xpDB;
 
     public CardAdapterQuest(Context context) {
         this.context = context;
@@ -57,9 +60,9 @@ public class CardAdapterQuest extends RecyclerView.Adapter<CardAdapterQuest.View
             dismiss.setOnClickListener(this);
             accomplish.setOnClickListener(this);
 
-            qDB = new QuestDB(context);
+            qctrl = new QuestCtrl(context);
+
             xpLog = new ExpLog();
-            xpDB = new ExpLogDB(context);
         }
 
         public void bind(Quest quest) {
@@ -86,6 +89,7 @@ public class CardAdapterQuest extends RecyclerView.Adapter<CardAdapterQuest.View
         holder.bind(this.items.get(position));
         final int Qid = items.get(position).getId();
         final int xp = items.get(position).getExp();
+        exp = xp;
 
         holder.dismiss.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -94,9 +98,9 @@ public class CardAdapterQuest extends RecyclerView.Adapter<CardAdapterQuest.View
                 items.remove(position);
                 notifyItemRemoved(position);
                 notifyItemRangeChanged(position,items.size());
-                qDB = new QuestDB(context);
-                qDB.deleteQuest(qDB.getQuest(Qid));
-                Toast.makeText(context, "Task dismissed", Toast.LENGTH_LONG).show();
+                qctrl = new QuestCtrl(context);
+                qctrl.deleteQuest(Qid);
+                Toast.makeText(context, "Quest dismissed", Toast.LENGTH_LONG).show();
                 Log.d("ID", "berapa idnya "+Qid);
             }
         });
@@ -107,24 +111,34 @@ public class CardAdapterQuest extends RecyclerView.Adapter<CardAdapterQuest.View
                 items.remove(position);
                 notifyItemRemoved(position);
                 notifyItemRangeChanged(position,items.size());
-                qDB = new QuestDB(context);
-                qDB.deleteQuest(qDB.getQuest(Qid));
-                Long tsLong = System.currentTimeMillis()/1000;
-                String ts = tsLong.toString();
-                xpLog.setExp_gain(xp);
-                xpLog.setQuest_id(Qid);
-                xpLog.setTimestamp(ts);
-                xpDB.insert(xpLog);
-                Toast.makeText(context, "Task completed +"+xp+" XP", Toast.LENGTH_LONG).show();
-                Log.d("XP insert", ts);
+
+                insertXP();
+                QuestCtrl qctrl = new QuestCtrl(context);
+                qctrl.deleteQuest(Integer.valueOf(Qid));
+                qctrl.closeDB();
+
+                Toast.makeText(context, "Quest completed! +"+xp+" XP", Toast.LENGTH_LONG).show();
             }
         });
     }
 
+    private void insertXP(){
+        TimeProcessing timeproc = new TimeProcessing();
+        ExpLogCtrl logCtrl = new ExpLogCtrl(context);
+        String ts = timeproc.getTimestamp();
+        int month = Integer.parseInt(timeproc.getMonth());
+        int expgain = exp;
+
+        xpLog.setExp_gain(expgain);
+        xpLog.setMonth(month);
+        xpLog.setTimestamp(ts);
+        logCtrl.addLog(xpLog);
+        logCtrl.closeDB();
+        Log.d("DialogActivity: ", "Log: \ntimestamp: " +ts +"\nmonth: " +month +"\nexp: " +expgain);
+    }
     @Override
     public int getItemCount() {
         return items.size();
     }
-
 
 }
