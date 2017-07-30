@@ -21,6 +21,7 @@ import com.ayotong.miranda.model.Quest;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -114,8 +115,8 @@ public class CardAdapterQuest extends RecyclerView.Adapter<CardAdapterQuest.View
                 qDB = new QuestDB(context);
                 qDB.deleteQuest(qDB.getQuest(Qid));
 
-                Long tsLong = System.currentTimeMillis()/1000;
-                String ts = tsLong.toString();
+                SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
+                String ts = sd.format(Calendar.getInstance().getTime());
                 xpLog.setExp_gain(xp);
                 xpLog.setQuest_id(Qid);
                 xpLog.setTimestamp(ts);

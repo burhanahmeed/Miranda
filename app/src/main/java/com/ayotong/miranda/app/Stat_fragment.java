@@ -40,27 +40,27 @@ public class Stat_fragment extends Fragment {
         //returning our layout file
         //change R.layout.yourlayoutfilename for each of your fragments
         View v =inflater.inflate(R.layout.fragment_stat, container, false);
-
+        xpDB = new ExpLogDB(getContext().getApplicationContext());
         LineChart lineChart = (LineChart) v.findViewById(R.id.chart);
                 // creating list of entry<br />
-                ArrayList<Entry> entries = new ArrayList<>();
-                entries.add(new Entry(100, 0));
-                entries.add(new Entry(50, 1));
-                entries.add(new Entry(100, 2));
-                entries.add(new Entry(40, 3));
-        LineDataSet dataset = new LineDataSet(entries, "# of Calls");
+//                ArrayList<Entry> entries = new ArrayList<>();
+//                entries.add(new Entry(100, 0));
+//                entries.add(new Entry(50, 1));
+//                entries.add(new Entry(100, 2));
+//                entries.add(new Entry(40, 3));
+        LineDataSet dataset = new LineDataSet(xpDB.getStats(), "# of Calls");
 //        Drawable drawable = ContextCompat.getDrawable(this, R.drawable.fade_red);
         dataset.setFillColor(Color.parseColor("#30c078"));
         dataset.setColor(Color.parseColor("#187878"));
 
-        // creating labels<br />
-        ArrayList<String> labels = new ArrayList<String>();
-                labels.add("July");
-                labels.add("August");
-                labels.add("September");
-                labels.add("October");
+//        // creating labels<br />
+//        ArrayList<String> labels = new ArrayList<String>();
+//                labels.add("July");
+//                labels.add("August");
+//                labels.add("September");
+//                labels.add("October");
 
-        LineData data = new LineData(labels, dataset);
+        LineData data = new LineData(xpDB.getMonth(), dataset);
                 lineChart.setData(data);
         lineChart.setDescription("Description");
         dataset.setDrawCubic(true);
@@ -78,7 +78,6 @@ public class Stat_fragment extends Fragment {
 //        stat.add(new Stat("August", 50, 150));
 //        stat.add(new Stat("September", 100, 250));
 //        stat.add(new Stat("October", 40, 290));
-        xpDB = new ExpLogDB(getContext().getApplicationContext());
         this.sAdapter.setItems(xpDB.sortByMonth());
 
         return v;

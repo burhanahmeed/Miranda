@@ -104,8 +104,8 @@ public class DialogActivity extends Activity{
     }
 
     private void insertXP(){
-        Long tsLong = System.currentTimeMillis()/1000;
-        String ts = tsLong.toString();
+        SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
+        String ts = sd.format(Calendar.getInstance().getTime());
         xpLog.setExp_gain(Integer.parseInt(xp));
         xpLog.setQuest_id(Integer.parseInt(Qid));
         xpLog.setTimestamp(ts);

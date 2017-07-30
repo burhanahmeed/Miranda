@@ -8,6 +8,7 @@ import android.util.Log;
 
 import com.ayotong.miranda.model.ExpLog;
 import com.ayotong.miranda.model.Stat;
+import com.github.mikephil.charting.data.Entry;
 
 import java.util.ArrayList;
 
@@ -110,16 +111,53 @@ public class ExpLogDB extends DatabaseDAO implements ExpLogDAO {
         ArrayList<Stat> arrLog = new ArrayList<>();
         if (c.moveToNext()&&ct.moveToNext()){
             Stat st = new Stat();
+            Log.d("Error", "cursor"+c.getString(c.getColumnIndex("time")));
             st.setXp(c.getInt(c.getColumnIndex("Total")));
             st.setBulan(c.getString(c.getColumnIndex("time")));
             st.setXp_overall(ct.getInt(ct.getColumnIndex("Total")));
             arrLog.add(st);
             c.moveToNext(); ct.moveToNext();
-            Log.d("Error", "cursor"+c.getString(c.getColumnIndex("time")));
         }else{
             Log.d("Error", "cursor are null");
         }
         c.close();
         return arrLog;
     }
+
+    public ArrayList<Entry> getStats(){
+        sqDB = this.getWritableDatabase();
+        Cursor c = sqDB.rawQuery("SELECT SUM("+ExpLog.COL_EXPGAIN+") as Total, strftime('%Y %m',"+ExpLog.COL_TIMESTAMP+") as time FROM "+ExpLog.DATABASE_TABLE+" GROUP BY time", null);
+        int count = c.getCount();
+        ArrayList<Entry> numStat = new ArrayList<>();
+        for (int i=0; i<count; i++){
+            if (c.moveToNext()){
+                Log.d("Stat", "StatBulan"+c.getInt(c.getColumnIndex("Total")));
+                Entry num = new Entry(c.getInt(c.getColumnIndex("Total")),i);
+                numStat.add(num);
+                c.moveToNext();
+            }else{
+                Log.d("Error", "cursor are null");
+            }
+        }
+        c.close();
+        return numStat;
+    }
+    public ArrayList<String> getMonth(){
+        sqDB = this.getWritableDatabase();
+        Cursor c = sqDB.rawQuery("SELECT SUM("+ExpLog.COL_EXPGAIN+") as Total, strftime('%Y %m',"+ExpLog.COL_TIMESTAMP+") as time FROM "+ExpLog.DATABASE_TABLE+" GROUP BY time", null);
+        int count = c.getCount();
+        ArrayList<String> label = new ArrayList<>();
+        for (int i=0; i<count; i++){
+            if (c.moveToNext()){
+                String lab = c.getString(c.getColumnIndex("time"));
+                label.add(lab);
+                c.moveToNext();
+            }else{
+                Log.d("Error", "cursor are null");
+            }
+        }
+        c.close();
+        return label;
+    }
+
 }

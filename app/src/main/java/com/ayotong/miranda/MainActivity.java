@@ -82,25 +82,26 @@ public class MainActivity extends AppCompatActivity {
         Log.i("Action: ", "get username");
         cond.setText(user.genderToText(user.getGender())); //iki ganti gender ae
 //        int total=0;
-        ExpLogDB xpDB = new ExpLogDB(getApplicationContext());
-        Cursor cXP = xpDB.SumOfXP();
-        int total=0;
-        if (cXP.moveToNext()) {
-            total = cXP.getInt(cXP.getColumnIndex("Total"));
-            Log.d("XP", "XP total "+total);
-        }
-//        level.setText(String.valueOf(total)); //total xp
-        final int tot = total;
-        runOnUiThread(new Runnable() {
 
+//        level.setText(String.valueOf(total)); //total xp
+//        final int tot = total;
+        final Handler timerHandler = new Handler();
+        updater = new Runnable() {
             @Override
             public void run() {
-                // TODO Auto-generated method stub
-                level.setText(String.valueOf(tot));
+                ExpLogDB xpDB = new ExpLogDB(getApplicationContext());
+                Cursor cXP = xpDB.SumOfXP();
+                int total=0;
+                if (cXP.moveToNext()) {
+                    total = cXP.getInt(cXP.getColumnIndex("Total"));
+                    Log.d("XP", "XP total "+total);
+                }
+                level.setText(String.valueOf(total));
+                timerHandler.postDelayed(updater,1000);
+//                Log.d("XPLOG", "Isi XPLOG"+xpDB.readLog());
             }
-        });
-
-        Log.d("XPLOG", "Isi XPLOG"+xpDB.readLog());
+        };
+        timerHandler.post(updater);
 
 
         ImageView img = (ImageView)header.findViewById(R.id.profile_image);

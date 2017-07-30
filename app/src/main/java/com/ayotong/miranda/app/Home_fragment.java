@@ -136,16 +136,16 @@ public class Home_fragment extends Fragment {
     }
 
     public void time(){
-        Calendar c = Calendar.getInstance();
-        SimpleDateFormat tm = new SimpleDateFormat("HH:mm");
-        final String times = tm.format(Calendar.getInstance().getTime());
 //        time.setText(times);
         final Handler timerHandler = new Handler();
         updater = new Runnable() {
             @Override
             public void run() {
+                Calendar c = Calendar.getInstance();
+                SimpleDateFormat tm = new SimpleDateFormat("HH:mm");
+                final String times = tm.format(Calendar.getInstance().getTime());
                 time.setText(times);
-                timerHandler.postDelayed(updater,50000);
+                timerHandler.postDelayed(updater,10000);
             }
         };
         timerHandler.post(updater);
