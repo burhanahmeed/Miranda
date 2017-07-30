@@ -1,5 +1,7 @@
 package com.ayotong.miranda.database;
 
+import android.database.Cursor;
+
 import com.ayotong.miranda.model.ExpLog;
 
 import java.util.ArrayList;
@@ -12,13 +14,17 @@ public interface ExpLogDAO {
 
     public ExpLog insert(ExpLog expLog);
 
-    public ExpLog insert(String timestamp, int quest_id, int exp_gain);
+    public ExpLog insert(String timestamp, int mont, int exp_gain);
 
     public ArrayList<ExpLog> readLog();
 
-    public ArrayList<ExpLog> readLog(String timestamp);
+    public ArrayList<ExpLog> readLogByMonth(int month);
 
-    public int clearLog();
+    public Cursor SumOfXP();
 
-    public int clearLog(String timestamp);
+    public int deleteLog();
+
+    public int deleteLogByMonth(int month);
+
+    public void closeDB();
 }

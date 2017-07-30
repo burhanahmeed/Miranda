@@ -22,6 +22,7 @@ import android.widget.TextView;
 ;
 import com.ayotong.miranda.R;
 import com.ayotong.miranda.adapter.CardAdapterQuest;
+import com.ayotong.miranda.core.databasecontroller.QuestCtrl;
 import com.ayotong.miranda.database.QuestDB;
 import com.ayotong.miranda.model.Quest;
 
@@ -41,7 +42,7 @@ public class Home_fragment extends Fragment {
     private CardAdapterQuest cardAdapterQuest;
     private TextView time, date, greet;
     private ImageView cuaca;
-    private QuestDB qDB;
+    private QuestCtrl qctrl;
     Runnable updater;
 
     @Nullable
@@ -67,11 +68,12 @@ public class Home_fragment extends Fragment {
 //        quests.add(new Quest(1,10,"Waktunya minum gelas yang banyak 1000ml","15:15"));
 //        quests.add(new Quest(2,10,"Enak enak dulu","15:15"));
 //        quests.add(new Quest(3,11,"Rehat jenak","15:15"));
-        qDB = new QuestDB(getContext().getApplicationContext());
+        qctrl = new QuestCtrl(getContext().getApplicationContext());
 //        qDB.readAllQuest();
         Log.d("DB", "terbaca ");
         // 3
-        this.cardAdapterQuest.setItems(qDB.readAllQuest());
+        this.cardAdapterQuest.setItems(qctrl.getAllQuest());
+        qctrl.closeDB();
 
         time = (TextView)v.findViewById(R.id.txttime);
         date = (TextView)v.findViewById(R.id.txtdate);

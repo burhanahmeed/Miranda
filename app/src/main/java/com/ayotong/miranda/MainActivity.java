@@ -2,8 +2,6 @@ package com.ayotong.miranda;
 
 //import android.app.Fragment;
 import android.content.res.Resources;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
@@ -24,6 +22,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.ayotong.miranda.core.databasecontroller.ExpLogCtrl;
 import com.ayotong.miranda.database.ExpLogDB;
 import com.ayotong.miranda.database.UserInfoDB;
 import com.ayotong.miranda.app.About_fragment;
@@ -43,8 +42,6 @@ public class MainActivity extends AppCompatActivity {
     UserInfo user;
     UserInfoDB userdb;
     TextView name, cond,level;
-    int fragID, total;
-    SQLiteDatabase sqDB;
     Runnable updater;
 
     @Override

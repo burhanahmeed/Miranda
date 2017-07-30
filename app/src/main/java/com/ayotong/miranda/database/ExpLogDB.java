@@ -25,36 +25,36 @@ public class ExpLogDB extends DatabaseDAO implements ExpLogDAO {
         super(context, DatabaseDAO.dName, ExpLog.TABLE_CREATE, ExpLog.DATABASE_TABLE, ExpLog.DATABASE_VERSION);
         this.context = context;
     }
+
     public ExpLog insert(ExpLog expLog){
         ContentValues cv = new ContentValues();
         cv.put(ExpLog.COL_TIMESTAMP, expLog.getTimestamp());
-        cv.put(ExpLog.COL_QUESTID, expLog.getQuest_id());
+        cv.put(ExpLog.COL_MONTH, expLog.getMonth());
         cv.put(ExpLog.COL_EXPGAIN, expLog.getExp_gain());
         super.insert(ExpLog.DATABASE_TABLE, cv);
-        return new ExpLog( expLog.getTimestamp(), expLog.getQuest_id(), expLog.getExp_gain());
+        return new ExpLog( expLog.getTimestamp(), expLog.getMonth(), expLog.getExp_gain());
     }
 
-    public ExpLog insert(String timestamp, int quest_id, int exp_gain){
+    public ExpLog insert(String timestamp, int month, int exp_gain){
         ContentValues cv = new ContentValues();
         cv.put(ExpLog.COL_TIMESTAMP, timestamp);
-        cv.put(ExpLog.COL_QUESTID, quest_id);
+        cv.put(ExpLog.COL_MONTH, month);
         cv.put(ExpLog.COL_EXPGAIN, exp_gain);
         super.insert(ExpLog.DATABASE_TABLE, cv);
-        return new ExpLog(timestamp, quest_id, exp_gain);
+        return new ExpLog(timestamp, month, exp_gain);
     }
 
     public ArrayList<ExpLog> readLog(){
-        String[] columns = new String[]{ExpLog.COL_TIMESTAMP, ExpLog.COL_QUESTID, ExpLog.COL_EXPGAIN};
-        Cursor cursor = super.get(ExpLog.DATABASE_TABLE, columns /*, ExpLog.COL_TIMESTAMP + " = * "*/);
+        String[] columns = new String[]{ExpLog.COL_TIMESTAMP, ExpLog.COL_MONTH, ExpLog.COL_EXPGAIN};
+        Cursor cursor = super.get(ExpLog.DATABASE_TABLE, columns);
 
-        ArrayList<ExpLog> arrlog = null;
+        ArrayList<ExpLog> arrlog = new ArrayList<ExpLog>();
         if(cursor != null && cursor.moveToFirst()) {
-            arrlog = new ArrayList<ExpLog>();
             while (cursor.isAfterLast()==false) {
                 //Calllog is a class with list of fileds
                 ExpLog log= new ExpLog();
                 log.setTimestamp(cursor.getString(cursor.getColumnIndex(ExpLog.COL_TIMESTAMP)));
-                log.setQuest_id(cursor.getInt(cursor.getColumnIndex(ExpLog.COL_QUESTID)));
+                log.setMonth(cursor.getInt(cursor.getColumnIndex(ExpLog.COL_MONTH)));
                 log.setExp_gain(cursor.getInt(cursor.getColumnIndex(ExpLog.COL_EXPGAIN)));
                 arrlog.add(log);
                 cursor.moveToNext();
@@ -66,18 +66,17 @@ public class ExpLogDB extends DatabaseDAO implements ExpLogDAO {
         return arrlog;
     }
 
-    public ArrayList<ExpLog> readLog(String timestamp){
-        String[] columns = new String[]{ExpLog.COL_TIMESTAMP, ExpLog.COL_QUESTID, ExpLog.COL_EXPGAIN};
-        Cursor cursor = super.get(ExpLog.DATABASE_TABLE, columns , ExpLog.COL_TIMESTAMP + " = "+ timestamp);
+    public ArrayList<ExpLog> readLogByMonth(int month){
+        String[] columns = new String[]{ExpLog.COL_TIMESTAMP, ExpLog.COL_MONTH, ExpLog.COL_EXPGAIN};
+        Cursor cursor = super.get(ExpLog.DATABASE_TABLE, columns, ExpLog.COL_MONTH + " = " + month);
 
-        ArrayList<ExpLog> arrlog = null;
+        ArrayList<ExpLog> arrlog = new ArrayList<ExpLog>();
         if(cursor != null && cursor.moveToFirst()) {
-            arrlog = new ArrayList<ExpLog>();
             while (cursor.isAfterLast()==false) {
                 //Calllog is a class with list of fileds
                 ExpLog log= new ExpLog();
                 log.setTimestamp(cursor.getString(cursor.getColumnIndex(ExpLog.COL_TIMESTAMP)));
-                log.setQuest_id(cursor.getInt(cursor.getColumnIndex(ExpLog.COL_QUESTID)));
+                log.setMonth(cursor.getInt(cursor.getColumnIndex(ExpLog.COL_MONTH)));
                 log.setExp_gain(cursor.getInt(cursor.getColumnIndex(ExpLog.COL_EXPGAIN)));
                 arrlog.add(log);
                 cursor.moveToNext();
@@ -89,12 +88,12 @@ public class ExpLogDB extends DatabaseDAO implements ExpLogDAO {
         return arrlog;
     }
 
-    public int clearLog(){
+    public int deleteLog(){
         return super.delete(ExpLog.DATABASE_TABLE, ExpLog.COL_TIMESTAMP+"=*", null);
     }
 
-    public int clearLog(String timestamp){
-        return super.delete(ExpLog.DATABASE_TABLE, ExpLog.COL_TIMESTAMP+"=" +timestamp, null);
+    public int deleteLogByMonth(int month){
+        return super.delete(ExpLog.DATABASE_TABLE, ExpLog.COL_MONTH+"=" +month, null);
     }
 
     public Cursor SumOfXP(){
@@ -160,4 +159,8 @@ public class ExpLogDB extends DatabaseDAO implements ExpLogDAO {
         return label;
     }
 
+
+    public void closeDB(){
+        sqDB.close();
+    }
 }
